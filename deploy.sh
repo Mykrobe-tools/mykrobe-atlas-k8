@@ -1,6 +1,18 @@
 #!/usr/bin/env bash
 
 sed -i "s~#{image}~$ARTIFACT_IMAGE~g" atlas-deployment.json
+sed -i "s~#{ATLAS_APP}~$ATLAS_APP~g" atlas-deployment.json
+sed -i "s~#{API_URL}~$API_URL~g" atlas-deployment.json
+sed -i "s~#{API_URL}~$API_URL~g" atlas-deployment.json
+sed -i "s~#{AUTH_COOKIE_NAME}~$AUTH_COOKIE_NAME~g" atlas-deployment.json
+sed -i "s~#{API_SWAGGER_URL}~$API_SWAGGER_URL~g" atlas-deployment.json
+sed -i "s~#{GOOGLE_MAPS_API_KEY}~$GOOGLE_MAPS_API_KEY~g" atlas-deployment.json
+sed -i "s~#{BOX_CLIENT_ID}~$BOX_CLIENT_ID~g" atlas-deployment.json
+sed -i "s~#{DROPBOX_APP_KEY}~$DROPBOX_APP_KEY~g" atlas-deployment.json
+sed -i "s~#{GOOGLE_DRIVE_CLIENT_ID}~$GOOGLE_DRIVE_CLIENT_ID~g" atlas-deployment.json
+sed -i "s~#{GOOGLE_DRIVE_DEVELOPER_KEY}~$GOOGLE_DRIVE_DEVELOPER_KEY~g" atlas-deployment.json
+sed -i "s~#{ONEDRIVE_CLIENT_ID}~$ONEDRIVE_CLIENT_ID~g" atlas-deployment.json
+sed -i "s~#{GOOGLE_MAPS_API_KEY}~$GOOGLE_MAPS_API_KEY~g" atlas-deployment.json
 
 if [ -z $KUBE_TOKEN ]; then
   echo "FATAL: Environment Variable KUBE_TOKEN must be specified."
