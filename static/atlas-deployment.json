@@ -5,7 +5,8 @@
     "labels": {
       "app": "atlas"
     },
-    "name": "atlas-deployment"
+    "name": "atlas-deployment",
+    "namespace": "default"
   },
   "spec": {
     "selector": {
