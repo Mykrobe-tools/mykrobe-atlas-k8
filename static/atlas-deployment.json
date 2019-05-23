@@ -23,7 +23,7 @@
       "spec": {
         "containers": [
           {
-            "image": "mthomsit/atlas-client-standalone:10",
+            "image": "mthomsit/atlas-client-standalone:12",
             "name": "atlas",
             "ports": [
               {
