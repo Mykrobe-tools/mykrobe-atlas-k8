@@ -23,7 +23,7 @@
       "spec": {
         "containers": [
           {
-            "image": "mthomsit/atlas-client-standalone:24",
+            "image": "makeandship/atlas-client:29",
             "name": "atlas",
             "ports": [
               {
@@ -50,19 +50,19 @@
               },
               {
                 "name": "ATLAS_APP",
-                "value": "https://dev-mykrobe-atlas.makeandship.com"
+                "value": "http://dev.mykro.be"
               },
               {
                 "name": "API_URL",
-                "value": "https://api-dev-mykrobe-atlas.makeandship.com"
+                "value": "http://api-dev.mykro.be"
               },
               {
                 "name": "AUTH_COOKIE_NAME",
-                "value": "api.atlas-dev.makeandship.com"
+                "value": "api-dev.mykro.be"
               },
               {
                 "name": "API_SWAGGER_URL",
-                "value": "https://api-dev-mykrobe-atlas.makeandship.com/swagger.json"
+                "value": "http://api-dev.mykro.be/swagger.json"
               },
               {
                 "name": "GOOGLE_MAPS_API_KEY",
@@ -87,6 +87,18 @@
               {
                 "name": "ONEDRIVE_CLIENT_ID",
                 "value": "e39a152d-61a5-4dbc-981c-95a0d0f23d9f"
+              },
+              {
+                "name":"AUTH_KEYCLOAK_URL",
+                "value":"https://accounts.makeandship.com/auth"
+              },
+              {
+                "name":"AUTH_KEYCLOAK_REALM",
+                "value":"atlas"
+              },
+              {
+                "name":"AUTH_KEYCLOAK_CLIENT_ID",
+                "value":"react-web-client"
               }
             ]
           }
