@@ -23,7 +23,7 @@
       "spec": {
         "containers": [
           {
-            "image": "makeandship/atlas-client:29",
+            "image": "makeandship/atlas-client:31",
             "name": "atlas",
             "ports": [
               {
