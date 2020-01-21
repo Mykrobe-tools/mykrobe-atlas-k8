@@ -1,18 +1,14 @@
 #!/usr/bin/env bash
 
-sed -i "s~#{image}~$ARTIFACT_IMAGE~g" atlas-deployment.json
-sed -i "s~#{ATLAS_APP}~$ATLAS_APP~g" atlas-deployment.json
-sed -i "s~#{API_URL}~$API_URL~g" atlas-deployment.json
-sed -i "s~#{API_URL}~$API_URL~g" atlas-deployment.json
-sed -i "s~#{AUTH_COOKIE_NAME}~$AUTH_COOKIE_NAME~g" atlas-deployment.json
-sed -i "s~#{API_SWAGGER_URL}~$API_SWAGGER_URL~g" atlas-deployment.json
-sed -i "s~#{GOOGLE_MAPS_API_KEY}~$GOOGLE_MAPS_API_KEY~g" atlas-deployment.json
-sed -i "s~#{BOX_CLIENT_ID}~$BOX_CLIENT_ID~g" atlas-deployment.json
-sed -i "s~#{DROPBOX_APP_KEY}~$DROPBOX_APP_KEY~g" atlas-deployment.json
-sed -i "s~#{GOOGLE_DRIVE_CLIENT_ID}~$GOOGLE_DRIVE_CLIENT_ID~g" atlas-deployment.json
-sed -i "s~#{GOOGLE_DRIVE_DEVELOPER_KEY}~$GOOGLE_DRIVE_DEVELOPER_KEY~g" atlas-deployment.json
-sed -i "s~#{ONEDRIVE_CLIENT_ID}~$ONEDRIVE_CLIENT_ID~g" atlas-deployment.json
-sed -i "s~#{GOOGLE_MAPS_API_KEY}~$GOOGLE_MAPS_API_KEY~g" atlas-deployment.json
+# --------------------------------------------------------------
+# Automated deployment using the kubernetes API:
+
+# - Client: Deployment
+# - Client: Service
+# - Client: Ingress (not autodeployed or used)
+# --------------------------------------------------------------
+
+sed -i "s~#{ARTIFACT_IMAGE}~$DOCKERHUB_ORGANISATION/atlas-client:$GO_DEPENDENCY_LABEL_BUILD~g" atlas-api-deployment.json
 
 if [ -z $KUBE_TOKEN ]; then
   echo "FATAL: Environment Variable KUBE_TOKEN must be specified."
@@ -42,7 +38,7 @@ echo
 
 # --------------------------------------------------------------
 
-echo "Artifact image $ARTIFACT_IMAGE"
+echo "Artifact image $DOCKERHUB_ORGANISATION/atlas-client:$GO_DEPENDENCY_LABEL_BUILD"
 echo "Namespace $NAMESPACE"
 echo "Service Host $KUBERNETES_SERVICE_HOST"
 echo "Port $KUBERNETES_PORT_443_TCP_PORT"
