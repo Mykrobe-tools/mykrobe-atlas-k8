@@ -8,7 +8,7 @@
 # - Client: Ingress (not autodeployed or used)
 # --------------------------------------------------------------
 
-sed -i "s~#{ARTIFACT_IMAGE}~$DOCKERHUB_ORGANISATION/atlas-client:$GO_DEPENDENCY_LABEL_BUILD~g" atlas-api-deployment.json
+sed -i "s~#{ARTIFACT_IMAGE}~$DOCKERHUB_ORGANISATION/atlas-client:$GO_DEPENDENCY_LABEL_BUILD~g" atlas-deployment.json
 
 if [ -z $KUBE_TOKEN ]; then
   echo "FATAL: Environment Variable KUBE_TOKEN must be specified."
