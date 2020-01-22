@@ -46,7 +46,7 @@ echo "Port $KUBERNETES_PORT_443_TCP_PORT"
 # --------------------------------------------------------------
 
 status_code=$(curl -sSk -H "Authorization: Bearer $KUBE_TOKEN" \
-    "https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/extensions/v1beta1/namespaces/$NAMESPACE/deployments/atlas-deployment" \
+    "https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/apps/v1beta2/namespaces/$NAMESPACE/deployments/atlas-deployment" \
     -X GET -o /dev/null -w "%{http_code}")
 
 echo
@@ -55,13 +55,13 @@ echo "Atlas deployment: $status_code"
 if [ $status_code == 200 ]; then
   echo "Updating Atlas deployment"
   curl -H 'Content-Type: application/strategic-merge-patch+json' -sSk -H "Authorization: Bearer $KUBE_TOKEN" \
-    "https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/extensions/v1beta1/namespaces/$NAMESPACE/deployments/atlas-deployment" \
+    "https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/apps/v1beta2/namespaces/$NAMESPACE/deployments/atlas-deployment" \
     -X PATCH -d @atlas-deployment.json
 else
  echo
  echo "Creating Atlas deployment"
  curl -H 'Content-Type: application/json' -sSk -H "Authorization: Bearer $KUBE_TOKEN" \
-    "https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/extensions/v1beta1/namespaces/$NAMESPACE/deployments" \
+    "https://$KUBERNETES_SERVICE_HOST:$KUBERNETES_PORT_443_TCP_PORT/apis/apps/v1beta2/namespaces/$NAMESPACE/deployments" \
     -X POST -d @atlas-deployment.json
 fi
 
