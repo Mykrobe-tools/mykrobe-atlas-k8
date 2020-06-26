@@ -1,20 +1,29 @@
-# mykrobe-atlas-api-k8
+# Atlas Kubernetes Specifications
 
-Followed base setup from cert-manager.io.
+Kubernetes specifications to deploy Atlas services. These are deployed to Embassy Hosted Kubernetes (EHK).
 
-Issuer is custom and requires a secret
+## Services
 
-__
+### Mykrobe (mykrobe-dev, mykrobe-uat, mykrobe)
 
-Get API key for the domain from cloudflare
+- Atlas Client - Atlas web and desktop front-end
+- Atlas API - Atlas backend API
+- MongoDB - Atlas datastore
+- Analysis API - Analysis API for resistance prediction
+- BIGSI API - Atlas to access BItsliced Genomic Signature Index (BIGSI) for distance calculations
+- Keycloak - User Account management
 
-Get a base64 encoded version using
-echo -n '<APIKEY>' | openssl base64
+### Insight (insight-dev, insight-uat, insight)
 
-Use that to create an api key secret
+- Confluent - Kafka pipelines
+- Kafka Consumer - Consumer for Atlas
+- Metabase - Ad-hoc reporting
+- MySQL - Reporting database
 
-__
+### Shared (shared)
 
+- Vault - Hashcorp vault to manage secrets
 
-Update the ingress
+### Cert Manager (cert-manager)
 
+- Cert Manager - TLS certificate management

@@ -1,1 +1,22 @@
 dockerhub-credentials.sh
+gocd/keys/atlas-api-deploy-readonly
+gocd/keys/atlas-api-readonly
+gocd/keys/atlas-cli-deploy-readonly
+gocd/keys/atlas-deploy-readonly
+gocd/keys/atlas-jsonschema-readonly
+gocd/keys/atlas-pipelines-readonly
+gocd/keys/atlas-readonly
+gocd/keys/atlas-keycloak-readonly
+gocd/keys/bitbucket-readonly
+.DS_Store
+static-embassy/mongo-replica-set/config.sh
+static-embassy/metabase/mysql/config.sh
+static-embassy/metabase/config-dev.sh
+static-embassy/atlas-api/config-dev.sh
+static-embassy/keycloak/config.sh
+static-embassy/atlas-client/config-dev.sh
+static-embassy/mongo-replica-set/config-dev.sh
+static-embassy/metabase/mysql/config-dev.sh
+
+# credentials
+static-embassy/gcr/atlas-275810-1b85bf39eb34.json
