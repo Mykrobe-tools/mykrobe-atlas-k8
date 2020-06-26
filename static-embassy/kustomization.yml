@@ -1,5 +1,0 @@
-resources:
-  - atlas-deployment.json
-  - atlas-nginx-ingress.json
-  - atlas-ingress.json
-  - atlas-service.json
