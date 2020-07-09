@@ -104,6 +104,8 @@ spec:
       - name: $ANALYSIS_PREFIX-config-data
         persistentVolumeClaim:
           claimName: $ANALYSIS_PREFIX-config-data
+      imagePullSecrets:
+      - name: gcr-json-key
 ---
 apiVersion: extensions/v1beta1
 kind: Deployment
@@ -164,4 +166,6 @@ spec:
       - name: $ANALYSIS_PREFIX-config-data
         persistentVolumeClaim:
           claimName: $ANALYSIS_PREFIX-config-data
+      imagePullSecrets:
+      - name: gcr-json-key
 EOF
