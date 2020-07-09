@@ -37,13 +37,13 @@ spec:
         volumeMounts:
         - mountPath: "/data/databases"
           name: mykrobe-atlas-distance-data
-      resources:
-        limits:
-          memory: $LIMIT_MEMORY_DISTANCE
-          cpu: $LIMIT_CPU_DISTANCE
-        requests:
-          memory: $REQUEST_MEMORY_DISTANCE
-          cpu: $REQUEST_CPU_DISTANCE
+        resources:
+          limits:
+            memory: $LIMIT_MEMORY_DISTANCE
+            cpu: $LIMIT_CPU_DISTANCE
+          requests:
+            memory: $REQUEST_MEMORY_DISTANCE
+            cpu: $REQUEST_CPU_DISTANCE
       imagePullSecrets:
       - name: gcr-json-key
 ---
