@@ -44,6 +44,8 @@ spec:
         requests:
           memory: $REQUEST_MEMORY_DISTANCE
           cpu: $REQUEST_CPU_DISTANCE
+      imagePullSecrets:
+      - name: gcr-json-key
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
