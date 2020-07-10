@@ -62,6 +62,15 @@ spec:
         image: $BIGSI_AGGREGATOR_IMAGE
         imagePullPolicy: IfNotPresent
         name: $BIGSI_PREFIX-aggregator
+        resources:
+          limits:
+            memory: $LIMIT_MEMORY_BIGSI
+            cpu: $LIMIT_CPU_BIGSI
+            ephemeral-storage: "$LIMIT_STORAGE_BIGSI"
+          requests:
+            memory: $REQUEST_MEMORY_BIGSI
+            cpu: $REQUEST_CPU_BIGSI
+            ephemeral-storage: "$REQUEST_STORAGE_BIGSI"
         ports:
         - containerPort: 80
           protocol: TCP
