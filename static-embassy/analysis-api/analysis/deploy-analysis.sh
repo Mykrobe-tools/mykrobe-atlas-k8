@@ -97,6 +97,13 @@ spec:
           name: uploads-data
         - mountPath: /config/
           name: $ANALYSIS_PREFIX-config-data
+        resources:
+          limits:
+            memory: $LIMIT_MEMORY_ANALYSIS
+            cpu: $LIMIT_CPU_ANALYSIS
+          requests:
+            memory: $REQUEST_MEMORY_ANALYSIS
+            cpu: $REQUEST_CPU_ANALYSIS
       volumes:
       - name: uploads-data
         persistentVolumeClaim:

@@ -54,6 +54,20 @@ metadata:
   name: $PREFIX-sa
   namespace: $NAMESPACE
 ---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: $PREFIX-tokenreview-binding
+  namespace: $NAMESPACE
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: system:auth-delegator
+subjects:
+  - kind: ServiceAccount
+    name: $PREFIX-sa
+    namespace: $NAMESPACE
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
@@ -135,6 +149,7 @@ spec:
       labels:
         app: $PREFIX
       annotations:
+        checksum/config: aefdcd6191ba1431beacf13834fede80e015dea465ab21a7e73d1eaa8c70ea51
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/mongo"
         vault.hashicorp.com/role: "mongo"
