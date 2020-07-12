@@ -3,7 +3,7 @@
 export NAMESPACE="mykrobe-dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:v0.0.1"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:v0.0.2"
 export ANALYSIS_CONFIG_HASH_MD5="0960112ac0a45b542a3c77aea5f2ceb4"
 export ANALYSIS_API_DNS="analysis-dev.mykro.be"
 
