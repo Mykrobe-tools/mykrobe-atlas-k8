@@ -75,6 +75,18 @@ spec:
     requests:
       storage: $STORAGE_THEMES
 ---
+apiVersion: v1
+data:
+  postgres_user: $POSTGRES_USER
+  postgres_password: $POSTGRES_PASSWORD
+  keycloak_user: $KEYCLOAK_USER
+  keycloak_password: $KEYCLOAK_PASSWORD
+kind: Secret
+metadata:
+  name: $PREFIX-credentials-secret
+  namespace: $NAMESPACE
+type: Opaque
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -126,9 +138,15 @@ spec:
         - name: POSTGRES_DB
           value: $POSTGRES_DB
         - name: POSTGRES_USER
-          value: $POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              key: postgres_user
+              name: $PREFIX-credentials-secret
         - name: POSTGRES_PASSWORD
-          value: $POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: postgres_password
+              name: $PREFIX-credentials-secret
         resources: 
           requests:
             memory: "$REQUEST_DB_MEMORY"
@@ -211,13 +229,25 @@ spec:
         - name: DB_PORT
           value: "$DB_PORT"
         - name: DB_USER
-          value: $POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              key: postgres_user
+              name: $PREFIX-credentials-secret
         - name: DB_PASSWORD
-          value: $POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: postgres_password
+              name: $PREFIX-credentials-secret
         - name: KEYCLOAK_USER
-          value: $KEYCLOAK_USER
+          valueFrom:
+            secretKeyRef:
+              key: keycloak_user
+              name: $PREFIX-credentials-secret
         - name: KEYCLOAK_PASSWORD
-          value: $KEYCLOAK_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              key: keycloak_password
+              name: $PREFIX-credentials-secret
         - name: PROXY_ADDRESS_FORWARDING
           value: 'true'
         resources: 
