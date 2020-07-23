@@ -87,6 +87,19 @@ spec:
       containers:
       - image: $CLIENT_IMAGE
         name: $PREFIX
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 120
+          timeoutSeconds: 5
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 3000
+          initialDelaySeconds: 130
+          timeoutSeconds: 10
+          failureThreshold: 10
         securityContext:
           runAsUser: 1000 
           allowPrivilegeEscalation: false
