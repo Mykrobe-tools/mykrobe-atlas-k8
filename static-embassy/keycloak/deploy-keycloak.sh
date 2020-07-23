@@ -94,6 +94,28 @@ spec:
       - image: $POSTGRES_IMAGE
         name: $POSTGRES_PREFIX
         imagePullPolicy: IfNotPresent
+        livenessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+          failureThreshold: 6
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - exec pg_isready -U "postgres" -h 127.0.0.1 -p 5432
+          failureThreshold: 6
+          initialDelaySeconds: 5
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 5
         ports:
         - containerPort: 5432
           protocol: TCP
@@ -158,6 +180,21 @@ spec:
       containers:
       - image: $KEYCLOAK_IMAGE
         name: $PREFIX
+        livenessProbe:
+          probe: |
+            exec:
+              command:
+              - curl
+              - -f
+              - http://127.0.0.1:8080/
+
+        readinessProbe:
+          probe: |
+            exec:
+              command:
+              - curl
+              - -f
+              - http://127.0.0.1:8080/realms/master
         ports:
         - containerPort: 8080
           protocol: TCP
