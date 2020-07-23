@@ -7,12 +7,12 @@ export POSTGRES_IMAGE="postgres:10"
 export KEYCLOAK_IMAGE="makeandship/keycloak:1"
 export HOST="accounts-dev.mykro.be"
 export POSTGRES_DB="keycloak"
-export POSTGRES_USER="keycloak"
-export POSTGRES_PASSWORD="<POSTGRES_PASSWORD>"
+export POSTGRES_USER=`echo -n "keycloak" | base64`
+export POSTGRES_PASSWORD=`echo -n "<POSTGRES_PASSWORD>" | base64`
 export DB_ADDR="keycloak-postgres"
 export DB_PORT="5432"
-export KEYCLOAK_USER="admin"
-export KEYCLOAK_PASSWORD="<KEYCLOAK_PASSWORD>"
+export KEYCLOAK_USER=`echo -n "admin" | base64`
+export KEYCLOAK_PASSWORD=`echo -n "<KEYCLOAK_PASSWORD>" | base64`
 
 # Storage sizes
 export STORAGE_POSTGRES="10Gi"
