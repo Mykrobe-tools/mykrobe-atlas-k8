@@ -77,6 +77,10 @@ spec:
     metadata:
       labels:
         app: $PREFIX
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/agent-inject-secret-atlas-keys: "kv/$PREFIX-keys"
+        vault.hashicorp.com/role: "atlas"
     spec:
       securityContext:
         runAsUser: 1000
