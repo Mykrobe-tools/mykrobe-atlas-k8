@@ -12,7 +12,7 @@ export BIGSI_CONFIG_HASH_MD5="8240ad548481b94901c8052723816e27"
 export BIGSI_IMAGE="phelimb/bigsi:v0.3.5"
 export BIGSI_DNS="bigsi-dev.mykro.be"
 
-export DISTANCE_API_IMAGE="iqballab/distance-service:v0.0.1"
+export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:v0.0.1"
 
 export REDIS_IMAGE="redis:4.0"
 
@@ -55,6 +55,8 @@ echo " - Bigsi image: $BIGSI_IMAGE"
 echo " - Bigsi config hash: $BIGSI_CONFIG_HASH_MD5"
 echo " - Bigsi dns: $BIGSI_DNS"
 
+echo " - Distance api image: $DISTANCE_API_IMAGE"
+
 echo " - Redis Prefix: $REDIS_PREFIX"
 echo " - Redis image: $REDIS_IMAGE"
 echo ""
@@ -72,6 +74,11 @@ echo " - BIGSI Memory request: $REQUEST_MEMORY_BIGSI"
 echo " - BIGSI CPU request: $REQUEST_CPU_BIGSI"
 echo " - BIGSI Memory limit: $LIMIT_MEMORY_BIGSI"
 echo " - BIGSI CPU limit: $LIMIT_CPU_BIGSI"
+
+echo " - Distance Memory request: $REQUEST_MEMORY_DISTANCE"
+echo " - Distance CPU request: $REQUEST_CPU_DISTANCE"
+echo " - Distance Memory limit: $LIMIT_MEMORY_DISTANCE"
+echo " - Distance CPU limit: $LIMIT_CPU_DISTANCE"
 echo ""
 
 sh ./redis/deploy-redis.sh
