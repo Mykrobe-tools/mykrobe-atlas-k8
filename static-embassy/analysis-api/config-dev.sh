@@ -3,7 +3,7 @@
 export NAMESPACE="mykrobe-dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:v0.0.2"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:50e3dd1"
 export ANALYSIS_CONFIG_HASH_MD5="0960112ac0a45b542a3c77aea5f2ceb4"
 export ANALYSIS_API_DNS="analysis-dev.mykro.be"
 
@@ -11,6 +11,8 @@ export BIGSI_AGGREGATOR_IMAGE="phelimb/bigsi-aggregator:210419"
 export BIGSI_CONFIG_HASH_MD5="8240ad548481b94901c8052723816e27"
 export BIGSI_IMAGE="phelimb/bigsi:v0.3.5"
 export BIGSI_DNS="bigsi-dev.mykro.be"
+
+export DISTANCE_API_IMAGE="iqballab/distance-service:v0.0.1"
 
 export REDIS_IMAGE="redis:4.0"
 
@@ -31,6 +33,10 @@ export REQUEST_STORAGE_BIGSI="4Gi"
 export LIMIT_MEMORY_BIGSI="1Gi"
 export LIMIT_CPU_BIGSI="500m"
 export LIMIT_STORAGE_BIGSI="4Gi"
+export REQUEST_MEMORY_DISTANCE="1Gi"
+export REQUEST_CPU_DISTANCE="1000m"
+export LIMIT_MEMORY_DISTANCE="2Gi"
+export LIMIT_CPU_DISTANCE="1000m"
 
 echo ""
 echo "Deploying analysis api using:"
@@ -70,4 +76,6 @@ echo ""
 
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
+sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=analysis-api-worker -n mykrobe-dev -o jsonpath="{.items[0].metadata.name}") mykrobe-dev
 sh ./bigsi/deploy-bigsi.sh
+sh ./distance/deploy-distance.sh
