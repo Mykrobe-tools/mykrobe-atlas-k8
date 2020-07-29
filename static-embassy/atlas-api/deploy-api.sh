@@ -33,6 +33,8 @@ echo " - Uploads temp location: $UPLOADS_TEMP_LOCATION"
 echo " - Demo data folder: $DEMO_DATA_ROOT_FOLDER"
 echo " - Google geocoding API key: $GOOGLE_MAPS_API_KEY"
 echo " - Swagger API files: $SWAGGER_API_FILES"
+echo " - Redis host: $REDIS_HOST"
+echo " - Redis port: $REDIS_PORT"
 echo ""
 
 echo "Limits:"
@@ -286,6 +288,10 @@ spec:
               key: GOOGLE_MAPS_API_KEY
         - name: SWAGGER_API_FILES
           value: $SWAGGER_API_FILES
+        - name: REDIS_HOST
+          value: $REDIS_HOST
+        - name: REDIS_PORT
+          value: $REDIS_PORT
         - name: NODE_OPTIONS
           value: '--max-old-space-size=$NODE_OPTIONS_MEMORY'
         resources: 
