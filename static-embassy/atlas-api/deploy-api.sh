@@ -291,7 +291,7 @@ spec:
         - name: REDIS_HOST
           value: $REDIS_HOST
         - name: REDIS_PORT
-          value: $REDIS_PORT
+          value: '$REDIS_PORT'
         - name: NODE_OPTIONS
           value: '--max-old-space-size=$NODE_OPTIONS_MEMORY'
         resources: 
