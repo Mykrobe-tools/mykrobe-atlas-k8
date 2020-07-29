@@ -2,7 +2,7 @@
 
 export NAMESPACE="mykrobe-dev"
 export PREFIX="atlas-api"
-export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:v0.0.6"
+export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:adeebc6"
 
 export DB_SERVICE_HOST="mykrobe-mongodb-replicaset-client.mykrobe-dev.svc.cluster.local"
 export DB_RS_NAME="rs0"
@@ -35,7 +35,7 @@ export UPLOAD_DIR="/home/node/app/uploads"
 export UPLOADS_LOCATION="/home/node/data"
 export UPLOADS_TEMP_LOCATION="/home/node/tmp"
 export DEMO_DATA_ROOT_FOLDER="/home/node/app/demo"
-export LOCATIONIQ_API_KEY="<LOCATIONIQ_API_KEY>"
+export GOOGLE_MAPS_API_KEY=`echo -n "" | base64`
 export SWAGGER_API_FILES="/home/node/app/dist/server/routes/*.route.js"
 
 # Storage sizes

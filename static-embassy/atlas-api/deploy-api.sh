@@ -131,7 +131,7 @@ data:
   AWS_SECRET_KEY: $AWS_SECRET_KEY
   ES_PASSWORD: $ES_PASSWORD
   KEYCLOAK_ADMIN_PASSWORD: $KEYCLOAK_ADMIN_PASSWORD
-  LOCATIONIQ_API_KEY: $LOCATIONIQ_API_KEY
+  GOOGLE_MAPS_API_KEY: $GOOGLE_MAPS_API_KEY
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -279,11 +279,11 @@ spec:
           value: $UPLOADS_TEMP_LOCATION
         - name: DEMO_DATA_ROOT_FOLDER
           value: $DEMO_DATA_ROOT_FOLDER
-        - name: LOCATIONIQ_API_KEY
+        - name: GOOGLE_MAPS_API_KEY
           valueFrom:
             secretKeyRef:
               name: $PREFIX-env-secret
-              key: LOCATIONIQ_API_KEY
+              key: GOOGLE_MAPS_API_KEY
         - name: SWAGGER_API_FILES
           value: $SWAGGER_API_FILES
         - name: NODE_OPTIONS
