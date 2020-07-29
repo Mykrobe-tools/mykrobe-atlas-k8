@@ -11,7 +11,7 @@ metadata:
 apiVersion: v1
 data:
   ATLAS_API: $ATLAS_API
-  BIGSI_URL: http://bigsi-aggregator-api-service/api/v1
+  BIGSI_URL: http://$BIGSI_PREFIX-aggregator-service/api/v1
   CELERY_BROKER_URL: redis://$REDIS_PREFIX:6379
   DEFAULT_OUTDIR: /data/out/
   FLASK_DEBUG: "1"
