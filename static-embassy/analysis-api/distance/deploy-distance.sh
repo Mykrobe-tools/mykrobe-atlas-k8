@@ -5,38 +5,38 @@ cat <<EOF | kubectl apply -f -
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: distance-api-sa
+  name: $DISTANCE_PREFIX-sa
   namespace: $NAMESPACE
 ---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  name: mykrobe-atlas-distance-deployment
+  name: $DISTANCE_PREFIX-deployment
   labels:
-    app: mykrobe-atlas-distance
+    app: $DISTANCE_PREFIX
   namespace: $NAMESPACE
 spec:
   selector:
     matchLabels:
-      app: mykrobe-atlas-distance
+      app: $DISTANCE_PREFIX
   template:
     metadata:
       labels:
-        app: mykrobe-atlas-distance
+        app: $DISTANCE_PREFIX
     spec:
-      serviceAccountName: distance-api-sa
+      serviceAccountName: $DISTANCE_PREFIX-sa
       volumes:
-      - name: mykrobe-atlas-distance-data
+      - name: $DISTANCE_PREFIX-data
         persistentVolumeClaim:
-          claimName: mykrobe-atlas-distance-data
+          claimName: $DISTANCE_PREFIX-data
       containers:
-      - name: mykrobe-atlas-distance
+      - name: $DISTANCE_PREFIX
         image: $DISTANCE_API_IMAGE
         ports:
         - containerPort: 8080
         volumeMounts:
         - mountPath: "/data/databases"
-          name: mykrobe-atlas-distance-data
+          name: $DISTANCE_PREFIX-data
         resources:
           limits:
             memory: $LIMIT_MEMORY_DISTANCE
@@ -50,7 +50,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mykrobe-atlas-distance-data
+  name: $DISTANCE_PREFIX-data
   namespace: $NAMESPACE
 spec:
   accessModes:
@@ -62,9 +62,9 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: mykrobe-atlas-distance-service
+  name: $DISTANCE_PREFIX-service
   labels:
-    app: mykrobe-atlas-distance
+    app: $DISTANCE_PREFIX
   namespace: $NAMESPACE
 spec:
   type: NodePort
@@ -72,5 +72,5 @@ spec:
   - port: 80
     targetPort: 8080
   selector:
-    app: mykrobe-atlas-distance
+    app: $DISTANCE_PREFIX
 EOF

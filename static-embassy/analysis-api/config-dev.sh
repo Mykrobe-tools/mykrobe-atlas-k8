@@ -15,6 +15,7 @@ export REDIS_IMAGE="redis:4.0"
 export REDIS_PREFIX="redis"
 export ANALYSIS_PREFIX="analysis-api"
 export BIGSI_PREFIX="bigsi-api"
+export DISTANCE_PREFIX="distance-api"
 export ATLAS_API_PREFIX="atlas-api"
 
 export POD_CPU_REDIS="500m"
@@ -47,6 +48,7 @@ echo " - Bigsi Prefix: $BIGSI_PREFIX"
 echo " - Bigsi aggregator image: $BIGSI_AGGREGATOR_IMAGE"
 echo " - Bigsi image: $BIGSI_IMAGE"
 
+echo " - Distance Prefix: $DISTANCE_PREFIX"
 echo " - Distance api image: $DISTANCE_API_IMAGE"
 
 echo " - Redis Prefix: $REDIS_PREFIX"
