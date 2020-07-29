@@ -38,6 +38,9 @@ export DEMO_DATA_ROOT_FOLDER="/home/node/app/demo"
 export GOOGLE_MAPS_API_KEY=`echo -n "" | base64`
 export SWAGGER_API_FILES="/home/node/app/dist/server/routes/*.route.js"
 
+export REDIS_HOST="redis.mykrobe-dev.svc.cluster.local"
+export REDIS_PORT="6379"
+
 # Storage sizes
 export STORAGE_DEMO="8Gi"
 export STORAGE_UPLOADS="50Gi"
