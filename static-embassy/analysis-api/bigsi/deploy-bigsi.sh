@@ -63,7 +63,7 @@ data:
     nproc: 1
     storage-engine: berkeleydb
     storage-config:
-      filename: /data/big-bigsi-bdb
+      filename: /database/big-bigsi-bdb
       flag: "r" ## Change to 'c' for write access
 kind: ConfigMap
 metadata:
@@ -79,7 +79,7 @@ data:
     nproc: 1
     storage-engine: berkeleydb
     storage-config:
-      filename: /data/small-bigsi-bdb
+      filename: /database/small-bigsi-bdb
       flag: "c" ## Change to 'r' for read-only access
 kind: ConfigMap
 metadata:
@@ -232,7 +232,7 @@ spec:
           - containerPort: 80
             protocol: TCP
           volumeMounts:
-          - mountPath: /data/
+          - mountPath: /database/
             name: $BIGSI_PREFIX-data-big
           - mountPath: /etc/bigsi/conf/
             name: configmap-volume-big
@@ -297,6 +297,8 @@ spec:
             protocol: TCP
           volumeMounts:
           - mountPath: /data/
+            name: uploads-data
+          - mountPath: /database/
             name: $BIGSI_PREFIX-data-small
           - mountPath: /etc/bigsi/conf/
             name: configmap-volume-small
@@ -312,6 +314,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
+      - name: uploads-data
+        persistentVolumeClaim:
+          claimName: $ATLAS_API_PREFIX-uploads-data
       - name: $BIGSI_PREFIX-data-small
         persistentVolumeClaim:
           claimName: $BIGSI_PREFIX-data-small
