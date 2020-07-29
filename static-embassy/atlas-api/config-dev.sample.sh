@@ -2,7 +2,7 @@
 
 export NAMESPACE="mykrobe-dev"
 export PREFIX="atlas-api"
-export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:v0.0.6"
+export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:adeebc6"
 
 export DB_SERVICE_HOST="mykrobe-mongodb-replicaset-client.mykrobe-dev.svc.cluster.local"
 export DB_RS_NAME="rs0"
