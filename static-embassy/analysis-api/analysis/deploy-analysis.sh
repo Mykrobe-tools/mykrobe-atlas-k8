@@ -12,6 +12,8 @@ apiVersion: v1
 data:
   ATLAS_API: $ATLAS_API
   BIGSI_URL: http://$BIGSI_PREFIX-aggregator-service/api/v1
+  BIGSI_BUILD_URL: http://$BIGSI_PREFIX-service-small
+  BIGSI_BUILD_CONFIG: /etc/bigsi/conf/config.yaml
   CELERY_BROKER_URL: redis://$REDIS_PREFIX:6379
   DEFAULT_OUTDIR: /data/out/
   FLASK_DEBUG: "1"
@@ -80,7 +82,7 @@ spec:
         - fair
         - -l
         - debug
-        - --concurrency=1
+        - --concurrency=4
         command:
         - celery
         env:
@@ -91,7 +93,7 @@ spec:
             name: $ANALYSIS_PREFIX-env
         image: $ANALYSIS_API_IMAGE
         imagePullPolicy: IfNotPresent
-        name: mykrobe-atlas-analysis
+        name: $ANALYSIS_PREFIX-worker
         volumeMounts:
         - mountPath: /data/
           name: uploads-data
@@ -99,11 +101,11 @@ spec:
           name: $ANALYSIS_PREFIX-config-data
         resources:
           limits:
-            memory: $LIMIT_MEMORY_ANALYSIS
-            cpu: $LIMIT_CPU_ANALYSIS
+            memory: $LIMIT_MEMORY_ANALYSIS_WORKER
+            cpu: $LIMIT_CPU_ANALYSIS_WORKER
           requests:
-            memory: $REQUEST_MEMORY_ANALYSIS
-            cpu: $REQUEST_CPU_ANALYSIS
+            memory: $REQUEST_MEMORY_ANALYSIS_WORKER
+            cpu: $REQUEST_CPU_ANALYSIS_WORKER
       volumes:
       - name: uploads-data
         persistentVolumeClaim:
@@ -137,7 +139,7 @@ spec:
       containers:
       - args:
         - -c
-        - uwsgi --http :80  --harakiri 300  --buffer-size=65535  -w wsgi:app
+        - uwsgi --enable-threads --http :80  --harakiri 300  --buffer-size=65535  -w wsgi:app
         command:
         - /bin/sh
         env:
@@ -148,7 +150,7 @@ spec:
             name: $ANALYSIS_PREFIX-env
         image: $ANALYSIS_API_IMAGE
         imagePullPolicy: IfNotPresent
-        name: mykrobe-atlas-analysis
+        name: $ANALYSIS_PREFIX
         ports:
         - containerPort: 80
           protocol: TCP
@@ -159,11 +161,11 @@ spec:
           name: $ANALYSIS_PREFIX-config-data
         resources:
           limits:
-            memory: $LIMIT_MEMORY_ANALYSIS
-            cpu: $LIMIT_CPU_ANALYSIS
+            memory: $LIMIT_MEMORY_ANALYSIS_API
+            cpu: $LIMIT_CPU_ANALYSIS_API
           requests:
-            memory: $REQUEST_MEMORY_ANALYSIS
-            cpu: $REQUEST_CPU_ANALYSIS
+            memory: $REQUEST_MEMORY_ANALYSIS_API
+            cpu: $REQUEST_CPU_ANALYSIS_API
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
