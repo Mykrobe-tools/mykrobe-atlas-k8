@@ -345,7 +345,7 @@ metadata:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/enable-cors: 'true'
-    nginx.ingress.kubernetes.io/cors-allow-origin: "*"
+    nginx.ingress.kubernetes.io/cors-allow-origin: $CORS_ORIGIN
     nginx.ingress.kubernetes.io/proxy-body-size: 10m
   namespace: $NAMESPACE
 spec:
