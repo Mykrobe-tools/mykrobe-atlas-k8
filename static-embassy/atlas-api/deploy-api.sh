@@ -35,6 +35,7 @@ echo " - Google geocoding API key: $GOOGLE_MAPS_API_KEY"
 echo " - Swagger API files: $SWAGGER_API_FILES"
 echo " - Redis host: $REDIS_HOST"
 echo " - Redis port: $REDIS_PORT"
+echo " - Cors origin: $CORS_ORIGIN"
 echo ""
 
 echo "Limits:"
@@ -294,6 +295,8 @@ spec:
           value: '$REDIS_PORT'
         - name: NODE_OPTIONS
           value: '--max-old-space-size=$NODE_OPTIONS_MEMORY'
+        - name: CORS_ORIGIN
+          value: $CORS_ORIGIN
         resources: 
           requests:
             memory: "$REQUEST_MEMORY"
