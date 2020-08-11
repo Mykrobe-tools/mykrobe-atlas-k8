@@ -23,7 +23,6 @@ echo " - Keycloak Realm: $REACT_APP_KEYCLOAK_REALM"
 echo " - Keycloak Client: $REACT_APP_KEYCLOAK_CLIENT_ID"
 echo " - API URL: $REACT_APP_API_URL"
 echo " - API URL Swagger Docs: $REACT_APP_API_SPEC_URL"
-echo " - App Storage Key (Cookie): $REACT_APP_TOKEN_STORAGE_KEY"
 echo ""
 
 cat <<EOF | kubectl apply -f -
@@ -138,8 +137,6 @@ spec:
           value: $REACT_APP_KEYCLOAK_REALM
         - name: REACT_APP_KEYCLOAK_CLIENT_ID
           value: $REACT_APP_KEYCLOAK_CLIENT_ID
-        - name: REACT_APP_TOKEN_STORAGE_KEY
-          value: $REACT_APP_TOKEN_STORAGE_KEY
         - name: REACT_APP_GOOGLE_MAPS_API_KEY
           valueFrom:
             secretKeyRef:
