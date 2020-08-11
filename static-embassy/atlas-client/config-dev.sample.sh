@@ -22,9 +22,6 @@ export REACT_APP_API_URL="https://api-dev.mykro.be"
 # Swagger spec if available
 export REACT_APP_API_SPEC_URL="https://api-dev.mykro.be/swagger.json"
 
-# Universal cookie name, used to store auth token if not using Keycloak
-export REACT_APP_TOKEN_STORAGE_KEY="dev.mykro.be"
-
 # If using Keycloak
 export REACT_APP_KEYCLOAK_URL="https://accounts-dev.mykro.be/auth"
 export REACT_APP_KEYCLOAK_REALM="atlas"
