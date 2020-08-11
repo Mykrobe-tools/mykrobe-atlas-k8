@@ -105,10 +105,12 @@ metadata:
   name: $REDIS_PREFIX
   namespace: $NAMESPACE
 spec:
-  type: NodePort
+  type: ClusterIP
   ports:
-  - name: $REDIS_PREFIX
-    port: 6379
+    - port: 6379
+      targetPort: 6379
+      protocol: TCP
+      name: $REDIS_PREFIX
   selector:
     app: $REDIS_PREFIX
 EOF
