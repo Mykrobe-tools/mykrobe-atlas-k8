@@ -27,7 +27,7 @@ export KEYCLOAK_ADMIN_PASSWORD="<KEYCLOAK_ADMIN_PASSWORD>"
 export API_HOST="api-dev.mykro.be"
 export DEBUG=1
 export LOG_LEVEL=debug
-export CORS_ORIGIN = "dev.mykro.be"
+export CORS_ORIGIN="dev.mykro.be"
 
 export ANALYSIS_API="http://analysis-api-service.mykrobe-dev.svc.cluster.local"
 export BIGSI_API="http://bigsi-api-aggregator-service.mykrobe-dev.svc.cluster.local"
