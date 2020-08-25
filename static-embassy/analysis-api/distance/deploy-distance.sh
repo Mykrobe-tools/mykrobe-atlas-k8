@@ -8,6 +8,17 @@ metadata:
   name: $DISTANCE_PREFIX-sa
   namespace: $NAMESPACE
 ---
+apiVersion: v1
+data:
+  NEO4J_AUTH: $DISTANCE_API_NEO4J_AUTH
+kind: Secret
+metadata:
+  labels:
+    app: $DISTANCE_PREFIX
+  name: $DISTANCE_PREFIX-secret
+  namespace: $NAMESPACE
+type: Opaque
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -25,18 +36,19 @@ spec:
         app: $DISTANCE_PREFIX
     spec:
       serviceAccountName: $DISTANCE_PREFIX-sa
-      volumes:
-      - name: $DISTANCE_PREFIX-data
-        persistentVolumeClaim:
-          claimName: $DISTANCE_PREFIX-data
       containers:
       - name: $DISTANCE_PREFIX
         image: $DISTANCE_API_IMAGE
         ports:
         - containerPort: 8080
-        volumeMounts:
-        - mountPath: "/data/databases"
-          name: $DISTANCE_PREFIX-data
+        env:
+        - name: NEO4J_AUTH
+          valueFrom:
+            secretKeyRef:
+              key: NEO4J_AUTH
+              name: $DISTANCE_PREFIX-secret
+        - name: NEO4J_URI
+          value: $NEO4J_URI
         resources:
           limits:
             memory: $LIMIT_MEMORY_DISTANCE
@@ -46,18 +58,6 @@ spec:
             cpu: $REQUEST_CPU_DISTANCE
       imagePullSecrets:
       - name: gcr-json-key
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: $DISTANCE_PREFIX-data
-  namespace: $NAMESPACE
-spec:
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
