@@ -10,7 +10,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  neo4j_auth: $NEO4J_AUTH
+  NEO4J_AUTH: $NEO4J_AUTH
 kind: Secret
 metadata:
   labels:
@@ -52,7 +52,7 @@ spec:
         - name: NEO4J_AUTH
           valueFrom:
             secretKeyRef:
-              key: neo4j_auth
+              key: NEO4J_AUTH
               name: $NEO4J_PREFIX-secret
         resources:
           limits:

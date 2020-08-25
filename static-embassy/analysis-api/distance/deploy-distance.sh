@@ -10,7 +10,7 @@ metadata:
 ---
 apiVersion: v1
 data:
-  neo4j_auth: $DISTANCE_API_NEO4J_AUTH
+  NEO4J_AUTH: $DISTANCE_API_NEO4J_AUTH
 kind: Secret
 metadata:
   labels:
@@ -45,7 +45,7 @@ spec:
         - name: NEO4J_AUTH
           valueFrom:
             secretKeyRef:
-              key: neo4j_auth
+              key: NEO4J_AUTH
               name: $DISTANCE_PREFIX-secret
         - name: NEO4J_URI
           value: $NEO4J_URI
