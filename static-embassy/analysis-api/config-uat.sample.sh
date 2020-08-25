@@ -1,31 +1,23 @@
 #!/bin/bash
 
-export NAMESPACE="mykrobe-dev"
-export ATLAS_API="https://api-dev.mykro.be"
-
+export NAMESPACE="mykrobe-analysis-uat"
+export TARGET_ENV="uat"
+export ATLAS_API="https://api-uat.mykro.be"
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:4b4e846"
-
-export BIGSI_AGGREGATOR_IMAGE="phelimb/bigsi-aggregator:210419"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
-
-export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:f8775c6"
-export NEO4J_IMAGE="neo4j:4.1"
-
-export REDIS_IMAGE="redis:4.0"
-
-export REDIS_PREFIX="redis"
-export ANALYSIS_PREFIX="analysis-api"
-export BIGSI_PREFIX="bigsi-api"
+export BIGSI_IMAGE="phelimb/bigsi:v0.3.5"
 export DISTANCE_PREFIX="distance-api"
-export ATLAS_API_PREFIX="atlas-api"
+export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:f8775c6"
 export NEO4J_PREFIX="neo4j"
+export NEO4J_IMAGE="neo4j:4.1"
+export REDIS_IMAGE="redis:4.0"
 export NEO4J_URI="bolt://neo4j-service:7687"
 export NEO4J_USER="neo4j"
-export NEO4J_PASSWORD=<password>
+export NEO4J_PASSWORD="<password>"
 export NEO4J_AUTH=`echo -n $NEO4J_USER/$NEO4J_PASSWORD | base64`
 export DISTANCE_API_NEO4J_AUTH=`echo -n $NEO4J_USER:$NEO4J_PASSWORD | base64`
 
-export POD_CPU_REDIS="500m"
+export POD_CPU_REDIS="1000m"
 export POD_MEMORY_REDIS="1Gi"
 export REQUEST_MEMORY_ANALYSIS_API="1Gi"
 export REQUEST_CPU_ANALYSIS_API="500m"
@@ -53,27 +45,19 @@ export LIMIT_CPU_NEO4J="500m"
 echo ""
 echo "Deploying analysis api using:"
 echo " - NAMESPACE: $NAMESPACE"
-echo " - Atlas api prefix: $ATLAS_API_PREFIX"
+echo " - Target: $TARGET_ENV"
 echo " - Atlas Api: $ATLAS_API"
-
-echo " - Analysis Prefix: $ANALYSIS_PREFIX"
 echo " - Analysis image: $ANALYSIS_API_IMAGE"
-
-echo " - Bigsi Prefix: $BIGSI_PREFIX"
 echo " - Bigsi aggregator image: $BIGSI_AGGREGATOR_IMAGE"
 echo " - Bigsi image: $BIGSI_IMAGE"
-
 echo " - Distance Prefix: $DISTANCE_PREFIX"
 echo " - Distance api image: $DISTANCE_API_IMAGE"
-
+echo " - Redis image: $REDIS_IMAGE"
 echo " - Neo4J Prefix: $NEO4J_PREFIX"
 echo " - Neo4J image: $NEO4J_IMAGE"
+echo " - Neo4J URI: $NEO4J_URI"
 echo " - Neo4J username: $NEO4J_USER"
 echo " - Neo4J password: $NEO4J_PASSWORD"
-echo " - Neo4J URI: $NEO4J_URI"
-
-echo " - Redis Prefix: $REDIS_PREFIX"
-echo " - Redis image: $REDIS_IMAGE"
 echo ""
 
 echo "Limits:"
