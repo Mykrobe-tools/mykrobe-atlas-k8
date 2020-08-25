@@ -30,6 +30,11 @@ spec:
         image: $DISTANCE_API_IMAGE
         ports:
         - containerPort: 8080
+        env:
+        - name: NEO4J_AUTH
+          value: $DISTANCE_API_NEO4J_AUTH
+        - name: NEO4J_URI
+          value: $NEO4J_URI
         resources:
           limits:
             memory: $LIMIT_MEMORY_DISTANCE

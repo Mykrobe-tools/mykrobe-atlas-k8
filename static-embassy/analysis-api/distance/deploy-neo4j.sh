@@ -33,10 +33,13 @@ spec:
       - name: $NEO4J_PREFIX
         image: $NEO4J_IMAGE
         ports:
-        - containerPort: 7474
+        - containerPort: 7687
         volumeMounts:
         - mountPath: "/data/databases"
           name: $NEO4J_PREFIX-data
+        env:
+        - name: NEO4J_AUTH
+          value: $NEO4J_AUTH
         resources:
           limits:
             memory: $LIMIT_MEMORY_NEO4J
@@ -67,8 +70,8 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - port: 80
-    targetPort: 7474
+  - port: 7687
+    targetPort: 7687
   selector:
     app: $NEO4J_PREFIX
 EOF
