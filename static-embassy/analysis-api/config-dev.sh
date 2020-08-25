@@ -3,12 +3,12 @@
 export NAMESPACE="mykrobe-dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:e2e488d"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:4b4e846"
 
 export BIGSI_AGGREGATOR_IMAGE="phelimb/bigsi-aggregator:210419"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
 
-export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:v0.0.1"
+export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:f8775c6"
 export NEO4J_IMAGE="neo4j:4.1"
 
 export REDIS_IMAGE="redis:4.0"
@@ -110,5 +110,5 @@ sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
 sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=analysis-api-worker -n mykrobe-dev -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
 sh ./bigsi/deploy-bigsi.sh
-sh ./distance/deploy-distance.sh
 sh ./distance/deploy-neo4j.sh
+sh ./distance/deploy-distance.sh
