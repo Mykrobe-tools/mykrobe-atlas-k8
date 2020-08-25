@@ -21,7 +21,7 @@ export ATLAS_API_PREFIX="atlas-api"
 export NEO4J_PREFIX="neo4j"
 export NEO4J_URI="bolt://neo4j-service:7687"
 export NEO4J_USER="neo4j"
-export NEO4J_PASSWORD=<password>
+export NEO4J_PASSWORD="<password>"
 export NEO4J_AUTH=`echo -n $NEO4J_USER/$NEO4J_PASSWORD | base64`
 export DISTANCE_API_NEO4J_AUTH=`echo -n $NEO4J_USER:$NEO4J_PASSWORD | base64`
 
