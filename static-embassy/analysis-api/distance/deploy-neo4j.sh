@@ -8,6 +8,17 @@ metadata:
   name: $NEO4J_PREFIX-sa
   namespace: $NAMESPACE
 ---
+apiVersion: v1
+data:
+  neo4j_auth: $NEO4J_AUTH
+kind: Secret
+metadata:
+  labels:
+    app: $NEO4J_PREFIX
+  name: $NEO4J_PREFIX-secret
+  namespace: $NAMESPACE
+type: Opaque
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -39,7 +50,10 @@ spec:
           name: $NEO4J_PREFIX-data
         env:
         - name: NEO4J_AUTH
-          value: $NEO4J_AUTH
+          valueFrom:
+            secretKeyRef:
+              key: neo4j_auth
+              name: $NEO4J_PREFIX-secret
         resources:
           limits:
             memory: $LIMIT_MEMORY_NEO4J

@@ -8,6 +8,17 @@ metadata:
   name: $DISTANCE_PREFIX-sa
   namespace: $NAMESPACE
 ---
+apiVersion: v1
+data:
+  neo4j_auth: $DISTANCE_API_NEO4J_AUTH
+kind: Secret
+metadata:
+  labels:
+    app: $DISTANCE_PREFIX
+  name: $DISTANCE_PREFIX-secret
+  namespace: $NAMESPACE
+type: Opaque
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -32,7 +43,10 @@ spec:
         - containerPort: 8080
         env:
         - name: NEO4J_AUTH
-          value: $DISTANCE_API_NEO4J_AUTH
+          valueFrom:
+            secretKeyRef:
+              key: neo4j_auth
+              name: $DISTANCE_PREFIX-secret
         - name: NEO4J_URI
           value: $NEO4J_URI
         resources:

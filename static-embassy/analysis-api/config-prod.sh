@@ -17,9 +17,11 @@ export DISTANCE_PREFIX="distance-api"
 export ATLAS_API_PREFIX="atlas-api"
 export NEO4J_PREFIX="neo4j"
 export NEO4J_IMAGE="neo4j:4.1"
-export NEO4J_AUTH="neo4j/test"
 export NEO4J_URI="bolt://neo4j-service:7687"
-export DISTANCE_API_NEO4J_AUTH="neo4j:test"
+export NEO4J_USER="neo4j"
+export NEO4J_PASSWORD=<password>
+export NEO4J_AUTH=`echo -n $NEO4J_USER/$NEO4J_PASSWORD | base64`
+export DISTANCE_API_NEO4J_AUTH=`echo -n $NEO4J_USER:$NEO4J_PASSWORD | base64`
 
 export POD_CPU_REDIS="500m"
 export POD_MEMORY_REDIS="1Gi"
@@ -61,12 +63,12 @@ echo " - Bigsi image: $BIGSI_IMAGE"
 
 echo " - Distance Prefix: $DISTANCE_PREFIX"
 echo " - Distance api image: $DISTANCE_API_IMAGE"
-echo " - Distance api Neo4J auth: $DISTANCE_API_NEO4J_AUTH"
 
 echo " - Neo4J Prefix: $NEO4J_PREFIX"
 echo " - Neo4J image: $NEO4J_IMAGE"
-echo " - Neo4J auth: $NEO4J_AUTH"
 echo " - Neo4J URI: $NEO4J_URI"
+echo " - Neo4J username: $NEO4J_USER"
+echo " - Neo4J password: $NEO4J_PASSWORD"
 
 echo " - Redis Prefix: $REDIS_PREFIX"
 echo " - Redis image: $REDIS_IMAGE"
