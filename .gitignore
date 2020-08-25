@@ -18,9 +18,9 @@ static-embassy/keycloak/config.sh
 static-embassy/atlas-client/config-dev.sh
 static-embassy/mongo-replica-set/config-dev.sh
 static-embassy/metabase/mysql/config-dev.sh
-static=embassy/analysis-api/config-dev.sh
-static=embassy/analysis-api/config-uat.sh
-static=embassy/analysis-api/config-prod.sh
+static-embassy/analysis-api/config-dev.sh
+static-embassy/analysis-api/config-uat.sh
+static-embassy/analysis-api/config-prod.sh
 static-embassy/keycloak/config-dev.sh
 
 # credentials
