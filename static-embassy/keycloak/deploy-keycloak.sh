@@ -199,26 +199,21 @@ spec:
       - image: $KEYCLOAK_IMAGE
         name: $PREFIX
         livenessProbe:
-          probe: |
-            exec:
-              command:
-              - curl
-              - -f
-              - http://127.0.0.1:8080/
-
+          httpGet:
+            path: /
+            port: http
+          initialDelaySeconds: 300
+          timeoutSeconds: 5
         readinessProbe:
-          probe: |
-            exec:
-              command:
-              - curl
-              - -f
-              - http://127.0.0.1:8080/realms/master
+          httpGet:
+            path: /auth/realms/master
+            port: http
+          initialDelaySeconds: 300
+          timeoutSeconds: 1
         ports:
         - containerPort: 8080
           protocol: TCP
-        volumeMounts:
-        - mountPath: "/opt/jboss/keycloak/themes/mykrobe"
-          name: $PREFIX-theme-volume
+          name: http
         env:
         - name: DB_VENDOR
           value: POSTGRES
@@ -250,6 +245,8 @@ spec:
               name: $PREFIX-credentials-secret
         - name: PROXY_ADDRESS_FORWARDING
           value: 'true'
+        - name: KEYCLOAK_LOGLEVEL
+          value: DEBUG
         resources: 
           requests:
             memory: "$REQUEST_MEMORY"
@@ -259,12 +256,8 @@ spec:
             memory: "$LIMIT_MEMORY"
             cpu: "$LIMIT_CPU" 
             ephemeral-storage: "$LIMIT_STORAGE"
-      volumes:
-      - name: $PREFIX-theme-volume
-        persistentVolumeClaim:
-          claimName: $PREFIX-theme-data
       imagePullSecrets:
-      - name: dockerhub
+      - name: gcr-json-key
 ---
 apiVersion: v1
 kind: Service
