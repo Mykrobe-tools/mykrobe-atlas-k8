@@ -60,6 +60,8 @@ data:
   REACT_APP_GOOGLE_DRIVE_CLIENT_ID: $REACT_APP_GOOGLE_DRIVE_CLIENT_ID
   REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY: $REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY
   REACT_APP_ONEDRIVE_CLIENT_ID: $REACT_APP_ONEDRIVE_CLIENT_ID
+  REACT_APP_SENTRY_PUBLIC_DSN: $REACT_APP_SENTRY_PUBLIC_DSN
+  SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -104,12 +106,12 @@ spec:
           timeoutSeconds: 10
           failureThreshold: 10
         securityContext:
-          runAsUser: 1000 
+          runAsUser: 1000
           allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
-          readOnlyRootFilesystem: true 
+          readOnlyRootFilesystem: true
         ports:
         - containerPort: 3000
           protocol: TCP
@@ -117,11 +119,11 @@ spec:
         - mountPath: "/home/node/data/forever"
           subPath: "forever"
           name: $PREFIX-app-data
-          readOnly: false 
+          readOnly: false
         - mountPath: "/home/node/data/logs"
           subPath: "logs"
           name: $PREFIX-app-data
-          readOnly: false 
+          readOnly: false
         env:
         - name: HOST
           value: 0.0.0.0
@@ -167,14 +169,24 @@ spec:
             secretKeyRef:
               name: $PREFIX-env-secret
               key: REACT_APP_ONEDRIVE_CLIENT_ID
-        resources: 
+        - name: REACT_APP_SENTRY_PUBLIC_DSN
+          valueFrom:
+            secretKeyRef:
+              name: $PREFIX-env-secret
+              key: REACT_APP_SENTRY_PUBLIC_DSN
+        - name: SENTRY_AUTH_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: $PREFIX-env-secret
+              key: SENTRY_AUTH_TOKEN
+        resources:
           requests:
             memory: "$REQUEST_MEMORY"
-            cpu: "$REQUEST_CPU" 
-            ephemeral-storage: "$REQUEST_STORAGE"         
+            cpu: "$REQUEST_CPU"
+            ephemeral-storage: "$REQUEST_STORAGE"
           limits:
             memory: "$LIMIT_MEMORY"
-            cpu: "$LIMIT_CPU" 
+            cpu: "$LIMIT_CPU"
             ephemeral-storage: "$LIMIT_STORAGE"
       volumes:
       - name: $PREFIX-app-data
