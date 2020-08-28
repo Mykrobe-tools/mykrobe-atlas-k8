@@ -35,4 +35,11 @@ export REACT_APP_DROPBOX_APP_KEY=`echo -n "" | base64`
 export REACT_APP_GOOGLE_DRIVE_CLIENT_ID=`echo -n "" | base64`
 export REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY=`echo -n "" | base64`
 export REACT_APP_ONEDRIVE_CLIENT_ID=`echo -n "" | base64`
+
+# Crash telemetry
+export REACT_APP_SENTRY_PUBLIC_DSN=`echo -n "" | base64`
+export SENTRY_AUTH_TOKEN=`echo -n "" | base64`
+export SENTRY_ORG="makeandship"
+export SENTRY_PROJECT="mykrobe-atlas"
+
 sh ./deploy-client.sh
