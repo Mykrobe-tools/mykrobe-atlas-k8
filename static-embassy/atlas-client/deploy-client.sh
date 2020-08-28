@@ -25,6 +25,12 @@ echo " - API URL: $REACT_APP_API_URL"
 echo " - API URL Swagger Docs: $REACT_APP_API_SPEC_URL"
 echo ""
 
+echo "Crash telemetry:"
+echo " - Public DSN: $REACT_APP_SENTRY_PUBLIC_DSN"
+echo " - Auth token: $SENTRY_AUTH_TOKEN"
+echo " - Org: $SENTRY_ORG"
+echo " - Project: $SENTRY_PROJECT"
+
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
@@ -139,6 +145,10 @@ spec:
           value: $REACT_APP_KEYCLOAK_REALM
         - name: REACT_APP_KEYCLOAK_CLIENT_ID
           value: $REACT_APP_KEYCLOAK_CLIENT_ID
+        - name: SENTRY_ORG
+          value: $SENTRY_ORG
+        - name: SENTRY_PROJECT
+          value: $SENTRY_PROJECT
         - name: REACT_APP_GOOGLE_MAPS_API_KEY
           valueFrom:
             secretKeyRef:
