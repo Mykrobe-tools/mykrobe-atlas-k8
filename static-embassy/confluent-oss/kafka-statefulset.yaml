@@ -106,7 +106,7 @@ spec:
             ephemeral-storage: "{KAFKA_EPHERMERAL_STORAGE}"   
           limits:
             memory: "{LIMIT_KAFKA_MEMORY}"
-            cpu: "{LIMIT_KAFKA_MEMORY}"
+            cpu: "{LIMIT_KAFKA_CPU}"
             ephemeral-storage: "{KAFKA_EPHERMERAL_STORAGE}" 
   volumeClaimTemplates:
   - metadata:
