@@ -67,7 +67,6 @@ data:
   REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY: $REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY
   REACT_APP_ONEDRIVE_CLIENT_ID: $REACT_APP_ONEDRIVE_CLIENT_ID
   REACT_APP_SENTRY_PUBLIC_DSN: $REACT_APP_SENTRY_PUBLIC_DSN
-  SENTRY_AUTH_TOKEN: $SENTRY_AUTH_TOKEN
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -145,10 +144,6 @@ spec:
           value: $REACT_APP_KEYCLOAK_REALM
         - name: REACT_APP_KEYCLOAK_CLIENT_ID
           value: $REACT_APP_KEYCLOAK_CLIENT_ID
-        - name: SENTRY_ORG
-          value: $SENTRY_ORG
-        - name: SENTRY_PROJECT
-          value: $SENTRY_PROJECT
         - name: REACT_APP_GOOGLE_MAPS_API_KEY
           valueFrom:
             secretKeyRef:
@@ -184,11 +179,6 @@ spec:
             secretKeyRef:
               name: $PREFIX-env-secret
               key: REACT_APP_SENTRY_PUBLIC_DSN
-        - name: SENTRY_AUTH_TOKEN
-          valueFrom:
-            secretKeyRef:
-              name: $PREFIX-env-secret
-              key: SENTRY_AUTH_TOKEN
         resources:
           requests:
             memory: "$REQUEST_MEMORY"
