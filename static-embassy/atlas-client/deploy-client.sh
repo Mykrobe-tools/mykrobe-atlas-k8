@@ -27,9 +27,6 @@ echo ""
 
 echo "Crash telemetry:"
 echo " - Public DSN: $REACT_APP_SENTRY_PUBLIC_DSN"
-echo " - Auth token: $SENTRY_AUTH_TOKEN"
-echo " - Org: $SENTRY_ORG"
-echo " - Project: $SENTRY_PROJECT"
 
 cat <<EOF | kubectl apply -f -
 ---
