@@ -83,6 +83,7 @@ spec:
         - -l
         - debug
         - --concurrency=4
+        - --uid=nobody
         command:
         - celery
         env:
