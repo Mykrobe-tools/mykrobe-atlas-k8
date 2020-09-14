@@ -27,3 +27,17 @@ Kubernetes specifications to deploy Atlas services. These are deployed to Embass
 ### Cert Manager (cert-manager)
 
 - Cert Manager - TLS certificate management
+
+## Installation
+
+### Namespaces
+
+In directory `/static-embassy/namespaces`, run in the configuration `./config.sh`
+
+to create namespaces `insight`, `mykrobe` and `shared`
+
+### GCR
+
+In directory `/static-embassy/gcr`, run in the configuration `./config.sh`
+
+to create gcr credentials `insight` and `mykrobe`
