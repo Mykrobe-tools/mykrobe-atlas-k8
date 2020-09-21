@@ -3,7 +3,8 @@
 export NAMESPACE="mykrobe-dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:4b4e846"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:a497584"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:a497584"
 
 export BIGSI_AGGREGATOR_IMAGE="phelimb/bigsi-aggregator:210419"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"

@@ -83,6 +83,7 @@ spec:
         - -l
         - debug
         - --concurrency=4
+        - --uid=nobody
         command:
         - celery
         env:
@@ -91,7 +92,7 @@ spec:
         envFrom:
         - configMapRef:
             name: $ANALYSIS_PREFIX-env
-        image: $ANALYSIS_API_IMAGE
+        image: $ANALYSIS_API_WORKER_IMAGE
         imagePullPolicy: IfNotPresent
         name: $ANALYSIS_PREFIX-worker
         volumeMounts:
