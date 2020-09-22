@@ -42,6 +42,11 @@ In directory `/static-embassy/gcr`, run in the configuration `./config.sh`
 
 to create gcr credentials `insight` and `mykrobe`
 
+### MongoDb
+In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file and run in the configuration `./config-uat.sh` for example
+
+This will create a mongo db cluster with 3 replicas
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
@@ -62,3 +67,8 @@ Run this command to create the kubernetes config (replace CLUSTER_URL by your cl
     kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt`
 
 Run this to enable database secrets `vault secrets enable database || true`
+
+#### Setup MongoDb Policy
+
+In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-mongo.sh
+
