@@ -42,7 +42,7 @@ In directory `/static-embassy/gcr`, run in the configuration `./config.sh`
 
 to create gcr credentials `insight` and `mykrobe`
 
-### VAULT
+### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
 
