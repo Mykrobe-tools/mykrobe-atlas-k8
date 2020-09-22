@@ -76,11 +76,9 @@ In directory `/static-embassy/mongo-replica-set`, create a new config file with 
 
 For example:
 
-for Development: copy config-dev.sample.sh
-
-for UAT: copy config-uat.sample.sh
-
-for Production: copy config-prod.sample.sh
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
 
 Replace the username, passwords and key then run it in.
 
@@ -140,11 +138,9 @@ In directory `/static-embassy/keycloak`, create a new config file with your sett
 
 For example:
 
-for Development: copy config-dev.sample.sh
-
-for UAT: copy config-uat.sample.sh
-
-for Production: copy config-prod.sample.sh
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
 
 Replace the passwords then run it in.
 
