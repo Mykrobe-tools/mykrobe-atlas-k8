@@ -38,7 +38,7 @@ type: Opaque
 data:
   api-key: $CLOUDFLARE_API_KEY
 ---
-apiVersion: cert-manager.io/v1
+apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
@@ -50,28 +50,6 @@ spec:
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
       name: account-key-letsencrypt-prod
-
-    # ACME DNS-01 provider configurations
-    solvers:
-      - dns01:
-          cloudflare:
-            email: $CLOUDFLARE_ACCOUNT_EMAIL
-            apiKeySecretRef:
-              name: cloudflare-api-key
-              key: api-key
----
-apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
-metadata:
-  name: letsencrypt-staging
-spec:
-  acme:
-    server: https://acme-staging-v02.api.letsencrypt.org/directory
-    email: $CLOUDFLARE_NOTIFICATION_EMAIL
-
-    # Name of a secret used to store the ACME account private key
-    privateKeySecretRef:
-      name: account-key-letsencrypt-staging
 
     # ACME DNS-01 provider configurations
     solvers:

@@ -101,6 +101,40 @@ mykrobe-mongodb-replicaset-1   1/1     Running   0          163m
 mykrobe-mongodb-replicaset-2   1/1     Running   0          163m
 ```
 
+### Cert Manager
+In directory `/static-embassy/certmanager`, copy config.sample.sh and replace the CLOUDFLARE_API_KEY by your cloudflare key in the copied file and run it in.
+
+this will deploy all the certmanager components
+
+Verify using
+
+```
+kubectl get all -n cert-manager
+```
+
+and see
+
+```
+NAME                                           READY   STATUS    RESTARTS   AGE
+pod/cert-manager-75856bb467-szm5t              1/1     Running   0          2m23s
+pod/cert-manager-cainjector-597f5b4768-xd4k4   1/1     Running   0          2m23s
+pod/cert-manager-webhook-5c9f7b5f75-7b6cc      1/1     Running   0          2m23s
+
+NAME                           TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+service/cert-manager           ClusterIP   10.43.146.63   <none>        9402/TCP   2m23s
+service/cert-manager-webhook   ClusterIP   10.43.103.19   <none>        443/TCP    2m23s
+
+NAME                                      READY   UP-TO-DATE   AVAILABLE   AGE
+deployment.apps/cert-manager              1/1     1            1           2m23s
+deployment.apps/cert-manager-cainjector   1/1     1            1           2m23s
+deployment.apps/cert-manager-webhook      1/1     1            1           2m23s
+
+NAME                                                 DESIRED   CURRENT   READY   AGE
+replicaset.apps/cert-manager-75856bb467              1         1         1       2m23s
+replicaset.apps/cert-manager-cainjector-597f5b4768   1         1         1       2m23s
+replicaset.apps/cert-manager-webhook-5c9f7b5f75      1         1         1       2m23s
+```
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
