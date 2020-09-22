@@ -29,3 +29,4 @@ static-embassy/vault/keys
 static-embassy/mongo-replica-set/config-uat.sh
 static-embassy/certmanager/config.sh
 static-embassy/keycloak/config-uat.sh
+static-embassy/atlas-api/config-uat.sh
