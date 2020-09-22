@@ -36,32 +36,90 @@ In directory `/static-embassy/namespaces`, run in the configuration `./config.sh
 
 to create namespaces `insight`, `mykrobe` and `shared`
 
+Verify using
+
+```
+kubectl get namespaces
+```
+
+and see
+
+```
+NAME              STATUS   AGE
+insight           Active   4h27m
+mykrobe           Active   4h27m
+shared            Active   4h27m
+```
+
 ### GCR
 
 In directory `/static-embassy/gcr`, run in the configuration `./config.sh`
 
 to create gcr credentials `insight` and `mykrobe`
 
+Verify using
+
+```
+kubectl get secrets -n insight
+kubectl get secrets -n mykrobe
+```
+
+and see
+
+```
+NAME                  TYPE                                  DATA   AGE
+gcr-json-key          kubernetes.io/dockerconfigjson        1      4h28m
+```
+
 ### MongoDb
 In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
 
-for Dev: copy config-dev.sample.sh
+for Development: copy config-dev.sample.sh
 
-for Uat: copy config-uat.sample.sh
+for UAT: copy config-uat.sample.sh
 
-for Prod: copy config-prod.sample.sh
+for Production: copy config-prod.sample.sh
 
 Replace the username, passwords and key then run it in.
 
 This will create a mongo db cluster with 3 replicas
+
+Verify using
+
+```
+kubectl get pods -n mykrobe
+```
+
+and see
+
+```
+NAME                           READY   STATUS    RESTARTS   AGE
+mykrobe-mongodb-replicaset-0   1/1     Running   0          164m
+mykrobe-mongodb-replicaset-1   1/1     Running   0          163m
+mykrobe-mongodb-replicaset-2   1/1     Running   0          163m
+```
 
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
 
 to create the vault and sidecar-injector agent
+
+Verify using
+
+```
+kubectl get pods -n shared
+```
+
+and see
+
+```
+NAME                                   READY   STATUS    RESTARTS   AGE
+vault-0                                1/1     Running   0          4h17m
+vault-agent-injector-c49c94bf4-xvncn   1/1     Running   0          4h12m
+```
 
 To initialise the vault operator ssh to the vault-0 pod and run the following command `vault operator init` and take note of the keys
 
