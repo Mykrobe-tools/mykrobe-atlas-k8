@@ -28,3 +28,4 @@ static-embassy/gcr/atlas-275810-1b85bf39eb34.json
 static-embassy/vault/keys
 static-embassy/mongo-replica-set/config-uat.sh
 static-embassy/certmanager/config.sh
+static-embassy/keycloak/config-uat.sh

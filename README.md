@@ -135,6 +135,35 @@ replicaset.apps/cert-manager-cainjector-597f5b4768   1         1         1      
 replicaset.apps/cert-manager-webhook-5c9f7b5f75      1         1         1       2m23s
 ```
 
+### Keycloak
+In directory `/static-embassy/keycloak`, create a new config file with your setting by copying the sample file for your target environment.
+
+For example:
+
+for Development: copy config-dev.sample.sh
+
+for UAT: copy config-uat.sample.sh
+
+for Production: copy config-prod.sample.sh
+
+Replace the passwords then run it in.
+
+This will create a postgres and keycloak
+
+Verify using
+
+```
+kubectl get pods -n mykrobe
+```
+
+and see
+
+```
+NAME                                   READY   STATUS    RESTARTS   AGE
+keycloak-deployment-75f857d8c5-z7lct   1/1     Running   0          8m48s
+postgres-596bcb6dc8-6fxhs              1/1     Running   0          8m49s
+```
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
