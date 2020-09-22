@@ -71,6 +71,47 @@ NAME                  TYPE                                  DATA   AGE
 gcr-json-key          kubernetes.io/dockerconfigjson        1      4h28m
 ```
 
+### Vault
+
+In directory `/static-embassy/vault`, run in the configuration `./config.sh`
+
+to create the vault and sidecar-injector agent
+
+Verify using
+
+```
+kubectl get pods -n shared
+```
+
+and see
+
+```
+NAME                                   READY   STATUS    RESTARTS   AGE
+vault-0                                1/1     Running   0          4h17m
+vault-agent-injector-c49c94bf4-xvncn   1/1     Running   0          4h12m
+```
+
+To initialise the vault operator ssh to the vault-0 pod and run the following command `vault operator init` and take note of the keys
+
+To unseal the vault operator ssh to the vault-0 pod and run the following command `vault operator unseal` for all the unseal keys provided in the previous step
+
+To enable kubernetes authentication, run the following command: `vault auth enable kubernetes || true`
+
+Run this command to create the kubernetes config (replace CLUSTER_URL by your cluster url):
+
+```
+vault write auth/kubernetes/config \
+    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
+    kubernetes_host=CLUSTER_URL \
+    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+```
+
+Run this to enable database secrets `vault secrets enable database || true`
+
+#### Setup MongoDb Policy
+
+In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-mongo.sh
+
 ### MongoDB
 In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file for your target environment.
 
@@ -161,45 +202,3 @@ postgres-596bcb6dc8-6fxhs              1/1     Running   0          8m49s
 ```
 
 Access the front-end at: https://accounts-uat.mykro.be
-
-### Vault
-
-In directory `/static-embassy/vault`, run in the configuration `./config.sh`
-
-to create the vault and sidecar-injector agent
-
-Verify using
-
-```
-kubectl get pods -n shared
-```
-
-and see
-
-```
-NAME                                   READY   STATUS    RESTARTS   AGE
-vault-0                                1/1     Running   0          4h17m
-vault-agent-injector-c49c94bf4-xvncn   1/1     Running   0          4h12m
-```
-
-To initialise the vault operator ssh to the vault-0 pod and run the following command `vault operator init` and take note of the keys
-
-To unseal the vault operator ssh to the vault-0 pod and run the following command `vault operator unseal` for all the unseal keys provided in the previous step
-
-To enable kubernetes authentication, run the following command: `vault auth enable kubernetes || true`
-
-Run this command to create the kubernetes config (replace CLUSTER_URL by your cluster url):
-
-```
-vault write auth/kubernetes/config \
-    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
-    kubernetes_host=CLUSTER_URL \
-    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-```
-
-Run this to enable database secrets `vault secrets enable database || true`
-
-#### Setup MongoDb Policy
-
-In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-mongo.sh
-
