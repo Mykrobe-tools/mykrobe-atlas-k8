@@ -192,10 +192,12 @@ To enable kubernetes authentication, run the following command: `vault auth enab
 
 Run this command to create the kubernetes config (replace CLUSTER_URL by your cluster url):
 
-`vault write auth/kubernetes/config \
+```
+vault write auth/kubernetes/config \
     token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
     kubernetes_host=CLUSTER_URL \
-    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt`
+    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+```
 
 Run this to enable database secrets `vault secrets enable database || true`
 
