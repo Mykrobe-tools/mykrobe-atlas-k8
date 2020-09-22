@@ -164,6 +164,8 @@ keycloak-deployment-75f857d8c5-z7lct   1/1     Running   0          8m48s
 postgres-596bcb6dc8-6fxhs              1/1     Running   0          8m49s
 ```
 
+Access the front-end at: https://accounts-uat.mykro.be
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
