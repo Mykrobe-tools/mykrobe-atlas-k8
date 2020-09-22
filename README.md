@@ -71,7 +71,7 @@ NAME                  TYPE                                  DATA   AGE
 gcr-json-key          kubernetes.io/dockerconfigjson        1      4h28m
 ```
 
-### MongoDb
+### MongoDB
 In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
