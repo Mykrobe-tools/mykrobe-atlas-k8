@@ -43,7 +43,17 @@ In directory `/static-embassy/gcr`, run in the configuration `./config.sh`
 to create gcr credentials `insight` and `mykrobe`
 
 ### MongoDb
-In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file and run in the configuration `./config-uat.sh` for example
+In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file for your target environment.
+
+For example:
+
+for Dev: copy config-dev.sample.sh
+
+for Uat: copy config-uat.sample.sh
+
+for Prod: copy config-prod.sample.sh
+
+Replace the username, passwords and key then run it in.
 
 This will create a mongo db cluster with 3 replicas
 
