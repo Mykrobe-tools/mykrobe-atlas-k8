@@ -25,3 +25,4 @@ static-embassy/keycloak/config-dev.sh
 
 # credentials
 static-embassy/gcr/atlas-275810-1b85bf39eb34.json
+static-embassy/vault/keys
