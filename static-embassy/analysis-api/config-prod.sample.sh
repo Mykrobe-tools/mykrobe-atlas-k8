@@ -1,13 +1,17 @@
 #!/bin/bash
 
 export NAMESPACE="mykrobe-analysis-prod"
-export TARGET_ENV="prod"
+
 export ATLAS_API="https://api.mykro.be"
+
+export ANALYSIS_PREFIX="analysis-api"
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:4b4e846"
+
 export BIGSI_AGGREGATOR_IMAGE="phelimb/bigsi-aggregator:210419"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
 export DISTANCE_PREFIX="distance-api"
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:f8775c6"
+
 export REDIS_IMAGE="redis:4.0"
 
 export REDIS_PREFIX="redis"
