@@ -201,7 +201,7 @@ keycloak-deployment-75f857d8c5-z7lct   1/1     Running   0          8m48s
 postgres-596bcb6dc8-6fxhs              1/1     Running   0          8m49s
 ```
 
-Access the front-end at: https://accounts-uat.mykro.be
+Access the front-end at e.g. https://accounts-uat.mykro.be
 
 ### Vault
 
@@ -257,15 +257,11 @@ In directory `/static-embassy/atlas-api`, create a new config file with your set
 
 For example:
 
-for Development: copy config-dev.sample.sh
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
 
-for UAT: copy config-uat.sample.sh
-
-for Production: copy config-prod.sample.sh
-
-Replace the passwords and keys then run it in.
-
-This will create a deployemt for the api
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployemt for the API
 
 Verify using
 
@@ -280,22 +276,18 @@ NAME                                    READY   STATUS    RESTARTS   AGE
 atlas-api-deployment-745f865577-5f57g   2/2     Running   0          3m5s
 ```
 
-Access the front-end at: https://api-uat.mykro.be
+Access the front-end at e.g. https://api-uat.mykro.be/health-check
 
 ### Client
 In directory `/static-embassy/atlas-client`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
 
-for Development: copy config-dev.sample.sh
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
 
-for UAT: copy config-uat.sample.sh
-
-for Production: copy config-prod.sample.sh
-
-Replace the passwords and keys then run it in.
-
-This will create a deployemt for the atlas client
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployemt for the atlas client
 
 Verify using
 
@@ -310,4 +302,4 @@ NAME                                    READY   STATUS    RESTARTS   AGE
 atlas-deployment-6df765696-p86rn        2/2     Running   0          15m
 ```
 
-Access the front-end at: https://uat.mykro.be
+Access the front-end at e.g. https://uat.mykro.be
