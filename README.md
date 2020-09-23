@@ -244,6 +244,14 @@ Run this to enable database secrets `vault secrets enable database || true`
 
 In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-mongo.sh
 
+#### Setup Key/Value Policy
+
+In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-kv.sh
+
+Port-forward the vault pod: `kubectl port-forward vault-0 8200:8200 -n shared`
+
+Copy the create-secrets.sh and replace the keys then run the script to create the secrets in vault: `./create-secrets.sh`
+
 ### API
 In directory `/static-embassy/atlas-api`, create a new config file with your setting by copying the sample file for your target environment.
 
@@ -273,3 +281,33 @@ atlas-api-deployment-745f865577-5f57g   2/2     Running   0          3m5s
 ```
 
 Access the front-end at: https://api-uat.mykro.be
+
+### Client
+In directory `/static-embassy/atlas-client`, create a new config file with your setting by copying the sample file for your target environment.
+
+For example:
+
+for Development: copy config-dev.sample.sh
+
+for UAT: copy config-uat.sample.sh
+
+for Production: copy config-prod.sample.sh
+
+Replace the passwords and keys then run it in.
+
+This will create a deployemt for the atlas client
+
+Verify using
+
+```
+kubectl get pods -n mykrobe
+```
+
+and see
+
+```
+NAME                                    READY   STATUS    RESTARTS   AGE
+atlas-deployment-6df765696-p86rn        2/2     Running   0          15m
+```
+
+Access the front-end at: https://uat.mykro.be
