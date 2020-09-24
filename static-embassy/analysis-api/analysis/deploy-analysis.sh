@@ -81,7 +81,7 @@ spec:
         - -O
         - fair
         - -l
-        - debug
+        - DEBUG
         - --concurrency=4
         - --uid=nobody
         command:
