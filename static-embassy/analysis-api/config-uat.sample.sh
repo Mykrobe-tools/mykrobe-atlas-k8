@@ -2,6 +2,7 @@
 
 export NAMESPACE="mykrobe"
 
+export ATLAS_API_PREFIX="atlas-api"
 export ATLAS_API="https://api-uat.mykro.be"
 
 export ANALYSIS_PREFIX="analysis-api"
