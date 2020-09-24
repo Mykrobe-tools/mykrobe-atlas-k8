@@ -108,7 +108,7 @@ echo ""
 
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
-sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=analysis-api-worker -n mykrobe-dev -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
+sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=analysis-api -n mykrobe-dev -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
 sh ./bigsi/deploy-bigsi.sh
 sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh
