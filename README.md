@@ -175,6 +175,7 @@ replicaset.apps/cert-manager-webhook-5c9f7b5f75      1         1         1      
 ```
 
 ### Keycloak
+
 In directory `/static-embassy/keycloak`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
@@ -253,6 +254,7 @@ Port-forward the vault pod: `kubectl port-forward vault-0 8200:8200 -n shared`
 Copy the create-secrets.sh and replace the keys then run the script to create the secrets in vault: `./create-secrets.sh`
 
 ### API
+
 In directory `/static-embassy/atlas-api`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
@@ -261,7 +263,7 @@ For example:
 * UAT: copy config-uat.sample.sh
 * Production: copy config-prod.sample.sh
 
-Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployemt for the API
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployment for the API
 
 Verify using
 
@@ -279,6 +281,7 @@ atlas-api-deployment-745f865577-5f57g   2/2     Running   0          3m5s
 Access the front-end at e.g. https://api-uat.mykro.be/health-check
 
 ### Client
+
 In directory `/static-embassy/atlas-client`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
@@ -287,7 +290,7 @@ For example:
 * UAT: copy config-uat.sample.sh
 * Production: copy config-prod.sample.sh
 
-Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployemt for the atlas client
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployment for the atlas client
 
 Verify using
 
@@ -303,3 +306,36 @@ atlas-deployment-6df765696-p86rn        2/2     Running   0          15m
 ```
 
 Access the front-end at e.g. https://uat.mykro.be
+
+### Analysis API
+
+In directory `/static-embassy/analysis-api`, create a new config file with your setting by copying the sample file for your target environment.
+
+For example:
+
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
+
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployment for the analysis api and worker, the bigsi api and worker, redis and the tracking api
+
+Verify using
+
+```
+kubectl get pods -n mykrobe
+```
+
+and see
+
+```
+NAME                                               READY   STATUS    RESTARTS   AGE
+analysis-api-859bc84568-297p5                      1/1     Running   0          18m
+analysis-api-worker-7465d96f76-2lds5               1/1     Running   7          18m
+bigsi-api-aggregator-deployment-5bc7dd497c-cph7w   1/1     Running   0          9h
+bigsi-api-aggregator-worker-8495b6f78c-8522s       1/1     Running   0          9h
+bigsi-api-deployment-big-f8bfb9c8f-gktsv           1/1     Running   0          9h
+bigsi-api-deployment-small-bfdb6d7fb-vhb6d         1/1     Running   0          22m
+distance-api-deployment-7c68fd7d9b-nn4cd           1/1     Running   0          9h
+neo4j-deployment-6d67694dbc-xz8q8                  1/1     Running   0          9h
+redis-0                                            1/1     Running   0          9h
+```
