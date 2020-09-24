@@ -407,6 +407,8 @@ mykrobe-mysql-74d6598dd4-rw2db                       1/1     Running   0        
 
 #### Metabase
 
+Create a database called metabase in mysql `CREATE DATABASE METABASE;` 
+
 In directory `/static-embassy/metabase`, create a new config file with your setting by copying the sample file for your target environment.
 
 For example:
