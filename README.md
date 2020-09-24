@@ -449,3 +449,26 @@ Verify:
 Port forward the controle-centre service using `kubectl port-forward svc/mykrobe-confluent-cc 9021:9021 -n insight`
 
 Then visit `http://localhost:9021/` and go to cluster->connect you should see 6 connectors running
+
+#### Kafka Consumer
+
+In directory `/static-embassy/metabase/kafka-consumer`, run the config file for your target environment/
+
+For example:
+
+* Development: run config-dev.sh
+* UAT: run config-uat.sh
+* Production: run config-prod.sh
+
+Verify using
+
+```
+kubectl get pods -n insight
+```
+
+and see
+
+```
+NAME                                                 READY   STATUS    RESTARTS   AGE
+mykrobe-kafka-consumer-79d84ff847-g6cdv              1/1     Running   0          41m
+```
