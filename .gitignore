@@ -31,3 +31,4 @@ static-embassy/certmanager/config.sh
 static-embassy/keycloak/config-uat.sh
 static-embassy/atlas-api/config-uat.sh
 static-embassy/atlas-client/config-uat.sh
+static-embassy/metabase/mysql/config-uat.sh

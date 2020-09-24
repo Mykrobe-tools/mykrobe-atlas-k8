@@ -343,6 +343,9 @@ redis-0                                            1/1     Running   0          
 ```
 
 ### Surveillance
+
+#### Confluent OSS
+
 In directory `/static-embassy/confluent-oss`, run the file for your target environment
 
 For example:
@@ -376,3 +379,28 @@ mykrobe-confluent-zookeeper-2                        1/1     Running   0        
 
 Port forward the controle-centre service using `kubectl port-forward svc/mykrobe-confluent-cc 9021:9021 -n insight`
 Access the front-end at: http://localhost:9021 and make sure the cluster is in healthy state
+
+#### Mysql
+
+In directory `/static-embassy/metabase/mysql`, create a new config file with your setting by copying the sample file for your target environment.
+
+For example:
+
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
+
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployment for the mysql database
+
+Verify using
+
+```
+kubectl get pods -n insight
+```
+
+and see
+
+```
+NAME                                                 READY   STATUS    RESTARTS   AGE
+mykrobe-mysql-74d6598dd4-rw2db                       1/1     Running   0          13m
+```
