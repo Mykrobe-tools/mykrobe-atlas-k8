@@ -6,7 +6,7 @@ export ATLAS_API_PREFIX="atlas-api"
 export ATLAS_API="https://api-uat.mykro.be"
 
 export ANALYSIS_PREFIX="analysis-api"
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:4b4e846"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:ced7116"
 
 export BIGSI_PREFIX="bigsi-api"
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:slim-buster"
