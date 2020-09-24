@@ -204,6 +204,8 @@ postgres-596bcb6dc8-6fxhs              1/1     Running   0          8m49s
 
 Access the front-end at e.g. https://accounts-uat.mykro.be
 
+Verify keycloak realm for Atlas allows the correct origin environment - dev.mykro.be, uat.mykro.be, www.mykro.be, mykro.be
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
