@@ -4,8 +4,8 @@ export NAMESPACE="mykrobe-analysis-prod"
 export TARGET_ENV="prod"
 export ATLAS_API="https://api.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:ced7116"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:ced7116"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:21001b1"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:21001b1"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:slim-buster"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
@@ -114,7 +114,6 @@ echo ""
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
 sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=$ANALYSIS_PREFIX -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
-sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=$ANALYSIS_PREFIX-worker -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
 sh ./bigsi/deploy-bigsi.sh
 sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh
