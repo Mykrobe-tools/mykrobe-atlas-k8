@@ -43,12 +43,6 @@ spec:
         ports:
         - containerPort: 9092
           name: kafka
-        - containerPort: {BROKER_NODEPORT0}
-          name: nodeport-0
-        - containerPort: {BROKER_NODEPORT1}
-          name: nodeport-1
-        - containerPort: {BROKER_NODEPORT2}
-          name: nodeport-2
         resources:
           {}
           
@@ -79,8 +73,6 @@ spec:
           value: "io.confluent.metrics.reporter.ConfluentMetricsReporter"
         - name: CONFLUENT_METRICS_REPORTER_BOOTSTRAP_SERVERS
           value: "PLAINTEXT://{CONFLUENT}-{KAFKA}-headless:9092"
-        - name: KAFKA_ADVERTISED_LISTENERS
-          value: "EXTERNAL://${POD_NAME}:$(({BROKER_NODEPORT0} + ${KAFKA_BROKER_ID}))"
         - name: "KAFKA_LISTENER_SECURITY_PROTOCOL_MAP"
           value: "PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
         - name: "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR"
@@ -94,7 +86,7 @@ spec:
         - -exc
         - |
           export KAFKA_BROKER_ID=${HOSTNAME##*-} && \
-          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_NAME}.{CONFLUENT}-{KAFKA}-headless.${POD_NAMESPACE}:9092,EXTERNAL://${POD_NAME}:$(({BROKER_NODEPORT0} + ${KAFKA_BROKER_ID})) && \
+          export KAFKA_ADVERTISED_LISTENERS=PLAINTEXT://${POD_NAME}.{CONFLUENT}-{KAFKA}-headless.${POD_NAMESPACE}:9092 && \
           exec /etc/confluent/docker/run
         volumeMounts:
           - name: datadir-0

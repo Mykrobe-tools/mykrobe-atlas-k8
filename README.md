@@ -341,3 +341,38 @@ distance-api-deployment-7c68fd7d9b-nn4cd           1/1     Running   0          
 neo4j-deployment-6d67694dbc-xz8q8                  1/1     Running   0          9h
 redis-0                                            1/1     Running   0          9h
 ```
+
+### Surveillance
+In directory `/static-embassy/confluent-oss`, run the file for your target environment
+
+For example:
+
+* Development: run config-dev.sh
+* UAT: run config-uat.sh
+* Production: run config-prod.sh
+
+This will create a deployemt for the confluent oss in the insight namespace
+
+Verify using
+
+```
+kubectl get pods -n insight
+```
+
+and see
+
+```
+NAME                                                 READY   STATUS    RESTARTS   AGE
+mykrobe-confluent-cc-556c84b5d8-242fw                1/1     Running   3          2m14s
+mykrobe-confluent-kafka-0                            1/1     Running   0          96s
+mykrobe-confluent-kafka-1                            1/1     Running   0          67s
+mykrobe-confluent-kafka-2                            1/1     Running   0          39s
+mykrobe-confluent-kafka-connect-5dd44b4dd9-f7rjr     1/1     Running   0          97s
+mykrobe-confluent-schema-registry-54ff74dd94-q969r   1/1     Running   0          97s
+mykrobe-confluent-zookeeper-0                        1/1     Running   0          95s
+mykrobe-confluent-zookeeper-1                        1/1     Running   0          71s
+mykrobe-confluent-zookeeper-2                        1/1     Running   0          47s
+```
+
+Port forward the controle-centre service using `kubectl port-forward svc/mykrobe-confluent-cc 9021:9021 -n insight`
+Access the front-end at: http://localhost:9021 and make sure the cluster is in healthy state
