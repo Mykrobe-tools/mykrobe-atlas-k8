@@ -404,3 +404,28 @@ and see
 NAME                                                 READY   STATUS    RESTARTS   AGE
 mykrobe-mysql-74d6598dd4-rw2db                       1/1     Running   0          13m
 ```
+
+#### Metabase
+
+In directory `/static-embassy/metabase`, create a new config file with your setting by copying the sample file for your target environment.
+
+For example:
+
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
+
+Replace the passwords and keys then run it in using e.g. `./config-dev.sh`.  This will create a deployment for metabase
+
+Verify using
+
+```
+kubectl get pods -n insight
+```
+
+and see
+
+```
+NAME                                                 READY   STATUS    RESTARTS   AGE
+mykrobe-insight-84c677f867-jxr44                     1/1     Running   0          77m
+```
