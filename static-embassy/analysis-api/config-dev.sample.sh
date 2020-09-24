@@ -1,15 +1,16 @@
 #!/bin/bash
 
 export NAMESPACE="mykrobe-dev"
+export TARGET_ENV="dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:a497584"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:a497584"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:ced7116"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:ced7116"
 
-export BIGSI_AGGREGATOR_IMAGE="phelimb/bigsi-aggregator:210419"
+export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:slim-buster"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
 
-export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:f8775c6"
+export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:df8414c"
 export NEO4J_IMAGE="neo4j:4.1"
 
 export REDIS_IMAGE="redis:4.0"
@@ -20,6 +21,7 @@ export BIGSI_PREFIX="bigsi-api"
 export DISTANCE_PREFIX="distance-api"
 export ATLAS_API_PREFIX="atlas-api"
 export NEO4J_PREFIX="neo4j"
+
 export NEO4J_URI="bolt://neo4j-service:7687"
 export NEO4J_USER="neo4j"
 export NEO4J_PASSWORD="<password>"
@@ -54,11 +56,13 @@ export LIMIT_CPU_NEO4J="500m"
 echo ""
 echo "Deploying analysis api using:"
 echo " - NAMESPACE: $NAMESPACE"
+echo " - Target: $TARGET_ENV"
 echo " - Atlas api prefix: $ATLAS_API_PREFIX"
 echo " - Atlas Api: $ATLAS_API"
 
 echo " - Analysis Prefix: $ANALYSIS_PREFIX"
-echo " - Analysis image: $ANALYSIS_API_IMAGE"
+echo " - Analysis API image: $ANALYSIS_API_IMAGE"
+echo " - Analysis API worker image: $ANALYSIS_API_WORKER_IMAGE"
 
 echo " - Bigsi Prefix: $BIGSI_PREFIX"
 echo " - Bigsi aggregator image: $BIGSI_AGGREGATOR_IMAGE"
@@ -109,7 +113,8 @@ echo ""
 
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
-sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=analysis-api-worker -n mykrobe-dev -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
+sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=$ANALYSIS_PREFIX -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
+sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=$ANALYSIS_PREFIX-worker -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
 sh ./bigsi/deploy-bigsi.sh
 sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh
