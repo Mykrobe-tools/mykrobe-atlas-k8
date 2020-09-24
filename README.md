@@ -429,3 +429,23 @@ and see
 NAME                                                 READY   STATUS    RESTARTS   AGE
 mykrobe-insight-84c677f867-jxr44                     1/1     Running   0          77m
 ```
+
+#### Create Kafka Connectors
+
+In directory `/static-embassy/confluent-oss`, create a new file with your setting by copying the sample file for your target environment.
+
+For example:
+
+* Development: copy create-connectors-dev.sh
+* UAT: copy create-connectors-uat.sh
+* Production: copy create-connectors-prod.sh
+
+Port forward the kafka-connect service using `kubectl port-forward svc/mykrobe-confluent-kafka-connect 8083:8083 -n insight`
+
+Replace the passwords in the copied script then run it in using e.g. `./create-connectors-dev-with-passwords.sh`.  This will the sink and source connectors 
+
+Verify:
+
+Port forward the controle-centre service using `kubectl port-forward svc/mykrobe-confluent-cc 9021:9021 -n insight`
+
+Then visit `http://localhost:9021/` and go to cluster->connect you should see 6 connectors running
