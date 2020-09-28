@@ -4,8 +4,8 @@ export NAMESPACE="mykrobe-dev"
 export TARGET_ENV="dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:8e2429b"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:8e2429b"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:1c6fb31"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:1c6fb31"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:slim-buster"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
