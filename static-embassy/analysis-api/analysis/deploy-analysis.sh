@@ -16,6 +16,7 @@ data:
   BIGSI_BUILD_CONFIG: /etc/bigsi/conf/config.yaml
   CELERY_BROKER_URL: redis://$REDIS_PREFIX:6379
   DEFAULT_OUTDIR: /data/out/
+  SKELETON_DIR: /config/
   FLASK_DEBUG: "1"
   REDIS_HOST: $REDIS_PREFIX
   REDIS_PORT: "6379"
@@ -38,7 +39,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 50Mi
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
