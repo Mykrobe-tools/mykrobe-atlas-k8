@@ -113,7 +113,7 @@ echo ""
 
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
-sh ./analysis/copy-files.sh $(kubectl get pods --selector=app=$ANALYSIS_PREFIX -n $NAMESPACE -o jsonpath="{.items[0].metadata.name}") $NAMESPACE
+sh ./analysis/copy-files.sh
 sh ./bigsi/deploy-bigsi.sh
 sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh
