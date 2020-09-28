@@ -39,7 +39,7 @@ spec:
   - ReadWriteMany
   resources:
     requests:
-      storage: 50Mi
+      storage: 1Gi
 ---
 apiVersion: v1
 kind: Service
