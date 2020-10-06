@@ -20,8 +20,8 @@ data:
   FLASK_DEBUG: "1"
   REDIS_HOST: $REDIS_PREFIX
   REDIS_PORT: "6379"
-  TB_GENBANK_PATH: /config/NC_000962.3.gb
-  TB_REFERENCE_PATH: /config/NC_000962.3.fasta
+  GENBANK_PATH: /config/NC_000962.3.gb
+  REFERENCE_PATH: /config/NC_000962.3.fasta
   TB_TREE_PATH_V1: /config/tb_tree.txt
 kind: ConfigMap
 metadata:
