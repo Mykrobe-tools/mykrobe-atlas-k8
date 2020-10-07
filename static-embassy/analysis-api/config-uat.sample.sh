@@ -1,7 +1,8 @@
 #!/bin/bash
 
-export NAMESPACE="mykrobe-analysis-uat"
-export TARGET_ENV="uat"
+export NAMESPACE="mykrobe"
+
+export ATLAS_API_PREFIX="atlas-api"
 export ATLAS_API="https://api-uat.mykro.be"
 
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:1c6fb31"

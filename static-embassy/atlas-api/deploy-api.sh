@@ -152,10 +152,8 @@ spec:
       labels:
         app: $PREFIX
       annotations:
-        checksum/config: aefdcd6191ba1431beacf13834fede80e015dea465ab21a7e73d1eaa8c70ea51
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/mongo"
-        vault.hashicorp.com/agent-inject-secret-atlas-keys: "kv/$PREFIX-keys"
         vault.hashicorp.com/role: "mongo"
     spec:
       securityContext:

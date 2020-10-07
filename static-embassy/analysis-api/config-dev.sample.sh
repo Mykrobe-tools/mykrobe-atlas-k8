@@ -13,6 +13,7 @@ export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:df8414c"
 export NEO4J_IMAGE="neo4j:4.1"
 
+export REDIS_PREFIX="redis"
 export REDIS_IMAGE="redis:4.0"
 
 export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:0b6e03e"
