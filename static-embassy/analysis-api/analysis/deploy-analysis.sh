@@ -52,7 +52,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: 8001
   selector:
     app: $ANALYSIS_PREFIX
   type: NodePort
@@ -73,6 +73,11 @@ spec:
       labels:
         app: $ANALYSIS_PREFIX-worker
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $ANALYSIS_PREFIX-sa
       containers:
       - args:
@@ -84,7 +89,6 @@ spec:
         - -l
         - DEBUG
         - --concurrency=4
-        - --uid=nobody
         command:
         - celery
         env:
@@ -137,11 +141,16 @@ spec:
       labels:
         app: $ANALYSIS_PREFIX
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $ANALYSIS_PREFIX-sa
       containers:
       - args:
         - -c
-        - uwsgi --enable-threads --http :80  --harakiri 300  --buffer-size=65535  -w wsgi:app
+        - uwsgi --enable-threads --socket 0.0.0.0:8001 --protocol=http  --harakiri 300  --buffer-size=65535  -w wsgi:app
         command:
         - /bin/sh
         env:
@@ -154,7 +163,7 @@ spec:
         imagePullPolicy: IfNotPresent
         name: $ANALYSIS_PREFIX
         ports:
-        - containerPort: 80
+        - containerPort: 8001
           protocol: TCP
         volumeMounts:
         - mountPath: /data/
