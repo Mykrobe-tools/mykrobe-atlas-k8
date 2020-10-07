@@ -172,6 +172,7 @@ spec:
         - bigsi_aggregator.celery
         - worker
         - --concurrency=1
+        - --uid=nobody
         command:
         - celery
         envFrom:

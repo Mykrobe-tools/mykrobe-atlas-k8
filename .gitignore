@@ -33,3 +33,6 @@ static-embassy/atlas-api/config-uat.sh
 static-embassy/atlas-client/config-uat.sh
 static-embassy/metabase/mysql/config-uat.sh
 static-embassy/metabase/config-uat.sh
+
+# IDEs
+.idea
