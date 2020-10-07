@@ -40,9 +40,24 @@ spec:
       - name: $TRACKING_DB_PREFIX-data
         persistentVolumeClaim:
           claimName: $TRACKING_DB_PREFIX-data
+      initContainers: # https://stackoverflow.com/questions/51200115/chown-changing-ownership-of-data-db-operation-not-permitted/51203031#51203031
+      - name: chmod-er
+        image: busybox:latest
+        command:
+        - /bin/chown
+        - -R
+        - "9999"  # or whatever the UID is, use string "9999" not 9999 due to yaml
+        - /var/lib/postgresql/data
+        volumeMounts:
+        - name: $TRACKING_DB_PREFIX-data
+          mountPath: /var/lib/postgresql/data
       containers:
       - name: $TRACKING_DB_PREFIX
         image: $TRACKING_DB_IMAGE
+        securityContext:
+          runAsUser: 9999
+          runAsGroup: 9999
+          runAsNonRoot: true
         ports:
         - containerPort: $TRACKING_DB_PORT
         volumeMounts:

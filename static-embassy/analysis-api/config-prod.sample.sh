@@ -88,9 +88,11 @@ echo " - Analysis API worker image: $ANALYSIS_API_WORKER_IMAGE"
 echo " - Bigsi Prefix: $BIGSI_PREFIX"
 echo " - Bigsi aggregator image: $BIGSI_AGGREGATOR_IMAGE"
 echo " - Bigsi image: $BIGSI_IMAGE"
+echo ""
 
 echo " - Distance Prefix: $DISTANCE_PREFIX"
-echo " - Distance api image: $DISTANCE_API_IMAGE"
+echo " - Distance API image: $DISTANCE_API_IMAGE"
+echo ""
 
 echo " - Neo4J Prefix: $NEO4J_PREFIX"
 echo " - Neo4J image: $NEO4J_IMAGE"
