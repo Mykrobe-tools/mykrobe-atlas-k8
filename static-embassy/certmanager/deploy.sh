@@ -3,6 +3,12 @@ echo "Deploying atlas api using:"
 echo " - Namespace: $NAMESPACE"
 echo " - Name: $NAME"
 echo " - Version: $VERSION"
+echo ""
+
+echo "Cloudflare:"
+echo " - Notification Email: $CLOUDFLARE_NOTIFICATION_EMAIL"
+echo " - Account Email: $CLOUDFLARE_ACCOUNT_EMAIL"
+echo ""
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -11,8 +17,7 @@ metadata:
   name: $NAMESPACE
 EOF
 
-helm install \
-  --name $NAME \
+helm install $NAME \
   --namespace $NAMESPACE \
   --version v0.15.1 \
   --set installCRDs=true \
@@ -31,7 +36,7 @@ metadata:
   namespace: $NAMESPACE
 type: Opaque
 data:
-  api-key: ZmU5YjJkYTgyMmIzMDA1Yzk0YmUzZjI3NDQ5YmM5MjNhNjdiNg==
+  api-key: $CLOUDFLARE_API_KEY
 ---
 apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
@@ -40,7 +45,7 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: mark@makeandship.com
+    email: $CLOUDFLARE_NOTIFICATION_EMAIL
 
     # Name of a secret used to store the ACME account private key
     privateKeySecretRef:
@@ -48,11 +53,9 @@ spec:
 
     # ACME DNS-01 provider configurations
     solvers:
-      - selector: {}
-        dns01:
-          name: cf-dns
+      - dns01:
           cloudflare:
-            email: cloudflare@makeandship.com
+            email: $CLOUDFLARE_ACCOUNT_EMAIL
             apiKeySecretRef:
               name: cloudflare-api-key
               key: api-key

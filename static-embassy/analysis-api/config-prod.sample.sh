@@ -1,7 +1,8 @@
 #!/bin/bash
 
-export NAMESPACE="mykrobe-analysis-prod"
-export TARGET_ENV="prod"
+export NAMESPACE="mykrobe"
+
+export ATLAS_API_PREFIX="atlas-api"
 export ATLAS_API="https://api.mykro.be"
 
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:1c6fb31"
@@ -20,9 +21,18 @@ export TRACKING_DB_IMAGE="postgres:12"
 
 export REDIS_PREFIX="redis"
 export ANALYSIS_PREFIX="analysis-api"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:ced7116"
+
 export BIGSI_PREFIX="bigsi-api"
+export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:slim-buster"
+export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
+
 export DISTANCE_PREFIX="distance-api"
-export ATLAS_API_PREFIX="atlas-api"
+export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:df8414c"
+
+export REDIS_PREFIX="redis"
+export REDIS_IMAGE="redis:4.0"
+
 export NEO4J_PREFIX="neo4j"
 export TRACKING_API_PREFIX="tracking-api"
 export TRACKING_DB_PREFIX="tracking-db"
@@ -88,9 +98,11 @@ echo " - Analysis API worker image: $ANALYSIS_API_WORKER_IMAGE"
 echo " - Bigsi Prefix: $BIGSI_PREFIX"
 echo " - Bigsi aggregator image: $BIGSI_AGGREGATOR_IMAGE"
 echo " - Bigsi image: $BIGSI_IMAGE"
+echo ""
 
 echo " - Distance Prefix: $DISTANCE_PREFIX"
-echo " - Distance api image: $DISTANCE_API_IMAGE"
+echo " - Distance API image: $DISTANCE_API_IMAGE"
+echo ""
 
 echo " - Neo4J Prefix: $NEO4J_PREFIX"
 echo " - Neo4J image: $NEO4J_IMAGE"

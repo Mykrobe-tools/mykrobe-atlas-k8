@@ -163,7 +163,7 @@ spec:
         runAsUser: 100
       containers:
         - name: sidecar-injector
-          image: "hashicorp/vault-k8s:0.3.0"
+          image: $SIDECAR_INJECTOR_IMAGE
           imagePullPolicy: "IfNotPresent"
           env:
             - name: AGENT_INJECT_LISTEN

@@ -1,10 +1,18 @@
 #!/bin/bash
 
-export NAMESPACE="mykrobe-insight-uat"
+export NAMESPACE="insight"
 export PREFIX="mykrobe"
-export CONSUMER_IMAGE="makeandship/atlas-kafka-consumer:1.0.0"
+export CONSUMER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kafka-consumer:v0.0.7"
 export APP_NAME="kafka-consumer"
-export BROKER_URL="http://mykrobe-confluent-kafka-0-nodeport.mykrobe-insight-uat.svc.cluster.local:32090"
-export SCHEMA_REGISTRY_URL="http://mykrobe-confluent-schema-registry.mykrobe-insight-uat.svc.cluster.local:8081"
+export BROKER_URL="http://mykrobe-confluent-kafka-headless.insight.svc.cluster.local:9092"
+export SCHEMA_REGISTRY_URL="http://mykrobe-confluent-schema-registry.insight.svc.cluster.local:8081"
+
+# Pod (Deployment) resource limits
+export REQUEST_CPU="500m"
+export REQUEST_MEMORY="2Gi"
+export REQUEST_STORAGE="2Gi"
+export LIMIT_CPU="1000m"
+export LIMIT_MEMORY="2Gi"
+export LIMIT_STORAGE="4Gi"
 
 sh ./deploy.sh

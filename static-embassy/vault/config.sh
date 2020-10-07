@@ -2,7 +2,8 @@
 
 export NAMESPACE="shared"
 export PREFIX="vault"
-export IMAGE_NAME="vault:1.4.0"
+export IMAGE_NAME="vault:1.5.3"
+export SIDECAR_INJECTOR_IMAGE="hashicorp/vault-k8s:0.5.0"
 
 export REQUEST_MEMORY="1Gi"
 export REQUEST_CPU="500m"
@@ -17,6 +18,7 @@ echo "Deploying vault using:"
 echo " - NAMESPACE: $NAMESPACE"
 echo " - Prefix: $PREFIX"
 echo " - Image: $IMAGE_NAME"
+echo " - Sidecar Injector Image: $SIDECAR_INJECTOR_IMAGE"
 echo ""
 
 echo "Limits:"
