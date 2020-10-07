@@ -35,6 +35,11 @@ spec:
       labels:
         app: $DISTANCE_PREFIX
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $DISTANCE_PREFIX-sa
       containers:
       - name: $DISTANCE_PREFIX

@@ -103,11 +103,16 @@ spec:
       labels:
         app: $BIGSI_PREFIX-aggregator
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $BIGSI_PREFIX-sa
       containers:
       - args:
         - -c
-        - uwsgi --http :80  --harakiri 300  --buffer-size=65535  -w wsgi
+        - uwsgi --harakiri 300  --buffer-size=65535 --socket 0.0.0.0:8001 --protocol=http -w wsgi
         command:
         - /bin/sh
         envFrom:
@@ -126,7 +131,7 @@ spec:
             cpu: $REQUEST_CPU_BIGSI
             ephemeral-storage: "$REQUEST_STORAGE_BIGSI"
         ports:
-        - containerPort: 80
+        - containerPort: 8001
           protocol: TCP
       dnsPolicy: ClusterFirst
       restartPolicy: Always
@@ -142,7 +147,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: 8001
   selector:
     app: $BIGSI_PREFIX-aggregator
   sessionAffinity: None
@@ -165,14 +170,18 @@ spec:
       labels:
         app: $BIGSI_PREFIX-aggregator-worker
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $BIGSI_PREFIX-sa
       containers:
       - args:
         - -A
         - bigsi_aggregator.celery
         - worker
-        - --concurrency=1
-        - --uid=nobody
+        - --concurrency=4
         command:
         - celery
         envFrom:
@@ -215,11 +224,16 @@ spec:
       labels:
         app: $BIGSI_PREFIX-big
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $BIGSI_PREFIX-sa
       containers:
         - args:
           - -c
-          - uwsgi --enable-threads --http :80 --wsgi-file bigsi/__main__.py --callable
+          - uwsgi --enable-threads --socket 0.0.0.0:8001 --protocol=http --wsgi-file bigsi/__main__.py --callable
             __hug_wsgi__ --processes=4 --buffer-size=32768 --harakiri=300000
           command:
           - /bin/sh
@@ -230,7 +244,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: $BIGSI_PREFIX-big
           ports:
-          - containerPort: 80
+          - containerPort: 8001
             protocol: TCP
           volumeMounts:
           - mountPath: /database/
@@ -279,11 +293,16 @@ spec:
       labels:
         app: $BIGSI_PREFIX-small
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $BIGSI_PREFIX-sa
       containers:
         - args:
           - -c
-          - uwsgi --enable-threads --http :80 --wsgi-file bigsi/__main__.py --callable
+          - uwsgi --enable-threads --socket 0.0.0.0:8001 --protocol=http --wsgi-file bigsi/__main__.py --callable
             __hug_wsgi__ --processes=4 --buffer-size=32768 --harakiri=300000
           command:
           - /bin/sh
@@ -294,7 +313,7 @@ spec:
           imagePullPolicy: IfNotPresent
           name: $BIGSI_PREFIX-small
           ports:
-          - containerPort: 80
+          - containerPort: 8001
             protocol: TCP
           volumeMounts:
           - mountPath: /data/
@@ -337,7 +356,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: 8001
   selector:
     app: $BIGSI_PREFIX-big
   sessionAffinity: None
@@ -354,7 +373,7 @@ spec:
   ports:
   - port: 80
     protocol: TCP
-    targetPort: 80
+    targetPort: 8001
   selector:
     app: $BIGSI_PREFIX-small
   sessionAffinity: None

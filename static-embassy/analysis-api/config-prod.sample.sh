@@ -8,7 +8,7 @@ export ATLAS_API="https://api.mykro.be"
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:1c6fb31"
 export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:1c6fb31"
 
-export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:slim-buster"
+export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:a1a9d21"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
 
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:df8414c"
