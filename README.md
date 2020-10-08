@@ -165,6 +165,8 @@ Access the front-end at e.g. https://accounts-uat.mykro.be
 
 Verify keycloak realm for Atlas allows the correct origin environment - dev.mykro.be, uat.mykro.be, www.mykro.be, mykro.be
 
+Verify the SMTP settings in the email tab
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
@@ -292,15 +294,17 @@ and see
 
 ```
 NAME                                               READY   STATUS    RESTARTS   AGE
-analysis-api-859bc84568-297p5                      1/1     Running   0          18m
-analysis-api-worker-7465d96f76-2lds5               1/1     Running   7          18m
-bigsi-api-aggregator-deployment-5bc7dd497c-cph7w   1/1     Running   0          9h
-bigsi-api-aggregator-worker-8495b6f78c-8522s       1/1     Running   0          9h
-bigsi-api-deployment-big-f8bfb9c8f-gktsv           1/1     Running   0          9h
-bigsi-api-deployment-small-bfdb6d7fb-vhb6d         1/1     Running   0          22m
-distance-api-deployment-7c68fd7d9b-nn4cd           1/1     Running   0          9h
-neo4j-deployment-6d67694dbc-xz8q8                  1/1     Running   0          9h
-redis-0                                            1/1     Running   0          9h
+analysis-api-f685f75df-f6hhg                       1/1     Running   0          4m36s
+analysis-api-worker-546849f658-jljvd               1/1     Running   0          4m36s
+bigsi-api-aggregator-deployment-5fd495bb76-qfxx6   1/1     Running   0          112s
+bigsi-api-aggregator-worker-8478d64dcf-nmdxq       1/1     Running   0          112s
+bigsi-api-deployment-big-6f648fc64d-kbcvn          1/1     Running   0          111s
+bigsi-api-deployment-small-8465bbdb77-d64ht        1/1     Running   0          111s
+distance-api-deployment-65b6f9f7f5-46hsm           1/1     Running   0          108s
+neo4j-deployment-6d67694dbc-6qx4r                  1/1     Running   0          41m
+redis-0                                            1/1     Running   0          44m
+tracking-api-deployment-798f96d4c5-6fb6v           1/1     Running   0          105s
+tracking-db-deployment-97f979485-wlz9t             1/1     Running   0          107s
 ```
 
 ### Surveillance
@@ -368,7 +372,9 @@ mykrobe-mysql-74d6598dd4-rw2db                       1/1     Running   0        
 
 #### Metabase
 
-Create a database called metabase in mysql `CREATE DATABASE METABASE;` 
+Create a database called metabase in mysql `CREATE DATABASE metabase;` 
+
+Grant privileges to mykrobe user `GRANT ALL PRIVILEGES ON metabase.* TO 'mykrobe'@'%';`
 
 In directory `/static-embassy/metabase`, create a new config file with your setting by copying the sample file for your target environment.
 
