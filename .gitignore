@@ -36,3 +36,9 @@ static-embassy/metabase/config-uat.sh
 
 # IDEs
 .idea
+static-embassy/mongo-replica-set/config-prod.sh
+static-embassy/keycloak/config-prod.sh
+static-embassy/atlas-api/config-prod.sh
+static-embassy/atlas-client/config-prod.sh
+static-embassy/metabase/mysql/config-prod.sh
+static-embassy/metabase/config-prod.sh

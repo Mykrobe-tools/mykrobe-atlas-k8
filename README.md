@@ -71,47 +71,6 @@ NAME                  TYPE                                  DATA   AGE
 gcr-json-key          kubernetes.io/dockerconfigjson        1      4h28m
 ```
 
-### Vault
-
-In directory `/static-embassy/vault`, run in the configuration `./config.sh`
-
-to create the vault and sidecar-injector agent
-
-Verify using
-
-```
-kubectl get pods -n shared
-```
-
-and see
-
-```
-NAME                                   READY   STATUS    RESTARTS   AGE
-vault-0                                1/1     Running   0          4h17m
-vault-agent-injector-c49c94bf4-xvncn   1/1     Running   0          4h12m
-```
-
-To initialise the vault operator ssh to the vault-0 pod and run the following command `vault operator init` and take note of the keys
-
-To unseal the vault operator ssh to the vault-0 pod and run the following command `vault operator unseal` for all the unseal keys provided in the previous step
-
-To enable kubernetes authentication, run the following command: `vault auth enable kubernetes || true`
-
-Run this command to create the kubernetes config (replace CLUSTER_URL by your cluster url):
-
-```
-vault write auth/kubernetes/config \
-    token_reviewer_jwt="$(cat /var/run/secrets/kubernetes.io/serviceaccount/token)" \
-    kubernetes_host=CLUSTER_URL \
-    kubernetes_ca_cert=@/var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-```
-
-Run this to enable database secrets `vault secrets enable database || true`
-
-#### Setup MongoDb Policy
-
-In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-mongo.sh
-
 ### MongoDB
 In directory `/static-embassy/mongo-replica-set`, create a new config file with your setting by copying the sample file for your target environment.
 
@@ -206,6 +165,8 @@ Access the front-end at e.g. https://accounts-uat.mykro.be
 
 Verify keycloak realm for Atlas allows the correct origin environment - dev.mykro.be, uat.mykro.be, www.mykro.be, mykro.be
 
+Verify the SMTP settings in the email tab
+
 ### Vault
 
 In directory `/static-embassy/vault`, run in the configuration `./config.sh`
@@ -250,6 +211,8 @@ In directory `/static-embassy/vault`, ssh to the vault pod and run the commands 
 #### Setup Key/Value Policy
 
 In directory `/static-embassy/vault`, ssh to the vault pod and run the commands in configure-kv.sh
+
+Run this inside the vault pod to enable kv secrets `vault secrets enable kv || true`
 
 Port-forward the vault pod: `kubectl port-forward vault-0 8200:8200 -n shared`
 
@@ -331,15 +294,17 @@ and see
 
 ```
 NAME                                               READY   STATUS    RESTARTS   AGE
-analysis-api-859bc84568-297p5                      1/1     Running   0          18m
-analysis-api-worker-7465d96f76-2lds5               1/1     Running   7          18m
-bigsi-api-aggregator-deployment-5bc7dd497c-cph7w   1/1     Running   0          9h
-bigsi-api-aggregator-worker-8495b6f78c-8522s       1/1     Running   0          9h
-bigsi-api-deployment-big-f8bfb9c8f-gktsv           1/1     Running   0          9h
-bigsi-api-deployment-small-bfdb6d7fb-vhb6d         1/1     Running   0          22m
-distance-api-deployment-7c68fd7d9b-nn4cd           1/1     Running   0          9h
-neo4j-deployment-6d67694dbc-xz8q8                  1/1     Running   0          9h
-redis-0                                            1/1     Running   0          9h
+analysis-api-f685f75df-f6hhg                       1/1     Running   0          4m36s
+analysis-api-worker-546849f658-jljvd               1/1     Running   0          4m36s
+bigsi-api-aggregator-deployment-5fd495bb76-qfxx6   1/1     Running   0          112s
+bigsi-api-aggregator-worker-8478d64dcf-nmdxq       1/1     Running   0          112s
+bigsi-api-deployment-big-6f648fc64d-kbcvn          1/1     Running   0          111s
+bigsi-api-deployment-small-8465bbdb77-d64ht        1/1     Running   0          111s
+distance-api-deployment-65b6f9f7f5-46hsm           1/1     Running   0          108s
+neo4j-deployment-6d67694dbc-6qx4r                  1/1     Running   0          41m
+redis-0                                            1/1     Running   0          44m
+tracking-api-deployment-798f96d4c5-6fb6v           1/1     Running   0          105s
+tracking-db-deployment-97f979485-wlz9t             1/1     Running   0          107s
 ```
 
 ### Surveillance
@@ -407,7 +372,9 @@ mykrobe-mysql-74d6598dd4-rw2db                       1/1     Running   0        
 
 #### Metabase
 
-Create a database called metabase in mysql `CREATE DATABASE METABASE;` 
+Create a database called metabase in mysql `CREATE DATABASE metabase;` 
+
+Grant privileges to mykrobe user `GRANT ALL PRIVILEGES ON metabase.* TO 'mykrobe'@'%';`
 
 In directory `/static-embassy/metabase`, create a new config file with your setting by copying the sample file for your target environment.
 

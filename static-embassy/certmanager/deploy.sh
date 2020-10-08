@@ -1,5 +1,5 @@
 echo ""
-echo "Deploying atlas api using:"
+echo "Deploying cert-manager using:"
 echo " - Namespace: $NAMESPACE"
 echo " - Name: $NAME"
 echo " - Version: $VERSION"
