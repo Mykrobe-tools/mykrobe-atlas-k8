@@ -4,19 +4,18 @@ export NAMESPACE="mykrobe-dev"
 export TARGET_ENV="dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:1c6fb31"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:1c6fb31"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:c059a8e"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:c059a8e"
 
-export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:a1a9d21"
+export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:b13a619"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
 
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:df8414c"
 export NEO4J_IMAGE="neo4j:4.1"
 
-export REDIS_PREFIX="redis"
 export REDIS_IMAGE="redis:4.0"
 
-export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:0b6e03e"
+export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:8ee3408"
 export TRACKING_DB_IMAGE="postgres:12"
 
 export REDIS_PREFIX="redis"

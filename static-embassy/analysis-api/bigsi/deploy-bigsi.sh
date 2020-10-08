@@ -247,6 +247,8 @@ spec:
           - containerPort: 8001
             protocol: TCP
           volumeMounts:
+          - mountPath: /config/
+            name: $ANALYSIS_PREFIX-config-data
           - mountPath: /database/
             name: $BIGSI_PREFIX-data-big
           - mountPath: /etc/bigsi/conf/
@@ -263,6 +265,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
+      - name: $ANALYSIS_PREFIX-config-data
+        persistentVolumeClaim:
+          claimName: $ANALYSIS_PREFIX-config-data
       - name: $BIGSI_PREFIX-data-big
         persistentVolumeClaim:
           claimName: $BIGSI_PREFIX-data-big
@@ -316,6 +321,8 @@ spec:
           - containerPort: 8001
             protocol: TCP
           volumeMounts:
+          - mountPath: /config/
+            name: $ANALYSIS_PREFIX-config-data
           - mountPath: /data/
             name: uploads-data
           - mountPath: /database/
@@ -334,6 +341,9 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       volumes:
+      - name: $ANALYSIS_PREFIX-config-data
+        persistentVolumeClaim:
+          claimName: $ANALYSIS_PREFIX-config-data
       - name: uploads-data
         persistentVolumeClaim:
           claimName: $ATLAS_API_PREFIX-uploads-data
