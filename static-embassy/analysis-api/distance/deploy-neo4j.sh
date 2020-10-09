@@ -35,6 +35,11 @@ spec:
       labels:
         app: $NEO4J_PREFIX
     spec:
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
+        runAsNonRoot: true
       serviceAccountName: $NEO4J_PREFIX-sa
       volumes:
       - name: $NEO4J_PREFIX-data
@@ -49,6 +54,8 @@ spec:
         - mountPath: "/data/databases"
           name: $NEO4J_PREFIX-data
         env:
+        - name: NEO4J_dbms_logs_debug_level
+          value: DEBUG
         - name: NEO4J_AUTH
           valueFrom:
             secretKeyRef:
