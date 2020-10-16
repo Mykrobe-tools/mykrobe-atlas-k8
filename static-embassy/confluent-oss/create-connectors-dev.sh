@@ -132,3 +132,43 @@ curl -X POST \
         "pk.mode": "record_value"
         }
     }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
+    "name": "core_groups",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_groups",
+        "connection.user": "mykrobe",
+        "name": "core_groups",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "id",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
+    "name": "core_group_experiments",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_group_experiments",
+        "connection.user": "mykrobe",
+        "name": "core_group_experiments",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "experimentId, groupId",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
