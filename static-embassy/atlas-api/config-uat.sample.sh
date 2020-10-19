@@ -46,6 +46,10 @@ export REDIS_PORT="6379"
 export STORAGE_DEMO="8Gi"
 export STORAGE_UPLOADS="50Gi"
 
+# Groups job
+export GROUPS_JOB_PREFIX="groups-search"
+export GROUPS_JOB_SCHEDULE="0 0 * * *"
+
 # Pod (Deployment) resource limits
 export REQUEST_CPU="1000m"
 export REQUEST_MEMORY="4Gi"

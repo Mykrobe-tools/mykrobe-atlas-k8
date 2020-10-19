@@ -42,6 +42,10 @@ export SWAGGER_API_FILES="/home/node/app/dist/server/routes/*.route.js"
 export REDIS_HOST="redis.mykrobe.svc.cluster.local"
 export REDIS_PORT="6379"
 
+# Groups job
+export GROUPS_JOB_PREFIX="groups-search"
+export GROUPS_JOB_SCHEDULE="0 0 * * *"
+
 # Storage sizes
 export STORAGE_DEMO="8Gi"
 export STORAGE_UPLOADS="50Gi"
