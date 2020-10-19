@@ -36,6 +36,8 @@ echo " - Swagger API files: $SWAGGER_API_FILES"
 echo " - Redis host: $REDIS_HOST"
 echo " - Redis port: $REDIS_PORT"
 echo " - Cors origin: $CORS_ORIGIN"
+echo " - Groups job prefix: $GROUPS_JOB_PREFIX"
+echo " - Groups job schedule: $GROUPS_JOB_SCHEDULE"
 echo ""
 
 echo "Limits:"
@@ -361,4 +363,29 @@ spec:
       - backend:
           serviceName: $PREFIX-service
           servicePort: 3000
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: $GROUPS_JOB_PREFIX-cronjob
+  namespace: $NAMESPACE
+spec:
+  schedule: $GROUPS_JOB_SCHEDULE
+  failedJobsHistoryLimit: 1
+  successfulJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: $PREFIX-sa
+          containers:
+          - name: $GROUPS_JOB_PREFIX-job
+            image: ubuntu
+            args:
+            - /bin/bash
+            - -c
+            - curl -X POST http://$PREFIX-service:3000/groups/search -H 'Content-Type: application/json'
+          restartPolicy: OnFailure
+      backoffLimit: 3
+      activeDeadlineSeconds: 120
 EOF
