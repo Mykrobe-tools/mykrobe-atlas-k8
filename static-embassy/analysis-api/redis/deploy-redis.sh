@@ -91,6 +91,7 @@ spec:
           requests:
             memory: $POD_MEMORY_REDIS
             cpu: $POD_CPU_REDIS
+      priorityClassName: high-priority
       volumes:
       - name: $REDIS_PREFIX-data
         persistentVolumeClaim:

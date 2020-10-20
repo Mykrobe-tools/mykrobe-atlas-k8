@@ -154,6 +154,7 @@ echo " - Tracking database Memory limit: $LIMIT_MEMORY_TRACKING_DB"
 echo " - Tracking database CPU limit: $LIMIT_CPU_TRACKING_DB"
 echo ""
 
+sh ./priority-classes.sh
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
 sh ./analysis/copy-files.sh
