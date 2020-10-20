@@ -31,6 +31,7 @@ export CORS_ORIGIN="uat.mykro.be"
 
 export ANALYSIS_API="http://analysis-api-service.mykrobe.svc.cluster.local"
 export BIGSI_API="http://bigsi-api-aggregator-service.mykrobe.svc.cluster.local"
+export TRACKING_API="http://tracking-api-service.mykrobe.svc.cluster.local/api/v1"
 export ANALYSIS_API_DIR="/data"
 export UPLOAD_DIR="/home/node/app/uploads"
 export UPLOADS_LOCATION="/home/node/data"
