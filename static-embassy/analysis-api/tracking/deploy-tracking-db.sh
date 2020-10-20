@@ -78,6 +78,7 @@ spec:
           requests:
             memory: $REQUEST_MEMORY_TRACKING_DB
             cpu: $REQUEST_CPU_TRACKING_DB
+      priorityClassName: high-priority
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim

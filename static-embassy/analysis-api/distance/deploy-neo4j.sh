@@ -68,6 +68,7 @@ spec:
           requests:
             memory: $REQUEST_MEMORY_NEO4J
             cpu: $REQUEST_CPU_NEO4J
+      priorityClassName: high-priority
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
