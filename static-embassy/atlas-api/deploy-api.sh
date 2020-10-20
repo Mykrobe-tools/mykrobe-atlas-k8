@@ -387,7 +387,7 @@ spec:
             args:
             - /bin/bash
             - -c
-            - curl -X POST http://$PREFIX-service:3000/groups/search -H 'Content-Type: application/json'
+            - curl -XPOST http://$PREFIX-service:3000/groups/search
           restartPolicy: OnFailure
       backoffLimit: 3
       activeDeadlineSeconds: 120
