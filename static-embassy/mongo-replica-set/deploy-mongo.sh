@@ -180,6 +180,7 @@ spec:
           name: configdir
         - mountPath: /work-dir
           name: workdir
+      priorityClassName: $HIGH_PRIORITY_CLASS_NAME
       initContainers:
       - args:
         - -c
