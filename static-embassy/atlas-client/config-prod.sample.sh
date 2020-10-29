@@ -4,6 +4,7 @@ export NAMESPACE="mykrobe"
 export PREFIX="atlas"
 export CLIENT_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas:a81d112"
 export HOST="www.mykro.be"
+export ADDITIONAL_DNS="mykro.be"
 export NODE_OPTIONS_MEMORY="4096"
 
 # Pod (Deployment) resource limits

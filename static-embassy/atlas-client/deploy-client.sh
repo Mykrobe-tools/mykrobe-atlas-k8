@@ -6,6 +6,7 @@ echo " - Namespace: $NAMESPACE"
 echo " - Prefix: $PREFIX"
 echo " - Client Image: $CLIENT_IMAGE"
 echo " - Host: $HOST"
+echo " - Additional DNS: $ADDITIONAL_DNS"
 echo ""
 
 echo "Limits:"
@@ -206,6 +207,10 @@ spec:
     targetPort: 3000
   selector:
     app: $PREFIX
+EOF
+
+if [[ -z "${ADDITIONAL_DNS}" ]]; then
+cat <<EOF | kubectl apply -f -
 ---
 apiVersion: extensions/v1beta1
 kind: Ingress
@@ -230,3 +235,41 @@ spec:
       - backend:
           serviceName: $PREFIX-service
           servicePort: 3000
+EOF
+else
+cat <<EOF | kubectl apply -f -
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: $PREFIX-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+  namespace: $NAMESPACE
+spec:
+  backend:
+    serviceName: $PREFIX-service
+    servicePort: 3000
+  tls:
+  - hosts:
+    - $HOST
+    secretName: $PREFIX-mykro-be-tls
+  - hosts:
+    - $ADDITIONAL_DNS
+    secretName: $PREFIX-mykro-be-additional-tls
+  rules:
+  - host: $HOST
+    http:
+      paths:
+      - backend:
+          serviceName: $PREFIX-service
+          servicePort: 3000
+  - host: $ADDITIONAL_DNS
+    http:
+      paths:
+      - backend:
+          serviceName: $PREFIX-service
+          servicePort: 3000
+EOF
+fi
