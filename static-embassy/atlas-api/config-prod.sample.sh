@@ -12,11 +12,11 @@ export AWS_SECRET_KEY="<AWS_SECRET_KEY>"
 export AWS_REGION="eu-west-1"
 export ATLAS_APP="https://www.mykro.be"
 
-export ES_SCHEME="https"
-export ES_HOST="es-dev.makeandship.com"
+export ES_SCHEME="http"
+export ES_HOST="mykrobe-elasticsearch-headless.search.svc"
 export ES_PORT="9200"
-export ES_USERNAME="admin"
-export ES_PASSWORD="<ES_PASSWORD>"
+export ES_USERNAME="elastic"
+export ES_PASSWORD=`echo -n "<ES_PASSWORD>" | base64`
 export ES_INDEX_NAME="mykrobe"
 
 export KEYCLOAK_REDIRECT_URI="https://www.mykro.be/"
