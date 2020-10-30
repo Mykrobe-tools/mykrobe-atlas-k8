@@ -20,6 +20,10 @@ Kubernetes specifications to deploy Atlas services. These are deployed to Embass
 - Metabase - Ad-hoc reporting
 - MySQL - Reporting database
 
+### Search (search)
+
+- Elasticsearch - elasticsearch cluster
+
 ### Shared (shared)
 
 - Vault - Hashcorp vault to manage secrets
@@ -217,6 +221,32 @@ Run this inside the vault pod to enable kv secrets `vault secrets enable kv || t
 Port-forward the vault pod: `kubectl port-forward vault-0 8200:8200 -n shared`
 
 Copy the create-secrets.sh and replace the keys then run the script to create the secrets in vault: `./create-secrets.sh`
+
+### Elasticsearch
+
+In directory `/static-embassy/elasticsearch`, create a new config file with your setting by copying the sample file for your target environment and run it.
+
+For example:
+
+* Development: copy config-dev.sample.sh
+* UAT: copy config-uat.sample.sh
+* Production: copy config-prod.sample.sh
+
+Replace the passwords then run it in using e.g. `./config-dev.sh`.  This will create a deployment for the Elasticsearch cluster
+
+Verify using
+
+```
+kubectl get pods -n search
+```
+
+and see
+
+```
+NAME                      READY   STATUS    RESTARTS   AGE
+mykrobe-elasticsearch-0   1/1     Running   0          102s
+mykrobe-elasticsearch-1   1/1     Running   0          101s
+```
 
 ### API
 
