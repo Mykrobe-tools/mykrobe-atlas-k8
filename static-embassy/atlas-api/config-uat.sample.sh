@@ -6,8 +6,6 @@ export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:adeebc6"
 
 export DB_SERVICE_HOST="mykrobe-mongodb-replicaset-client.mykrobe.svc.cluster.local"
 export DB_RS_NAME="rs0"
-export MONGO_USER="atlas"
-export MONGO_PASSWORD="<password>"
 
 export AWS_ACCESS_KEY="<AWS_ACCESS_KEY>"
 export AWS_SECRET_KEY="<AWS_SECRET_KEY>"

@@ -156,6 +156,7 @@ spec:
             memory: "$LIMIT_DB_MEMORY"
             cpu: "$LIMIT_DB_CPU" 
             ephemeral-storage: "$LIMIT_DB_STORAGE"
+      priorityClassName: $HIGH_PRIORITY_CLASS_NAME
       volumes:
       - name: $POSTGRES_PREFIX-data
         persistentVolumeClaim:

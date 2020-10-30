@@ -7,8 +7,6 @@ echo " - Prefix: $PREFIX"
 echo " - API Image: $API_IMAGE"
 echo " - DB Host: $DB_SERVICE_HOST"
 echo " - DB Replica Set name: $DB_RS_NAME"
-echo " - Mongo user: $MONGO_USER"
-echo " - Mongo password: $MONGO_PASSWORD"
 echo " - AWS access key: $AWS_ACCESS_KEY"
 echo " - AWS secret key: $AWS_SECRET_KEY"
 echo " - AWS region: $AWS_REGION"
@@ -132,7 +130,6 @@ metadata:
   name: $PREFIX-env-secret
   namespace: $NAMESPACE
 data:
-  MONGO_PASSWORD: $MONGO_PASSWORD
   AWS_ACCESS_KEY: $AWS_ACCESS_KEY
   AWS_SECRET_KEY: $AWS_SECRET_KEY
   ES_PASSWORD: $ES_PASSWORD
@@ -218,13 +215,6 @@ spec:
           value: '27017'
         - name: DB_RS_NAME
           value: $DB_RS_NAME
-        - name: MONGO_USER
-          value: $MONGO_USER
-        - name: MONGO_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: $PREFIX-env-secret
-              key: MONGO_PASSWORD
         - name: AWS_ACCESS_KEY
           valueFrom:
             secretKeyRef:
