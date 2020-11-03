@@ -6,6 +6,9 @@ export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:adeebc6"
 
 export DB_SERVICE_HOST="mykrobe-mongodb-replicaset-client.mykrobe-dev.svc.cluster.local"
 export DB_RS_NAME="rs0"
+export MONGO_USER="atlas"
+export MONGO_PASSWORD=`echo -n "ZnHhPUCEAFCAYhhFC3gmwF54" | base64`
+
 
 export AWS_ACCESS_KEY="<AWS_ACCESS_KEY>"
 export AWS_SECRET_KEY="<AWS_SECRET_KEY>"
@@ -48,6 +51,8 @@ export GROUPS_JOB_SCHEDULE="0 0 * * *"
 # Storage sizes
 export STORAGE_DEMO="8Gi"
 export STORAGE_UPLOADS="50Gi"
+export STORAGE_APP_DATA="100Mi"
+export STORAGE_APP_TMP="5Gi"
 
 # Pod (Deployment) resource limits
 export REQUEST_CPU="1000m"

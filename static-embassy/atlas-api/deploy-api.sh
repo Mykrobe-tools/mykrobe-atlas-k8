@@ -39,6 +39,13 @@ echo " - Groups job prefix: $GROUPS_JOB_PREFIX"
 echo " - Groups job schedule: $GROUPS_JOB_SCHEDULE"
 echo ""
 
+echo "Storage:"
+echo " - Demo: $STORAGE_DEMO"
+echo " - Uploads: $STORAGE_UPLOADS"
+echo " - App data: $STORAGE_APP_DATA"
+echo " - App tmp: $STORAGE_APP_TMP"
+echo ""
+
 echo "Limits:"
 echo " - Request CPU: $REQUEST_CPU"
 echo " - Request Memory: $REQUEST_MEMORY"
@@ -108,7 +115,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: $STORAGE_APP_DATA
   storageClassName: nfs-client
 ---
 apiVersion: v1
@@ -121,7 +128,7 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
+      storage: $STORAGE_APP_TMP
   storageClassName: nfs-client
 ---
 apiVersion: v1
@@ -135,6 +142,7 @@ data:
   ES_PASSWORD: $ES_PASSWORD
   KEYCLOAK_ADMIN_PASSWORD: $KEYCLOAK_ADMIN_PASSWORD
   GOOGLE_MAPS_API_KEY: $GOOGLE_MAPS_API_KEY
+  MONGO_PASSWORD: $MONGO_PASSWORD
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
@@ -152,9 +160,6 @@ spec:
       labels:
         app: $PREFIX
       annotations:
-        vault.hashicorp.com/agent-inject: "true"
-        vault.hashicorp.com/agent-inject-secret-db-creds: "database/creds/mongo"
-        vault.hashicorp.com/role: "mongo"
     spec:
       securityContext:
         runAsUser: 1000
@@ -215,6 +220,13 @@ spec:
           value: '27017'
         - name: DB_RS_NAME
           value: $DB_RS_NAME
+        - name: MONGO_USER
+          value: $MONGO_USER
+        - name: MONGO_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: $PREFIX-env-secret
+              key: MONGO_PASSWORD
         - name: AWS_ACCESS_KEY
           valueFrom:
             secretKeyRef:
