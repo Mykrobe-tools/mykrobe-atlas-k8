@@ -15,7 +15,7 @@ export NEO4J_IMAGE="neo4j:4.1"
 
 export REDIS_IMAGE="redis:4.0"
 
-export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:520c3c1"
+export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:603c0aa"
 export TRACKING_DB_IMAGE="postgres:12"
 
 export REDIS_PREFIX="redis"
