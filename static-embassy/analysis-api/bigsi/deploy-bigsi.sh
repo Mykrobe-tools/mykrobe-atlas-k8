@@ -11,28 +11,15 @@ metadata:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: $BIGSI_PREFIX-data-big
+  name: $BIGSI_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: nfs-client
+  storageClassName: external-nfs-provisioner-storage-class-1
   accessModes:
   - ReadWriteMany
   resources:
     requests:
-      storage: 32Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: $BIGSI_PREFIX-data-small
-  namespace: $NAMESPACE
-spec:
-  storageClassName: nfs-client
-  accessModes:
-  - ReadWriteMany
-  resources:
-    requests:
-      storage: 8Gi
+      storage: 512Gi
 ---
 apiVersion: v1
 data:
@@ -270,7 +257,7 @@ spec:
           claimName: $ANALYSIS_PREFIX-config-data
       - name: $BIGSI_PREFIX-data-big
         persistentVolumeClaim:
-          claimName: $BIGSI_PREFIX-data-big
+          claimName: $BIGSI_PREFIX-data
       - configMap:
           defaultMode: 420
           name: $BIGSI_PREFIX-config-big
@@ -349,7 +336,7 @@ spec:
           claimName: $ATLAS_API_PREFIX-uploads-data
       - name: $BIGSI_PREFIX-data-small
         persistentVolumeClaim:
-          claimName: $BIGSI_PREFIX-data-small
+          claimName: $BIGSI_PREFIX-data
       - configMap:
           defaultMode: 420
           name: $BIGSI_PREFIX-config-small
