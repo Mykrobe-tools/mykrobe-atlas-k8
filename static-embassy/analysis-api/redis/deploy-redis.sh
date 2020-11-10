@@ -14,12 +14,12 @@ metadata:
   name: $REDIS_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: nfs-client
+  storageClassName: external-nfs-provisioner-storage-class-1
   accessModes:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 8Gi
+      storage: 16Gi
 ---
 apiVersion: v1
 kind: ConfigMap

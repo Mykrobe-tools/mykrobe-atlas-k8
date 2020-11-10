@@ -34,7 +34,7 @@ metadata:
   name: $ANALYSIS_PREFIX-config-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: nfs-client
+  storageClassName: external-nfs-provisioner-storage-class-1
   accessModes:
   - ReadWriteMany
   resources:

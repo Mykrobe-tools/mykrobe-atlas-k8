@@ -76,11 +76,12 @@ metadata:
   name: $NEO4J_PREFIX-data
   namespace: $NAMESPACE
 spec:
+  storageClassName: external-nfs-provisioner-storage-class-1
   accessModes:
   - ReadWriteMany
   resources:
     requests:
-      storage: 1Gi
+      storage: 4Gi
 ---
 apiVersion: v1
 kind: Service
