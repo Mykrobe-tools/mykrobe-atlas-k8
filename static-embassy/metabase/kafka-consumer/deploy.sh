@@ -56,7 +56,6 @@ spec:
               memory: "$LIMIT_MEMORY"
               cpu: "$LIMIT_CPU"
               ephemeral-storage: "$LIMIT_STORAGE"
-      priorityClassName: $HIGH_PRIORITY_CLASS_NAME
       imagePullSecrets:
         - name: gcr-json-key
 EOF

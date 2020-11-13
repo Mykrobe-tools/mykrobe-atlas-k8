@@ -100,7 +100,6 @@ spec:
             memory: "{LIMIT_KAFKA_MEMORY}"
             cpu: "{LIMIT_KAFKA_CPU}"
             ephemeral-storage: "{KAFKA_EPHERMERAL_STORAGE}"
-      priorityClassName: "{HIGH_PRIORITY_CLASS_NAME}"
   volumeClaimTemplates:
   - metadata:
       name: datadir-0
@@ -212,7 +211,6 @@ spec:
             memory: "{LIMIT_ZOOKEEPER_MEMORY}"
             cpu: "{LIMIT_ZOOKEEPER_CPU}"
             ephemeral-storage: "{ZOOKEEPER_EPHERMERAL_STORAGE}"
-      priorityClassName: "{HIGH_PRIORITY_CLASS_NAME}"
   volumeClaimTemplates:
   - metadata:
       name: datadir

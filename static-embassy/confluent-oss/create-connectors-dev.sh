@@ -19,7 +19,7 @@ curl -X POST \
     "config": {
         "connector.class": "io.debezium.connector.mongodb.MongoDbConnector",
         "tasks.max": 1,
-        "mongodb.hosts" : "mykrobe-mongodb-replicaset-client.mykrobe-dev.svc.cluster.local:27017",
+        "mongodb.hosts" : "mykrobe-mongodb-replicaset-client.mykrobe-dev.svc:27017",
         "mongodb.name" : "mykrobe",
         "mongodb.user" : "admin",
         "mongodb.password" : "<admin_password>",
@@ -29,7 +29,7 @@ curl -X POST \
         "transforms.unwrap.type": "io.debezium.connector.mongodb.transforms.UnwrapFromMongoDbEnvelope",
         "key.converter": "org.apache.kafka.connect.storage.StringConverter",
         "value.converter": "org.apache.kafka.connect.json.JsonConverter",
-        "database.history.kafka.bootstrap.servers" : "mykrobe-confluent-kafka.mykrobe-insight-dev.svc.cluster.local:9092"
+        "database.history.kafka.bootstrap.servers" : "mykrobe-confluent-kafka.insight-dev.svc:9092"
         }
     }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
 
@@ -45,7 +45,7 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_experiments",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "id",
@@ -65,7 +65,7 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_nearest_neighbour_result",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "experimentId, received",
@@ -85,7 +85,7 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_predictor_result",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "experimentId, received",
@@ -105,7 +105,7 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_predictor_result_file",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "experimentId, received, index",
@@ -125,7 +125,7 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_tree_distance_result",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "experimentId, received",
@@ -145,7 +145,7 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_groups",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "id",
@@ -165,10 +165,30 @@ curl -X POST \
         "connection.user": "mykrobe",
         "name": "core_group_experiments",
         "auto.create": "false",
-        "connection.url": "jdbc:mysql://mykrobe-mysql.mykrobe-insight-dev.svc.cluster.local:3306/mykrobe",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
         "errors.log.enable": "true",
         "insert.mode": "upsert",
         "pk.fields": "experimentId, groupId",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
+    "name": "core_predictor_result_lineage",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_predictor_result_lineage",
+        "connection.user": "mykrobe",
+        "name": "core_predictor_result_lineage",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "experimentId, index",
         "pk.mode": "record_value"
         }
     }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
