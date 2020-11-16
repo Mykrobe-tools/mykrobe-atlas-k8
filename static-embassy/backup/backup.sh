@@ -5,7 +5,7 @@ date=`date +"%d%m%y"`
 old_date=`date +"%d%m%y" -d "10 day ago"`
 
 # Create the db dump
-mongodump --host=$DB_HOST --port=$DB_PORT --username=$MONGO_USER --password=$MONGO_PASSWORD --out=/home/ubuntu/dump
+mongodump --host=$DB_HOST --port=$DB_PORT --username=$MONGO_USER --password=$MONGO_PASSWORD --db=$DB_NAME --out=/home/ubuntu/dump
 
 # Zip the files
 zip -r /home/ubuntu/backups/mongo_$date.zip /home/ubuntu/dump

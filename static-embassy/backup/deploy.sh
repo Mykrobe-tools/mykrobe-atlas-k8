@@ -7,6 +7,7 @@ echo " - Prefix: $PREFIX"
 echo " - Image: $IMAGE"
 echo " - Database Host: $DB_HOST"
 echo " - Database User: $MONGO_USER"
+echo " - Database: $DB_NAME"
 echo ""
 
 # website
@@ -34,21 +35,25 @@ spec:
       template:
         spec:
           serviceAccountName: $PREFIX-sa
+          imagePullSecrets:
+          - name: gcr-json-key
           containers:
           - name: backup-job
             image: $IMAGE
             env:
-              - name: DB_HOST
-                value: $DB_HOST
-              - name: DB_PORT
-                value: '27017'
-              - name: MONGO_USER
-                 value: $MONGO_USER
-              - name: MONGO_PASSWORD
-                valueFrom:
-                  secretKeyRef:
-                    name: atlas-api-env-secret
-                    key: MONGO_PASSWORD
+            - name: DB_HOST
+              value: $DB_HOST
+            - name: DB_PORT
+              value: '27017'
+            - name: MONGO_USER
+              value: $MONGO_USER
+            - name: DB_NAME
+              value: $DB_NAME
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: atlas-api-env-secret
+                  key: MONGO_PASSWORD
             args:
             - /bin/bash
             - -c
