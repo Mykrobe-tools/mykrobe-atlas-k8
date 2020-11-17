@@ -28,6 +28,7 @@ echo ""
 
 echo "Crash telemetry:"
 echo " - Public DSN: $REACT_APP_SENTRY_PUBLIC_DSN"
+echo ""
 
 cat <<EOF | kubectl apply -f -
 ---
