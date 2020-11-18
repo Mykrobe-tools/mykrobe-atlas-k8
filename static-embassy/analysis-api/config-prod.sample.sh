@@ -5,7 +5,7 @@ export TARGET_ENV="prod"
 export ATLAS_API="https://api.mykro.be"
 
 export ATLAS_AUTH_REALM="atlas"
-export ATLAS_AUTH_SERVER="https://accounts.mykro.be/auth/realms/$ATLAS_AUTH_REALM/protocol/openid-connect/token"
+export ATLAS_AUTH_SERVER="https://accounts.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
 export ATLAS_AUTH_CLIENT_SECRET="6373370d-28fc-4e55-963b-4665e6310131"
 
