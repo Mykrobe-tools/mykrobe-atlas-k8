@@ -4,6 +4,11 @@ export NAMESPACE="mykrobe-dev"
 export TARGET_ENV="dev"
 export ATLAS_API="https://api-dev.mykro.be"
 
+export ATLAS_AUTH_REALM="atlas"
+export ATLAS_AUTH_SERVER="https://accounts-dev.mykro.be/auth/realms/$ATLAS_AUTH_REALM/protocol/openid-connect/token"
+export ATLAS_AUTH_CLIENT_ID="analysis-api"
+export ATLAS_AUTH_CLIENT_SECRET="66011b88-e780-4997-a518-b1b42bccdd1f"
+
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:94e172a"
 export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:94e172a"
 
@@ -80,6 +85,11 @@ echo " - NAMESPACE: $NAMESPACE"
 echo " - Target: $TARGET_ENV"
 echo " - Atlas api prefix: $ATLAS_API_PREFIX"
 echo " - Atlas Api: $ATLAS_API"
+
+echo " - Atlas auth realm: $ATLAS_AUTH_REALM"
+echo " - Atlas auth server: $ATLAS_AUTH_SERVER"
+echo " - Atlas auth client ID: $ATLAS_ATLAS_AUTH_CLIENT_ID"
+echo " - Atlas auth client secret: $ATLAS_ATLAS_AUTH_CLIENT_SECRET"
 
 echo " - Analysis Prefix: $ANALYSIS_PREFIX"
 echo " - Analysis API image: $ANALYSIS_API_IMAGE"
