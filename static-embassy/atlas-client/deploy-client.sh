@@ -20,7 +20,7 @@ echo ""
 
 echo "Storage:"
 echo " - Data Size: $STORAGE_DATA"
-echo " - Storage Class: $STORAGE_DATA"
+echo " - Storage Class: $STORAGE_CLASS"
 echo ""
 
 echo "Env:"
