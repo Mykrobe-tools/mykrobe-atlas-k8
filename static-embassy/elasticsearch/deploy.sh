@@ -5,13 +5,18 @@ echo "Deploying mykrobe elasticsearch cluster using:"
 echo " - Namespace: $NAMESPACE"
 echo " - Prefix: $PREFIX"
 echo " - Image: $IMAGE"
+echo ""
 echo " - Replicas: $REPLICAS"
 echo " - Cluster Name: $CLUSTER_NAME"
+echo ""
 echo " - Request CPU: $REQUEST_CPU"
 echo " - Request Memory: $REQUEST_MEMORY"
 echo " - Limit CPU: $LIMIT_CPU"
-echo " - LIMIT Memort: $LIMIT_MEMORY"
+echo " - Limit Memory: $LIMIT_MEMORY"
+echo ""
 echo " - Storage Size: $STORAGE_SIZE"
+echo " - Storage Size: $STORAGE_CLASS"
+echo ""
 echo " - Username: $USERNAME"
 echo " - Password: $PASSWORD"
 echo ""
@@ -112,7 +117,8 @@ sed "s#{REQUEST_CPU}#$REQUEST_CPU#g" statefulset-tmp4.yaml > statefulset-tmp5.ya
 sed "s#{REQUEST_MEMORY}#$REQUEST_MEMORY#g" statefulset-tmp5.yaml > statefulset-tmp6.yaml
 sed "s#{LIMIT_CPU}#$LIMIT_CPU#g" statefulset-tmp6.yaml > statefulset-tmp7.yaml
 sed "s#{LIMIT_MEMORY}#$LIMIT_MEMORY#g" statefulset-tmp7.yaml > statefulset-tmp8.yaml
-sed "s#{STORAGE_SIZE}#$STORAGE_SIZE#g" statefulset-tmp8.yaml > statefulset-resolved.yaml
+sed "s#{STORAGE_SIZE}#$STORAGE_SIZE#g" statefulset-tmp8.yaml > statefulset-tmp9.yaml
+sed "s#{STORAGE_CLASS}#$STORAGE_CLASS#g" statefulset-tmp9.yaml > statefulset-resolved.yaml
 
 kubectl apply -f statefulset-resolved.yaml
 

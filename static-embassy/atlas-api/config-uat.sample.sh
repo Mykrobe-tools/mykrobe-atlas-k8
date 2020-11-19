@@ -50,6 +50,9 @@ export STORAGE_UPLOADS="50Gi"
 export STORAGE_APP_DATA="10Gi"
 export STORAGE_APP_TMP="5Gi"
 
+# Storage class
+export STORAGE_CLASS="nfs-client"
+
 # Groups job
 export GROUPS_JOB_PREFIX="groups-search"
 export GROUPS_JOB_SCHEDULE="0 0 * * *"
