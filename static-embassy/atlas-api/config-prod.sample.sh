@@ -30,13 +30,16 @@ export CORS_ORIGIN="www.mykro.be"
 export ANALYSIS_API="http://analysis-api-service.mykrobe.svc.cluster.local"
 export BIGSI_API="http://bigsi-api-aggregator-service.mykrobe.svc.cluster.local"
 export TRACKING_API="http://tracking-api-service.mykrobe.svc.cluster.local/api/v1"
+export GOOGLE_MAPS_API_KEY=`echo -n "" | base64`
+export SWAGGER_API_FILES="/home/node/app/dist/server/routes/*.route.js"
+
+export FOREVER_DIR="/home/node/data/forever"
+export FOREVER_LOGS_DIR="/home/node/data/logs"
 export ANALYSIS_API_DIR="/data"
 export UPLOAD_DIR="/home/node/app/uploads"
 export UPLOADS_LOCATION="/home/node/data"
 export UPLOADS_TEMP_LOCATION="/home/node/tmp"
 export DEMO_DATA_ROOT_FOLDER="/home/node/app/demo"
-export GOOGLE_MAPS_API_KEY=`echo -n "" | base64`
-export SWAGGER_API_FILES="/home/node/app/dist/server/routes/*.route.js"
 
 export REDIS_HOST="redis.mykrobe.svc.cluster.local"
 export REDIS_PORT="6379"
@@ -48,6 +51,8 @@ export GROUPS_JOB_SCHEDULE="0 0 * * *"
 # Storage sizes
 export STORAGE_DEMO="8Gi"
 export STORAGE_UPLOADS="50Gi"
+export STORAGE_APP_DATA="10Gi"
+export STORAGE_APP_TMP="5Gi"
 
 # Pod (Deployment) resource limits
 export REQUEST_CPU="1000m"
