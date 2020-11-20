@@ -88,7 +88,6 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /var/lib/mysql
-      priorityClassName: {HIGH_PRIORITY_CLASS_NAME}
       volumes:
       - name: data
         persistentVolumeClaim:

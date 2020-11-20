@@ -18,9 +18,6 @@ export LIMIT_STORAGE="20Gi"
 
 # Storage
 export STORAGE_DATA="8Gi"
-export STORAGE_CLASS="nfs-client"
-
-# High Priority Class 
-export HIGH_PRIORITY_CLASS_NAME="high-priority"
+export STORAGE_CLASS="external-nfs-provisioner-storage-class-3"
 
 sh ./deploy-mysql.sh
