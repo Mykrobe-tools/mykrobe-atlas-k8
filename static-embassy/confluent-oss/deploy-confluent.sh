@@ -234,7 +234,7 @@ spec:
             - name: KAFKA_HEAP_OPTS
               value: "-Xms512M -Xmx512M"
             - name: "CONTROL_CENTER_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
 
 ---
 apiVersion: apps/v1beta2
@@ -291,7 +291,7 @@ spec:
             - name: KAFKA_HEAP_OPTS
               value: "-Xms512M -Xmx512M"
             - name: "CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
             - name: "CONNECT_INTERNAL_KEY_CONVERTER"
               value: "org.apache.kafka.connect.json.JsonConverter"
             - name: "CONNECT_INTERNAL_VALUE_CONVERTER"
@@ -301,11 +301,11 @@ spec:
             - name: "CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE"
               value: "false"
             - name: "CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
             - name: "CONNECT_PLUGIN_PATH"
               value: "/usr/share/java,/usr/share/confluent-hub-components"
             - name: "CONNECT_STATUS_STORAGE_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
             - name: "CONNECT_VALUE_CONVERTER"
               value: "io.confluent.connect.avro.AvroConverter"
             - name: "CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE"
