@@ -18,6 +18,10 @@ echo " - Limit CPU: $LIMIT_CPU"
 echo " - Limit Memory: $LIMIT_MEMORY"
 echo " - Limit Storage: $LIMIT_STORAGE"
 echo ""
+echo "Storage:"
+echo " - Storage Class: $STORAGE_CLASS"
+echo " - Storage Size: $STORAGE_DATA"
+echo ""
 
 cat <<EOF | kubectl apply -f -
 ---
@@ -49,12 +53,12 @@ metadata:
   labels:
     app: $PREFIX-mysql
 spec:
-  storageClassName: nfs-client
+  storageClassName: $STORAGE_CLASS
   accessModes:
     - "ReadWriteOnce"
   resources:
     requests:
-      storage: "8Gi"
+      storage: $STORAGE_DATA
 ---
 apiVersion: v1
 kind: Service
@@ -84,7 +88,10 @@ sed "s#{REQUEST_STORAGE}#$REQUEST_STORAGE#g" mysql-deployment-tmp5.yaml > mysql-
 sed "s#{LIMIT_MEMORY}#$LIMIT_MEMORY#g" mysql-deployment-tmp6.yaml > mysql-deployment-tmp7.yaml
 sed "s#{LIMIT_CPU}#$LIMIT_CPU#g" mysql-deployment-tmp7.yaml > mysql-deployment-tmp8.yaml
 sed "s#{LIMIT_STORAGE}#$LIMIT_STORAGE#g" mysql-deployment-tmp8.yaml > mysql-deployment-tmp9.yaml
-sed "s#{DB_USER}#$DB_USER#g" mysql-deployment-tmp9.yaml > mysql-deployment-resolved.yaml
+sed "s#{DB_USER}#$DB_USER#g" mysql-deployment-tmp9.yaml > mysql-deployment-tmp10.yaml
+sed "s#{STORAGE_CLASS}#$STORAGE_CLASS#g" mysql-deployment-tmp10.yaml > mysql-deployment-tmp11.yaml
+sed "s#{STORAGE_DATA}#$STORAGE_DATA#g" mysql-deployment-tmp11.yaml > mysql-deployment-tmp12.yaml
+sed "s#{HIGH_PRIORITY_CLASS_NAME}#$HIGH_PRIORITY_CLASS_NAME#g" mysql-deployment-tmp12.yaml > mysql-deployment-resolved.yaml
 
 kubectl apply -f mysql-deployment-resolved.yaml
 
