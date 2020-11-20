@@ -54,6 +54,8 @@ spec:
         - mountPath: "/data/databases"
           name: $NEO4J_PREFIX-data
         env:
+        - name: NEO4J_dbms_recovery_fail__on__missing__files
+          value: "false"
         - name: NEO4J_dbms_logs_debug_level
           value: DEBUG
         - name: NEO4J_AUTH
@@ -76,12 +78,12 @@ metadata:
   name: $NEO4J_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-1
+  storageClassName: external-nfs-provisioner-storage-class-4
   accessModes:
   - ReadWriteMany
   resources:
     requests:
-      storage: 4Gi
+      storage: 16Gi
 ---
 apiVersion: v1
 kind: Service
