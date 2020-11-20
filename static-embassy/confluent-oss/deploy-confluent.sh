@@ -41,6 +41,10 @@ echo " - Limit Connect CPU: $LIMIT_KAFKA_CONNECT_CPU"
 echo " - Limit Connect Memory: $LIMIT_KAFKA_CONNECT_MEMORY"
 echo ""
 
+echo "Storage:"
+echo " - Storage Class: $STORAGE_CLASS"
+echo ""
+
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
@@ -396,7 +400,8 @@ sed "s#{REQUEST_KAFKA_STORAGE}#$REQUEST_KAFKA_STORAGE#g" kafka-statefulset-deplo
 sed "s#{LIMIT_KAFKA_CPU}#$LIMIT_KAFKA_CPU#g" kafka-statefulset-deploy-tmp16.yaml > kafka-statefulset-deploy-tmp17.yaml
 sed "s#{LIMIT_KAFKA_MEMORY}#$LIMIT_KAFKA_MEMORY#g" kafka-statefulset-deploy-tmp17.yaml > kafka-statefulset-deploy-tmp18.yaml
 sed "s#{LIMIT_KAFKA_STORAGE}#$LIMIT_KAFKA_STORAGE#g" kafka-statefulset-deploy-tmp18.yaml > kafka-statefulset-deploy-tmp19.yaml
-sed "s#{NAMESPACE}#$NAMESPACE#g" kafka-statefulset-deploy-tmp19.yaml > kafka-statefulset-deploy.yaml
+sed "s#{NAMESPACE}#$NAMESPACE#g" kafka-statefulset-deploy-tmp19.yaml > kafka-statefulset-deploy-tmp20.yaml
+sed "s#{STORAGE_CLASS}#$STORAGE_CLASS#g" kafka-statefulset-deploy-tmp20.yaml > kafka-statefulset-deploy.yaml
 
 kubectl apply -f kafka-statefulset-deploy.yaml -n $NAMESPACE
 

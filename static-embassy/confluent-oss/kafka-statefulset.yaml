@@ -104,7 +104,7 @@ spec:
   - metadata:
       name: datadir-0
     spec:
-      storageClassName: nfs-client
+      storageClassName: "{STORAGE_CLASS}"
       accessModes:
       - ReadWriteOnce
       resources:
@@ -215,7 +215,7 @@ spec:
   - metadata:
       name: datadir
     spec:
-      storageClassName: nfs-client
+      storageClassName: "{STORAGE_CLASS}"
       accessModes:
       - ReadWriteOnce
       resources:
@@ -226,7 +226,7 @@ spec:
   - metadata:
       name: datalogdir
     spec:
-      storageClassName: nfs-client
+      storageClassName: "{STORAGE_CLASS}"
       accessModes:
       - ReadWriteOnce
       resources:
