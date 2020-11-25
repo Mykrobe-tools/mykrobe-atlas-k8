@@ -58,6 +58,9 @@ export STORAGE_UPLOADS="50Gi"
 export STORAGE_APP_DATA="10Gi"
 export STORAGE_APP_TMP="5Gi"
 
+# Storage class
+export STORAGE_CLASS="external-nfs-provisioner-storage-class-2"
+
 # Pod (Deployment) resource limits
 export REQUEST_CPU="1000m"
 export REQUEST_MEMORY="4Gi"

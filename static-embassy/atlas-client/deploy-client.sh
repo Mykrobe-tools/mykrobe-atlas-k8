@@ -18,6 +18,11 @@ echo " - Limit Memory: $LIMIT_MEMORY"
 echo " - Limit Storage: $LIMIT_STORAGE"
 echo ""
 
+echo "Storage:"
+echo " - Data Size: $STORAGE_DATA"
+echo " - Storage Class: $STORAGE_CLASS"
+echo ""
+
 echo "Env:"
 echo " - Keycloak URL: $REACT_APP_KEYCLOAK_URL"
 echo " - Keycloak Realm: $REACT_APP_KEYCLOAK_REALM"
@@ -50,8 +55,8 @@ spec:
   - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
-  storageClassName: nfs-client
+      storage: $STORAGE_DATA
+  storageClassName: $STORAGE_CLASS
 ---
 apiVersion: v1
 kind: Secret

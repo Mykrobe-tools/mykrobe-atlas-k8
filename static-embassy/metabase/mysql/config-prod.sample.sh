@@ -16,4 +16,8 @@ export LIMIT_CPU="500m"
 export LIMIT_MEMORY="1Gi"
 export LIMIT_STORAGE="20Gi"
 
+# Storage
+export STORAGE_DATA="8Gi"
+export STORAGE_CLASS="nfs-client"
+
 sh ./deploy-mysql.sh

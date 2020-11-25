@@ -41,6 +41,10 @@ echo " - Limit Connect CPU: $LIMIT_KAFKA_CONNECT_CPU"
 echo " - Limit Connect Memory: $LIMIT_KAFKA_CONNECT_MEMORY"
 echo ""
 
+echo "Storage:"
+echo " - Storage Class: $STORAGE_CLASS"
+echo ""
+
 cat <<EOF | kubectl apply -f -
 ---
 apiVersion: v1
@@ -230,7 +234,7 @@ spec:
             - name: KAFKA_HEAP_OPTS
               value: "-Xms512M -Xmx512M"
             - name: "CONTROL_CENTER_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
 
 ---
 apiVersion: apps/v1beta2
@@ -287,7 +291,7 @@ spec:
             - name: KAFKA_HEAP_OPTS
               value: "-Xms512M -Xmx512M"
             - name: "CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
             - name: "CONNECT_INTERNAL_KEY_CONVERTER"
               value: "org.apache.kafka.connect.json.JsonConverter"
             - name: "CONNECT_INTERNAL_VALUE_CONVERTER"
@@ -297,11 +301,11 @@ spec:
             - name: "CONNECT_KEY_CONVERTER_SCHEMAS_ENABLE"
               value: "false"
             - name: "CONNECT_OFFSET_STORAGE_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
             - name: "CONNECT_PLUGIN_PATH"
               value: "/usr/share/java,/usr/share/confluent-hub-components"
             - name: "CONNECT_STATUS_STORAGE_REPLICATION_FACTOR"
-              value: "3"
+              value: "1"
             - name: "CONNECT_VALUE_CONVERTER"
               value: "io.confluent.connect.avro.AvroConverter"
             - name: "CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE"
@@ -396,7 +400,8 @@ sed "s#{REQUEST_KAFKA_STORAGE}#$REQUEST_KAFKA_STORAGE#g" kafka-statefulset-deplo
 sed "s#{LIMIT_KAFKA_CPU}#$LIMIT_KAFKA_CPU#g" kafka-statefulset-deploy-tmp16.yaml > kafka-statefulset-deploy-tmp17.yaml
 sed "s#{LIMIT_KAFKA_MEMORY}#$LIMIT_KAFKA_MEMORY#g" kafka-statefulset-deploy-tmp17.yaml > kafka-statefulset-deploy-tmp18.yaml
 sed "s#{LIMIT_KAFKA_STORAGE}#$LIMIT_KAFKA_STORAGE#g" kafka-statefulset-deploy-tmp18.yaml > kafka-statefulset-deploy-tmp19.yaml
-sed "s#{NAMESPACE}#$NAMESPACE#g" kafka-statefulset-deploy-tmp19.yaml > kafka-statefulset-deploy.yaml
+sed "s#{NAMESPACE}#$NAMESPACE#g" kafka-statefulset-deploy-tmp19.yaml > kafka-statefulset-deploy-tmp20.yaml
+sed "s#{STORAGE_CLASS}#$STORAGE_CLASS#g" kafka-statefulset-deploy-tmp20.yaml > kafka-statefulset-deploy.yaml
 
 kubectl apply -f kafka-statefulset-deploy.yaml -n $NAMESPACE
 
