@@ -24,13 +24,15 @@ echo " - Keycloak URI: $KEYCLOAK_URL"
 echo " - Keycloak admin password: $KEYCLOAK_ADMIN_PASSWORD"
 echo ""
 echo " - API host: $API_HOST"
-echo " - Debug: $DEBUG"
-echo " - Log Level: $LOG_LEVEL"
 echo " - Analysis API: $ANALYSIS_API"
 echo " - Bigsi API: $BIGSI_API"
 echo " - Tracking API: $TRACKING_API"
 echo " - Google geocoding API key: $GOOGLE_MAPS_API_KEY"
 echo " - Swagger API files: $SWAGGER_API_FILES"
+echo ""
+echo " - Debug: $DEBUG"
+echo " - Log Level: $LOG_LEVEL"
+echo " - Elasticsearch Log Level: $ELASTICSEARCH_LOG_LEVEL"
 echo ""
 echo " - Forever dir: $FOREVER_DIR"
 echo " - Forever log dir: $FOREVER_LOG_DIR"
@@ -265,6 +267,8 @@ spec:
           value: "$DEBUG"
         - name: LOG_LEVEL
           value: "$LOG_LEVEL"
+        - name: ELASTICSEARCH_LOG_LEVEL
+          value: "$ELASTICSEARCH_LOG_LEVEL"
         - name: ANALYSIS_API
           value: $ANALYSIS_API
         - name: BIGSI_API
