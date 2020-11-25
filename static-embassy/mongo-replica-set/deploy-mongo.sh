@@ -23,6 +23,10 @@ echo " - Limit Memory: $LIMIT_MEMORY"
 echo " - Limit Storage: $LIMIT_STORAGE"
 echo ""
 
+echo "Storage:"
+echo " - Storage Class: $STORAGE_CLASS"
+echo " - Storage Size: $STORAGE_DATA"
+
 kubectl apply -f mongodb-init-configmap.yaml -n $NAMESPACE
 
 cat <<EOF | kubectl apply -f -
@@ -297,11 +301,11 @@ spec:
       annotations: null
       name: datadir
     spec:
-      storageClassName: nfs-client
+      storageClassName: $STORAGE_CLASS
       accessModes:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 10Gi
+          storage: $STORAGE_DATA
 
 EOF

@@ -40,4 +40,6 @@ export REQUEST_KAFKA_CONNECT_MEMORY="1Gi"
 export LIMIT_KAFKA_CONNECT_CPU="2000m"
 export LIMIT_KAFKA_CONNECT_MEMORY="2Gi"
 
+export STORAGE_CLASS="nfs-client"
+
 sh ./deploy-confluent.sh

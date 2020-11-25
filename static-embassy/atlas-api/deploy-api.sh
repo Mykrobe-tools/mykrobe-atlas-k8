@@ -92,23 +92,10 @@ subjects:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: $PREFIX-demo-data
-  namespace: $NAMESPACE
-spec:
-  storageClassName: nfs-client
-  accessModes:
-  - ReadWriteOnce
-  resources:
-    requests:
-      storage: $STORAGE_DEMO
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
   name: $PREFIX-uploads-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: nfs-client
+  storageClassName: $STORAGE_CLASS
   accessModes:
   - ReadWriteMany
   resources:
@@ -126,7 +113,7 @@ spec:
   resources:
     requests:
       storage: $STORAGE_APP_DATA
-  storageClassName: nfs-client
+  storageClassName: $STORAGE_CLASS
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -139,7 +126,7 @@ spec:
   resources:
     requests:
       storage: $STORAGE_APP_TMP
-  storageClassName: nfs-client
+  storageClassName: $STORAGE_CLASS
 ---
 apiVersion: v1
 kind: Secret
@@ -206,9 +193,6 @@ spec:
         volumeMounts:
         - mountPath: $UPLOAD_DIR
           name: $PREFIX-uploads-volume
-          readOnly: false 
-        - mountPath: $DEMO_DATA_ROOT_FOLDER
-          name: $PREFIX-demo-volume
           readOnly: false 
         - mountPath: $FOREVER_DIR
           subPath: "forever"
@@ -325,9 +309,6 @@ spec:
       - name: $PREFIX-uploads-volume
         persistentVolumeClaim:
           claimName: $PREFIX-uploads-data
-      - name: $PREFIX-demo-volume
-        persistentVolumeClaim:
-          claimName: $PREFIX-demo-data
       - name: $PREFIX-app-data
         persistentVolumeClaim:
           claimName: $PREFIX-app-data

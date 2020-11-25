@@ -21,7 +21,7 @@ spec:
   - metadata:
       name: {PREFIX}
     spec:
-      storageClassName: nfs-client
+      storageClassName: {STORAGE_CLASS}
       accessModes:
       - ReadWriteOnce
       resources:

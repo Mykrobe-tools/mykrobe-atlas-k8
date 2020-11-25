@@ -15,8 +15,11 @@ echo " - DB address: $DB_ADDR"
 echo " - DB port: $DB_PORT"
 echo " - Keycloak admin user: $KEYCLOAK_USER"
 echo " - Keycloak admin password: $KEYCLOAK_PASSWORD"
+echo ""
+echo "Storage:"
 echo " - Postgres storage: $STORAGE_POSTGRES"
 echo " - Themes storage: $STORAGE_THEMES"
+echo " - Storage class: $STORAGE_CLASS"
 echo ""
 
 echo "Keycloak limits:"
@@ -27,6 +30,7 @@ echo " - Limit CPU: $LIMIT_CPU"
 echo " - Limit Memory: $LIMIT_MEMORY"
 echo " - Limit Storage: $LIMIT_STORAGE"
 echo ""
+
 
 echo "Postgres limits:"
 echo " - Request DB CPU: $REQUEST_DB_CPU"
@@ -55,7 +59,7 @@ metadata:
   labels:
     app: $POSTGRES_PREFIX
 spec:
-  storageClassName: nfs-client
+  storageClassName: $STORAGE_CLASS
   accessModes:
   - ReadWriteMany
   resources:
@@ -68,7 +72,7 @@ metadata:
   name: $PREFIX-theme-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: nfs-client
+  storageClassName: $STORAGE_CLASS
   accessModes:
   - ReadWriteMany
   resources:

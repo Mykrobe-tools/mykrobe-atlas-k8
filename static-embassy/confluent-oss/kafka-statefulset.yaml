@@ -10,7 +10,7 @@ metadata:
 spec:
   serviceName: {CONFLUENT}-{KAFKA}-headless
   podManagementPolicy: OrderedReady
-  replicas: 3
+  replicas: 1
   updateStrategy:
     type: RollingUpdate
   template:
@@ -76,7 +76,7 @@ spec:
         - name: "KAFKA_LISTENER_SECURITY_PROTOCOL_MAP"
           value: "PLAINTEXT:PLAINTEXT,EXTERNAL:PLAINTEXT"
         - name: "KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR"
-          value: "3"
+          value: "1"
         # This is required because the Downward API does not yet support identification of
         # pod numbering in statefulsets. Thus, we are required to specify a command which
         # allows us to extract the pod ID for usage as the Kafka Broker ID.
@@ -104,7 +104,7 @@ spec:
   - metadata:
       name: datadir-0
     spec:
-      storageClassName: nfs-client
+      storageClassName: "{STORAGE_CLASS}"
       accessModes:
       - ReadWriteOnce
       resources:
@@ -124,7 +124,7 @@ metadata:
 spec:
   serviceName: {CONFLUENT}-{ZOOKEEPER}-headless
   podManagementPolicy: OrderedReady
-  replicas: 3
+  replicas: 1
   updateStrategy:
     type: RollingUpdate
   template:
@@ -176,13 +176,13 @@ spec:
         - name : ZOOKEEPER_MAX_CLIENT_CNXNS
           value: "60"
         - name : ZOOKEEPER_AUTOPURGE_SNAP_RETAIN_COUNT
-          value: "3"
+          value: "1"
         - name : ZOOKEEPER_AUTOPURGE_PURGE_INTERVAL
           value: "24"
         - name: ZOOKEEPER_CLIENT_PORT
           value: "2181"
         - name : ZOOKEEPER_SERVERS
-          value: "{CONFLUENT}-{ZOOKEEPER}-0.{CONFLUENT}-{ZOOKEEPER}-headless.{NAMESPACE}:2888:3888;{CONFLUENT}-{ZOOKEEPER}-1.{CONFLUENT}-{ZOOKEEPER}-headless.{NAMESPACE}:2888:3888;{CONFLUENT}-{ZOOKEEPER}-2.{CONFLUENT}-{ZOOKEEPER}-headless.{NAMESPACE}:2888:3888"
+          value: "{CONFLUENT}-{ZOOKEEPER}-0.{CONFLUENT}-{ZOOKEEPER}-headless.{NAMESPACE}:2888:3888"
         # ZOOKEEPER_SERVER_ID is required just to pass {ZOOKEEPER} ensure script for env check,
         # the value(metadata.mame) is not used and will be overwritten in command part
         - name: ZOOKEEPER_SERVER_ID
@@ -215,7 +215,7 @@ spec:
   - metadata:
       name: datadir
     spec:
-      storageClassName: nfs-client
+      storageClassName: "{STORAGE_CLASS}"
       accessModes:
       - ReadWriteOnce
       resources:
@@ -226,7 +226,7 @@ spec:
   - metadata:
       name: datalogdir
     spec:
-      storageClassName: nfs-client
+      storageClassName: "{STORAGE_CLASS}"
       accessModes:
       - ReadWriteOnce
       resources:

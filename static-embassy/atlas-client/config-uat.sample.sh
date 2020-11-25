@@ -14,6 +14,10 @@ export LIMIT_CPU="1000m"
 export LIMIT_MEMORY="1Gi"
 export LIMIT_STORAGE="4Gi"
 
+# Storage class
+export STORAGE_DATA="2Gi"
+export STORAGE_CLASS="external-nfs-provisioner-storage-class-2"
+
 # Env vars
 
 # Endpoint of the API

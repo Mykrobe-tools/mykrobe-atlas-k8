@@ -17,6 +17,7 @@ export KEYCLOAK_PASSWORD=`echo -n "<KEYCLOAK_PASSWORD>" | base64`
 # Storage sizes
 export STORAGE_POSTGRES="10Gi"
 export STORAGE_THEMES="2Gi"
+export STORAGE_CLASS="nfs-client"
 
 # Pod (Deployment) resource limits
 export REQUEST_DB_CPU="1000m"
