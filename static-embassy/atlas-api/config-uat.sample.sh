@@ -25,6 +25,7 @@ export KEYCLOAK_ADMIN_PASSWORD="<KEYCLOAK_ADMIN_PASSWORD>"
 export API_HOST="api-uat.mykro.be"
 export DEBUG=1
 export LOG_LEVEL=debug
+export ELASTICSEARCH_LOG_LEVEL="info"
 export CORS_ORIGIN="uat.mykro.be"
 
 export ANALYSIS_API="http://analysis-api-service.mykrobe.svc.cluster.local"
