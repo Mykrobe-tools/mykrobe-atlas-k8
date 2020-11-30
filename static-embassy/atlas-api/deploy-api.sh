@@ -49,6 +49,7 @@ echo " - Cors origin: $CORS_ORIGIN"
 echo ""
 echo " - Groups job prefix: $GROUPS_JOB_PREFIX"
 echo " - Groups job schedule: $GROUPS_JOB_SCHEDULE"
+echo " - Groups location: $GROUPS_LOCATION"
 echo ""
 
 echo "Storage:"
@@ -103,6 +104,16 @@ spec:
   resources:
     requests:
       storage: $STORAGE_UPLOADS
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: $PREFIX-groups-data
+  namespace: $NAMESPACE
+spec:
+  storageClassName: $STORAGE_CLASS
+  accessModes:
+  - ReadWriteMany
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -207,6 +218,9 @@ spec:
         - mountPath: $UPLOADS_TEMP_LOCATION
           name: $PREFIX-app-tmp
           readOnly: false
+        - mountPath: $GROUPS_LOCATION
+          name: $PREFIX-groups-volume
+          readOnly: false
         env:
         - name: NODE_ENV
           value: production
@@ -300,6 +314,8 @@ spec:
           value: '--max-old-space-size=$NODE_OPTIONS_MEMORY'
         - name: CORS_ORIGIN
           value: $CORS_ORIGIN
+        - name: GROUPS_LOCATION
+          value: $GROUPS_LOCATION 
         resources: 
           requests:
             memory: "$REQUEST_MEMORY"
@@ -319,6 +335,9 @@ spec:
       - name: $PREFIX-app-tmp
         persistentVolumeClaim:
           claimName: $PREFIX-app-tmp
+      - name: $PREFIX-groups-volume
+        persistentVolumeClaim:
+          claimName: $PREFIX-groups-data
       imagePullSecrets:
       - name: gcr-json-key
 ---

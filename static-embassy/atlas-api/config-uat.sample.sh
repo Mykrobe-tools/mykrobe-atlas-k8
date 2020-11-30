@@ -57,6 +57,7 @@ export STORAGE_CLASS="external-nfs-provisioner-storage-class-2"
 # Groups job
 export GROUPS_JOB_PREFIX="groups-search"
 export GROUPS_JOB_SCHEDULE="0 0 * * *"
+export GROUPS_LOCATION="/home/node/groups.json"
 
 # Pod (Deployment) resource limits
 export REQUEST_CPU="1000m"
