@@ -48,6 +48,7 @@ export REDIS_PORT="6379"
 # Groups job
 export GROUPS_JOB_PREFIX="groups-search"
 export GROUPS_JOB_SCHEDULE="0 0 * * *"
+export GROUPS_LOCATION="/home/node/groups.json"
 
 # Storage sizes
 export STORAGE_DEMO="8Gi"
