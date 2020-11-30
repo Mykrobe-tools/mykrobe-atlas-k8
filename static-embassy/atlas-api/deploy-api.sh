@@ -114,6 +114,9 @@ spec:
   storageClassName: $STORAGE_CLASS
   accessModes:
   - ReadWriteMany
+  resources:
+    requests:
+      storage: $REQUEST_STORAGE
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -315,7 +318,7 @@ spec:
         - name: CORS_ORIGIN
           value: $CORS_ORIGIN
         - name: GROUPS_LOCATION
-          value: $GROUPS_LOCATION 
+          value: $GROUPS_LOCATION/init.json
         resources: 
           requests:
             memory: "$REQUEST_MEMORY"
