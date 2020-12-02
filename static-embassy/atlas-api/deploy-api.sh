@@ -402,9 +402,9 @@ spec:
           serviceAccountName: $PREFIX-sa
           containers:
           - name: $GROUPS_JOB_PREFIX-job
-            image: ubuntu
+            image: pstauffer/curl
             args:
-            - /bin/bash
+            - sh
             - -c
             - curl -XPOST http://$PREFIX-service:3000/groups/search
           restartPolicy: OnFailure
