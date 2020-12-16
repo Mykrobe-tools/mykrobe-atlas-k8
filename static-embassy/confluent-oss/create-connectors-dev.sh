@@ -192,3 +192,63 @@ curl -X POST \
         "pk.mode": "record_value"
         }
     }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
+    "name": "core_searches",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_searches",
+        "connection.user": "mykrobe",
+        "name": "core_searches",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "id",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
+    "name": "core_search_results",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_search_results",
+        "connection.user": "mykrobe",
+        "name": "core_search_results",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "searchId, resultSampleId",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
+    "name": "core_group_searches",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_group_searches",
+        "connection.user": "mykrobe",
+        "name": "core_group_searches",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight-dev.svc:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "groupId, searchId",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
