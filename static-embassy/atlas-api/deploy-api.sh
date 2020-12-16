@@ -369,6 +369,7 @@ metadata:
     nginx.ingress.kubernetes.io/enable-cors: 'true'
     nginx.ingress.kubernetes.io/cors-allow-origin: $CORS_ORIGIN
     nginx.ingress.kubernetes.io/proxy-body-size: 10m
+    nginx.ingress.kubernetes.io/proxy-read-timeout: '500'
   namespace: $NAMESPACE
 spec:
   backend:
