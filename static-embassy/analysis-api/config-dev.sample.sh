@@ -23,6 +23,8 @@ export REDIS_IMAGE="redis:4.0"
 export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:603c0aa"
 export TRACKING_DB_IMAGE="postgres:12"
 
+export KMERSEARCH_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kmersearch-api:418d96c"
+
 export REDIS_PREFIX="redis"
 export ANALYSIS_PREFIX="analysis-api"
 export BIGSI_PREFIX="bigsi-api"
@@ -31,6 +33,7 @@ export ATLAS_API_PREFIX="atlas-api"
 export NEO4J_PREFIX="neo4j"
 export TRACKING_API_PREFIX="tracking-api"
 export TRACKING_DB_PREFIX="tracking-db"
+export KMERSEARCH_API_PREFIX="kmersearch-api"
 
 export NEO4J_URI="bolt://neo4j-service:7687"
 export NEO4J_USER="neo4j"
@@ -45,6 +48,8 @@ export TRACKING_DB_SVC="$TRACKING_DB_PREFIX-service"
 export TRACKING_DB_PORT="5432"
 export TRACKING_DB_URI_RAW="postgresql://$TRACKING_DB_USER:$TRACKING_DB_PASSWORD_RAW@$TRACKING_DB_SVC:$TRACKING_DB_PORT"
 export TRACKING_DB_URI=`echo -n "$TRACKING_DB_URI_RAW" | base64`
+
+export KMERSEARCH_COBS_INDEX_PATH="/data/500.cobs_compact"
 
 export POD_CPU_REDIS="500m"
 export POD_MEMORY_REDIS="1Gi"
@@ -78,6 +83,10 @@ export REQUEST_MEMORY_TRACKING_DB="1Gi"
 export REQUEST_CPU_TRACKING_DB="500m"
 export LIMIT_MEMORY_TRACKING_DB="2Gi"
 export LIMIT_CPU_TRACKING_DB="500m"
+export REQUEST_MEMORY_KMERSEARCH_API="1Gi"
+export REQUEST_CPU_KMERSEARCH_API="500m"
+export LIMIT_MEMORY_KMERSEARCH_API="2Gi"
+export LIMIT_CPU_KMERSEARCH_API="1000m"
 
 echo ""
 echo "Deploying analysis api using:"
@@ -116,6 +125,9 @@ echo " - Tracking database image: $TRACKING_DB_IMAGE"
 echo " - Tracking database hostname: $TRACKING_DB_SVC"
 echo " - Tracking database port: $TRACKING_DB_PORT"
 echo " - Tracking database user: $TRACKING_DB_USER"
+
+echo " - K-mer Search Prefix: $KMERSEARCH_API_PREFIX"
+echo " - K-mer Search api image: $KMERSEARCH_API_IMAGE"
 
 echo " - Redis Prefix: $REDIS_PREFIX"
 echo " - Redis image: $REDIS_IMAGE"
@@ -160,6 +172,11 @@ echo " - Tracking database Memory request: $REQUEST_MEMORY_TRACKING_DB"
 echo " - Tracking database CPU request: $REQUEST_CPU_TRACKING_DB"
 echo " - Tracking database Memory limit: $LIMIT_MEMORY_TRACKING_DB"
 echo " - Tracking database CPU limit: $LIMIT_CPU_TRACKING_DB"
+
+echo " - K-mer Search API Memory request: $REQUEST_MEMORY_KMERSEARCH_API"
+echo " - K-mer Search API CPU request: $REQUEST_CPU_KMERSEARCH_API"
+echo " - K-mer Search API Memory limit: $LIMIT_MEMORY_KMERSEARCH_API"
+echo " - K-mer Search API CPU limit: $LIMIT_CPU_KMERSEARCH_API"
 echo ""
 
 sh ./redis/deploy-redis.sh
@@ -170,3 +187,4 @@ sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh
 sh ./tracking/deploy-tracking-db.sh
 sh ./tracking/deploy-tracking-api.sh
+sh ./kmersearch/deploy-kmersearch-api.sh
