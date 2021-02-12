@@ -22,6 +22,8 @@ static-embassy/analysis-api/config-dev.sh
 static-embassy/analysis-api/config-uat.sh
 static-embassy/analysis-api/config-prod.sh
 static-embassy/keycloak/config-dev.sh
+static-embassy/elasticsearch/config-dev.sh
+static-embassy/elasticsearch/config-uat.sh
 
 # credentials
 static-embassy/gcr/atlas-275810-1b85bf39eb34.json
