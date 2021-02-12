@@ -13,6 +13,9 @@ export REQUEST_CPU="500m"
 export REQUEST_MEMORY="2Gi"
 export LIMIT_CPU="1000m"
 export LIMIT_MEMORY="2Gi"
+
+# Storage
 export STORAGE_SIZE="30Gi"
+export STORAGE_CLASS="external-nfs-provisioner-storage-class-2"
 
 sh ./deploy.sh
