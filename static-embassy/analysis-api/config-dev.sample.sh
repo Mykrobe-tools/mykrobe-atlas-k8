@@ -13,7 +13,7 @@ export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:667
 export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:66797e0"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:b13a619"
-export BIGSI_IMAGE="zhichengliu/bigsi:6bda65f"
+export BIGSI_IMAGE="zhichengliu/bigsi:c329b10"
 export BACKGROUND_VARIANTS_DB_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-background-variants-db:4302c8c"
 
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:512d921"
