@@ -9,8 +9,8 @@ export ATLAS_AUTH_SERVER="https://accounts-dev.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
 export ATLAS_AUTH_CLIENT_SECRET="<secret>"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:d302ff5"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:d302ff5"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:66797e0"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:66797e0"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:b13a619"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
