@@ -7,10 +7,10 @@ export ATLAS_API="https://api.mykro.be"
 export ATLAS_AUTH_REALM="atlas"
 export ATLAS_AUTH_SERVER="https://accounts.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
-export ATLAS_AUTH_CLIENT_SECRET="6373370d-28fc-4e55-963b-4665e6310131"
+export ATLAS_AUTH_CLIENT_SECRET="<secret>"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:94e172a"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:94e172a"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:66797e0"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:66797e0"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:b13a619"
 export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
