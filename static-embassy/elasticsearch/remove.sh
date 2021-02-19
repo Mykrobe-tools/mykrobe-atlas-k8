@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "Remove Atlas Client using:"
+echo "Remove Elasticsearch using:"
 echo " - Namespace: $NAMESPACE"
 echo " - Prefix: $PREFIX"
 

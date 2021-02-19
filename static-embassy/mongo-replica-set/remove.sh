@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo ""
-echo "Remove Atlas Client using:"
+echo "Remove Mongo using:"
 echo " - Namespace: $NAMESPACE"
 echo " - Release Name: $RELEASE_NAME"
 
