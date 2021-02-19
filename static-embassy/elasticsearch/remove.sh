@@ -11,5 +11,5 @@ kubectl delete configmap $PREFIX-config -n $NAMESPACE
 kubectl delete service $PREFIX -n $NAMESPACE
 kubectl delete service $PREFIX-headless -n $NAMESPACE
 kubectl delete statefulset $PREFIX -n $NAMESPACE
-kubectl delete pvc $PREFIX-$PREFIX-0
-kubectl delete pvc $PREFIX-$PREFIX-1
+kubectl delete pvc $PREFIX-$PREFIX-0 -n $NAMESPACE
+kubectl delete pvc $PREFIX-$PREFIX-1 -n $NAMESPACE
