@@ -7,13 +7,14 @@ export ATLAS_API="https://api-uat.mykro.be"
 export ATLAS_AUTH_REALM="atlas"
 export ATLAS_AUTH_SERVER="https://accounts-uat.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
-export ATLAS_AUTH_CLIENT_SECRET="c7f35f75-bfc7-4f65-a1eb-7f2bd47670ad"
+export ATLAS_AUTH_CLIENT_SECRET="<secret>"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:94e172a"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:94e172a"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:66797e0"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:66797e0"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:b13a619"
-export BIGSI_IMAGE="zhichengliu/bigsi:cb7ea44"
+export BIGSI_IMAGE="zhichengliu/bigsi:c329b10"
+export BACKGROUND_VARIANTS_DB_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-background-variants-db:4302c8c"
 
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:512d921"
 export NEO4J_IMAGE="neo4j:4.1"
@@ -26,6 +27,7 @@ export TRACKING_DB_IMAGE="postgres:12"
 export REDIS_PREFIX="redis"
 export ANALYSIS_PREFIX="analysis-api"
 export BIGSI_PREFIX="bigsi-api"
+export BACKGROUND_VARIANTS_DB_PREFIX="background-variants-db"
 export DISTANCE_PREFIX="distance-api"
 export ATLAS_API_PREFIX="atlas-api"
 export NEO4J_PREFIX="neo4j"
@@ -62,6 +64,10 @@ export REQUEST_STORAGE_BIGSI="4Gi"
 export LIMIT_MEMORY_BIGSI="2Gi"
 export LIMIT_CPU_BIGSI="1000m"
 export LIMIT_STORAGE_BIGSI="4Gi"
+export REQUEST_MEMORY_BACKGROUND_VARIANTS_DB="1Gi"
+export REQUEST_CPU_BACKGROUND_VARIANTS_DB="500m"
+export LIMIT_MEMORY_BACKGROUND_VARIANTS_DB="1Gi"
+export LIMIT_CPU_BACKGROUND_VARIANTS_DB="500m"
 export REQUEST_MEMORY_DISTANCE="1Gi"
 export REQUEST_CPU_DISTANCE="500m"
 export LIMIT_MEMORY_DISTANCE="2Gi"
@@ -140,6 +146,11 @@ echo " - BIGSI CPU request: $REQUEST_CPU_BIGSI"
 echo " - BIGSI Memory limit: $LIMIT_MEMORY_BIGSI"
 echo " - BIGSI CPU limit: $LIMIT_CPU_BIGSI"
 
+echo " - Background Variants Db Memory request: $REQUEST_MEMORY_BACKGROUND_VARIANTS_DB"
+echo " - Background Variants Db CPU request: $REQUEST_CPU_BACKGROUND_VARIANTS_DB"
+echo " - Background Variants Db Memory limit: $LIMIT_MEMORY_BACKGROUND_VARIANTS_DB"
+echo " - Background Variants Db CPU limit: $LIMIT_CPU_BACKGROUND_VARIANTS_DB"
+
 echo " - Distance Memory request: $REQUEST_MEMORY_DISTANCE"
 echo " - Distance CPU request: $REQUEST_CPU_DISTANCE"
 echo " - Distance Memory limit: $LIMIT_MEMORY_DISTANCE"
@@ -166,6 +177,7 @@ sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
 sh ./analysis/copy-files.sh
 sh ./bigsi/deploy-bigsi.sh
+sh ./bigsi/deploy-background-variants-db.sh
 sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh
 sh ./tracking/deploy-tracking-db.sh
