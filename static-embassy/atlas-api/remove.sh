@@ -12,6 +12,6 @@ kubectl delete service $PREFIX-ingress -n $NAMESPACE
 kubectl delete pvc $PREFIX-uploads-data -n $NAMESPACE
 kubectl delete pvc $PREFIX-groups-data -n $NAMESPACE
 kubectl delete pvc $PREFIX-app-data -n $NAMESPACE
-kubectl delete pvc $PREFIX-api-tmp -n $NAMESPACE
-kubectl delete pvc $PREFIX-api-demo-data -n $NAMESPACE
+kubectl delete pvc $PREFIX-tmp -n $NAMESPACE
+kubectl delete pvc $PREFIX-demo-data -n $NAMESPACE
 
