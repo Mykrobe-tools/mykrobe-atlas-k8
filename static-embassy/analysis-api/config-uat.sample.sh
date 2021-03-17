@@ -9,8 +9,8 @@ export ATLAS_AUTH_SERVER="https://accounts-uat.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
 export ATLAS_AUTH_CLIENT_SECRET="<secret>"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:71f9cf2"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:71f9cf2"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:c401c92"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:c401c92"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:b13a619"
 export BIGSI_IMAGE="zhichengliu/bigsi:c329b10"
@@ -19,7 +19,7 @@ export BACKGROUND_VARIANTS_DB_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-backgr
 export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:512d921"
 export NEO4J_IMAGE="neo4j:4.1"
 
-export REDIS_IMAGE="redis:4.0"
+export REDIS_IMAGE="redis:6.2.1"
 
 export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:603c0aa"
 export TRACKING_DB_IMAGE="postgres:12"
@@ -48,8 +48,8 @@ export TRACKING_DB_PORT="5432"
 export TRACKING_DB_URI_RAW="postgresql://$TRACKING_DB_USER:$TRACKING_DB_PASSWORD_RAW@$TRACKING_DB_SVC:$TRACKING_DB_PORT"
 export TRACKING_DB_URI=`echo -n "$TRACKING_DB_URI_RAW" | base64`
 
-export POD_CPU_REDIS="500m"
-export POD_MEMORY_REDIS="1Gi"
+export POD_CPU_REDIS="1000m"
+export POD_MEMORY_REDIS="2Gi"
 export REQUEST_MEMORY_ANALYSIS_API="1Gi"
 export REQUEST_CPU_ANALYSIS_API="500m"
 export LIMIT_MEMORY_ANALYSIS_API="1Gi"
