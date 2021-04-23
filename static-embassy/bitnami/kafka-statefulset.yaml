@@ -65,7 +65,7 @@ spec:
                     app.kubernetes.io/instance: {BITNAMI}
                     app.kubernetes.io/component: {ZOOKEEPER}
                 namespaces:
-                  - "insight"
+                  - "{NAMESPACE}"
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
@@ -226,7 +226,7 @@ spec:
                     app.kubernetes.io/name: {KAFKA}
                     app.kubernetes.io/instance: {BITNAMI}
                 namespaces:
-                  - "insight"
+                  - "{NAMESPACE}"
                 topologyKey: kubernetes.io/hostname
               weight: 1
         nodeAffinity:
@@ -261,7 +261,7 @@ spec:
             - name: KAFKA_CFG_LISTENERS
               value: "INTERNAL://:9093,CLIENT://:9092"
             - name: KAFKA_CFG_ADVERTISED_LISTENERS
-              value: "INTERNAL://$(MY_POD_NAME).{BITNAMI}-{KAFKA}-headless.insight.svc.cluster.local:9093,CLIENT://$(MY_POD_NAME).{BITNAMI}-{KAFKA}-headless.insight.svc.cluster.local:9092"
+              value: "INTERNAL://$(MY_POD_NAME).{BITNAMI}-{KAFKA}-headless.{NAMESPACE}.svc.cluster.local:9093,CLIENT://$(MY_POD_NAME).{BITNAMI}-{KAFKA}-headless.{NAMESPACE}.svc.cluster.local:9092"
             - name: ALLOW_PLAINTEXT_LISTENER
               value: "yes"
             - name: KAFKA_VOLUME_DIR
@@ -285,7 +285,7 @@ spec:
             - name: KAFKA_CFG_LOG_RETENTION_HOURS
               value: "168"
             - name: KAFKA_CFG_MESSAGE_MAX_BYTES
-              value: "1000012"
+              value: "41943040"
             - name: KAFKA_CFG_LOG_SEGMENT_BYTES
               value: "1073741824"
             - name: KAFKA_CFG_LOG_DIRS
@@ -309,7 +309,7 @@ spec:
             - name: KAFKA_CFG_SOCKET_RECEIVE_BUFFER_BYTES
               value: "102400"
             - name: KAFKA_CFG_SOCKET_REQUEST_MAX_BYTES
-              value: "104857600"
+              value: "41943040"
             - name: KAFKA_CFG_SOCKET_SEND_BUFFER_BYTES
               value: "102400"
             - name: KAFKA_CFG_ZOOKEEPER_CONNECTION_TIMEOUT_MS

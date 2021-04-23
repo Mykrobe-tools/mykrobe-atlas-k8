@@ -317,6 +317,10 @@ spec:
               value: "io.confluent.connect.avro.AvroConverter"
             - name: "CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE"
               value: "false"
+            - name: "CONNECT_MAX_REQUEST_SIZE"
+              value: "41943040"
+            - name: "CONNECT_PRODUCER_MAX_REQUEST_SIZE"
+              value: "41943040"
           resources: 
             requests:
               memory: "$REQUEST_KAFKA_CONNECT_MEMORY"

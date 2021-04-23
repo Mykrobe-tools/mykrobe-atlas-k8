@@ -2,7 +2,7 @@
 
 export NAMESPACE="insight"
 export PREFIX="mykrobe"
-export CONSUMER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kafka-consumer:v0.0.7"
+export CONSUMER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kafka-consumer:v0.0.12"
 export APP_NAME="kafka-consumer"
 export BROKER_URL="http://mykrobe-bitnami-kafka-headless.insight.svc.cluster.local:9092"
 export SCHEMA_REGISTRY_URL="http://mykrobe-bitnami-schema-registry.insight.svc.cluster.local:8081"
