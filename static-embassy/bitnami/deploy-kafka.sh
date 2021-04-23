@@ -1,15 +1,16 @@
 #!/bin/bash
 
 echo ""
-echo "Deploying Confluent platform using:"
+echo "Deploying Kafka platform using:"
 echo " - Namespace: $NAMESPACE"
 echo " - Prefix: $PREFIX"
-echo " - Confluent: $CONFLUENT"
+echo " - Bitnami: $BITNAMI"
+echo " - Kafdrop: $KAFDROP"
 echo " - Zookeeper: $ZOOKEEPER"
 echo " - Schema Registry: $SCHEMA_REGISTRY"
 echo " - Kafka Connect: $KAFKA_CONNECT"
 echo " - Kafka: $KAFKA"
-echo " - Control-center Image: $CONTROL_CENTER_IMAGE"
+echo " - Kafdrop Image: $KAFDROP_IMAGE"
 echo " - Kafka-connect Image: $KAFKA_CONNECT_IMAGE"
 echo " - Schema-registry Image: $SCHEMA_REGISTRY_IMAGE"
 echo " - Kafka broker Image: $KAFKA_BROKER_IMAGE"
@@ -51,211 +52,220 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   labels:
-    app: $CONFLUENT
+    app: $BITNAMI
   name: $PREFIX-insight
   namespace: $NAMESPACE
 ---
-apiVersion: policy/v1beta1
-kind: PodDisruptionBudget
+apiVersion: v1
+kind: Service
 metadata:
-  name: $CONFLUENT-$ZOOKEEPER-pdb
+  name: $BITNAMI-$ZOOKEEPER-headless
   namespace: $NAMESPACE
   labels:
-    app: $ZOOKEEPER
-    release: $CONFLUENT
+    app.kubernetes.io/name: $ZOOKEEPER
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $ZOOKEEPER
 spec:
+  type: ClusterIP
+  clusterIP: None
+  publishNotReadyAddresses: true
+  ports:
+    
+    - name: tcp-client
+      port: 2181
+      targetPort: client
+    
+    
+    - name: follower
+      port: 2888
+      targetPort: follower
+    - name: tcp-election
+      port: 3888
+      targetPort: election
   selector:
-    matchLabels:
-      app: $ZOOKEEPER
-      release: $CONFLUENT
-  maxUnavailable: 1
+    app.kubernetes.io/name: $ZOOKEEPER
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $ZOOKEEPER
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: $CONFLUENT-cc
+  name: $BITNAMI-$ZOOKEEPER
   namespace: $NAMESPACE
   labels:
-    app: cc
-    release: $CONFLUENT
+    app.kubernetes.io/name: $ZOOKEEPER
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $ZOOKEEPER
+spec:
+  type: ClusterIP
+  ports:
+    
+    - name: tcp-client
+      port: 2181
+      targetPort: client
+    
+    
+    - name: follower
+      port: 2888
+      targetPort: follower
+    - name: tcp-election
+      port: 3888
+      targetPort: election
+  selector:
+    app.kubernetes.io/name: $ZOOKEEPER
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $ZOOKEEPER
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $BITNAMI-$KAFKA-headless
+  namespace: $NAMESPACE
+  labels:
+    app.kubernetes.io/name: $KAFKA
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $KAFKA
+spec:
+  type: ClusterIP
+  clusterIP: None
+  ports:
+    - name: tcp-client
+      port: 9092
+      protocol: TCP
+      targetPort: kafka-client
+    - name: tcp-internal
+      port: 9093
+      protocol: TCP
+      targetPort: kafka-internal
+  selector:
+    app.kubernetes.io/name: $KAFKA
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $KAFKA
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $BITNAMI-$KAFKA
+  namespace: $NAMESPACE
+  labels:
+    app.kubernetes.io/name: $KAFKA
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $KAFKA
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp-client
+      port: 9092
+      protocol: TCP
+      targetPort: kafka-client
+      nodePort: null
+  selector:
+    app.kubernetes.io/name: $KAFKA
+    app.kubernetes.io/instance: $BITNAMI
+    app.kubernetes.io/component: $KAFKA
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: $KAFDROP
+  namespace: $NAMESPACE
+  labels:
+    app: $KAFDROP
+    release: $KAFDROP
 spec:
   ports:
-    - name: cc-http
-      port: 9021
+    - name: kafdrop-http
+      port: 9000
   selector:
-    app: cc
-    release: $CONFLUENT
-
+    app: $KAFDROP
+    release: $KAFDROP
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: $CONFLUENT-$KAFKA_CONNECT
+  name: $BITNAMI-$KAFKA_CONNECT
   namespace: $NAMESPACE
   labels:
     app: $KAFKA_CONNECT
-    release: $CONFLUENT
+    release: $BITNAMI
 spec:
   ports:
     - name: kafka-connect
       port: 8083
   selector:
     app: $KAFKA_CONNECT
-    release: $CONFLUENT
-
+    release: $BITNAMI
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: $CONFLUENT-$KAFKA-headless
-  namespace: $NAMESPACE
-  labels:
-    app: $KAFKA
-    release: $CONFLUENT
-spec:
-  ports:
-    - port: 9092
-      name: broker
-  clusterIP: None
-  selector:
-    app: $KAFKA
-    release: $CONFLUENT
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: $CONFLUENT-$KAFKA
-  namespace: $NAMESPACE
-  labels:
-    app: $KAFKA
-    release: $CONFLUENT
-spec:
-  ports:
-    - port: 9092
-      name: broker
-  selector:
-    app: $KAFKA
-    release: $CONFLUENT
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: $CONFLUENT-$SCHEMA_REGISTRY
+  name: $BITNAMI-$SCHEMA_REGISTRY
   namespace: $NAMESPACE
   labels:
     app: $SCHEMA_REGISTRY
-    release: $CONFLUENT
+    release: $BITNAMI
 spec:
   ports:
     - name: schema-registry
       port: 8081
   selector:
     app: $SCHEMA_REGISTRY
-    release: $CONFLUENT
-
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: $CONFLUENT-$ZOOKEEPER-headless
-  namespace: $NAMESPACE
-  labels:
-    app: $ZOOKEEPER
-    release: $CONFLUENT
-spec:
-  ports:
-    - port: 2888
-      name: server
-    - port: 3888
-      name: leader-election
-  clusterIP: None
-  selector:
-    app: $ZOOKEEPER
-    release: $CONFLUENT
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: $CONFLUENT-$ZOOKEEPER
-  namespace: $NAMESPACE
-  labels:
-    app: $ZOOKEEPER
-    release: $CONFLUENT
-spec:
-  type: 
-  ports:
-    - port: 2181
-      name: client
-  selector:
-    app: $ZOOKEEPER
-    release: $CONFLUENT
+    release: $BITNAMI
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: $CONFLUENT-cc
+  name: $KAFDROP
   namespace: $NAMESPACE
   labels:
-    app: cc
-    release: $CONFLUENT
+    app: $KAFDROP
+    release: $KAFDROP
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: cc
-      release: $CONFLUENT
+      app: $KAFDROP
+      release: $KAFDROP
   template:
     metadata:
       labels:
-        app: cc
-        release: $CONFLUENT
+        app: $KAFDROP
+        release: $KAFDROP
     spec:
       serviceAccountName: $PREFIX-insight
       containers:
-        - name: cc
-          image: $CONTROL_CENTER_IMAGE
+        - name: $KAFDROP
+          image: $KAFDROP_IMAGE
           imagePullPolicy: IfNotPresent
           ports:
-            - name: cc-http
-              containerPort: 9021
+            - name: kafdrop-http
+              containerPort: 9000
               protocol: TCP
-          resources:
-            {}
-            
           env:
-            - name: CONTROL_CENTER_BOOTSTRAP_SERVERS
-              value: PLAINTEXT://$CONFLUENT-$KAFKA-headless:9092
-            - name: CONTROL_CENTER_ZOOKEEPER_CONNECT
-              value: 
-            - name: CONTROL_CENTER_CONNECT_CLUSTER
-              value: http://$CONFLUENT-$KAFKA_CONNECT:8083
-            - name: CONTROL_CENTER_SCHEMA_REGISTRY_URL
-              value: http://$CONFLUENT-$SCHEMA_REGISTRY:8081
-            - name: KAFKA_HEAP_OPTS
-              value: "-Xms512M -Xmx512M"
-            - name: "CONTROL_CENTER_REPLICATION_FACTOR"
-              value: "1"
-
+            - name: KAFKA_BROKERCONNECT
+              value: $BITNAMI-$KAFKA-headless:9092
+            - name: SCHEMAREGISTRY_CONNECT
+              value: http://$BITNAMI-$SCHEMA_REGISTRY:8081
 ---
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: $CONFLUENT-$KAFKA_CONNECT
+  name: $BITNAMI-$KAFKA_CONNECT
   namespace: $NAMESPACE
   labels:
     app: $KAFKA_CONNECT
-    release: $CONFLUENT
+    release: $BITNAMI
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: $KAFKA_CONNECT
-      release: $CONFLUENT
+      release: $BITNAMI
   template:
     metadata:
       labels:
         app: $KAFKA_CONNECT
-        release: $CONFLUENT
+        release: $BITNAMI
     spec:
       serviceAccountName: $PREFIX-insight
       containers:
@@ -266,28 +276,25 @@ spec:
             - name: kafka-connect
               containerPort: 8083
               protocol: TCP
-          resources:
-            {}
-            
           env:
             - name: CONNECT_REST_ADVERTISED_HOST_NAME
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
             - name: CONNECT_BOOTSTRAP_SERVERS
-              value: PLAINTEXT://$CONFLUENT-$KAFKA-headless:9092
+              value: PLAINTEXT://$BITNAMI-$KAFKA-headless:9092
             - name: CONNECT_GROUP_ID
-              value: $CONFLUENT
+              value: $BITNAMI
             - name: CONNECT_CONFIG_STORAGE_TOPIC
-              value: $CONFLUENT-$KAFKA_CONNECT-config
+              value: $BITNAMI-$KAFKA_CONNECT-config
             - name: CONNECT_OFFSET_STORAGE_TOPIC
-              value: $CONFLUENT-$KAFKA_CONNECT-offset
+              value: $BITNAMI-$KAFKA_CONNECT-offset
             - name: CONNECT_STATUS_STORAGE_TOPIC
-              value: $CONFLUENT-$KAFKA_CONNECT-status
+              value: $BITNAMI-$KAFKA_CONNECT-status
             - name: CONNECT_KEY_CONVERTER_SCHEMA_REGISTRY_URL
-              value: http://$CONFLUENT-$SCHEMA_REGISTRY:8081
+              value: http://$BITNAMI-$SCHEMA_REGISTRY:8081
             - name: CONNECT_VALUE_CONVERTER_SCHEMA_REGISTRY_URL
-              value: http://$CONFLUENT-$SCHEMA_REGISTRY:8081
+              value: http://$BITNAMI-$SCHEMA_REGISTRY:8081
             - name: KAFKA_HEAP_OPTS
               value: "-Xms512M -Xmx512M"
             - name: "CONNECT_CONFIG_STORAGE_REPLICATION_FACTOR"
@@ -310,6 +317,10 @@ spec:
               value: "io.confluent.connect.avro.AvroConverter"
             - name: "CONNECT_VALUE_CONVERTER_SCHEMAS_ENABLE"
               value: "false"
+            - name: "CONNECT_MAX_REQUEST_SIZE"
+              value: "41943040"
+            - name: "CONNECT_PRODUCER_MAX_REQUEST_SIZE"
+              value: "41943040"
           resources: 
             requests:
               memory: "$REQUEST_KAFKA_CONNECT_MEMORY"
@@ -323,22 +334,22 @@ spec:
 apiVersion: apps/v1beta2
 kind: Deployment
 metadata:
-  name: $CONFLUENT-$SCHEMA_REGISTRY
+  name: $BITNAMI-$SCHEMA_REGISTRY
   namespace: $NAMESPACE
   labels:
     app: $SCHEMA_REGISTRY
-    release: $CONFLUENT
+    release: $BITNAMI
 spec:
   replicas: 1
   selector:
     matchLabels:
       app: $SCHEMA_REGISTRY
-      release: $CONFLUENT
+      release: $BITNAMI
   template:
     metadata:
       labels:
         app: $SCHEMA_REGISTRY
-        release: $CONFLUENT
+        release: $BITNAMI
     spec:
       serviceAccountName: $PREFIX-insight
       containers:
@@ -349,9 +360,6 @@ spec:
             - name: schema-registry
               containerPort: 8081
               protocol: TCP
-          resources:
-            {}
-            
           env:
           - name: SCHEMA_REGISTRY_HOST_NAME
             valueFrom:
@@ -360,9 +368,9 @@ spec:
           - name: SCHEMA_REGISTRY_LISTENERS
             value: http://0.0.0.0:8081
           - name: SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS
-            value: PLAINTEXT://$CONFLUENT-$KAFKA-headless:9092
+            value: PLAINTEXT://$BITNAMI-$KAFKA-headless:9092
           - name: SCHEMA_REGISTRY_KAFKASTORE_GROUP_ID
-            value: $CONFLUENT
+            value: $BITNAMI
           - name: SCHEMA_REGISTRY_MASTER_ELIGIBILITY
             value: "true"
           - name: SCHEMA_REGISTRY_HEAP_OPTS
@@ -380,7 +388,7 @@ spec:
               ephemeral-storage: "$KAFKA_EPHERMERAL_STORAGE"
 EOF
 
-sed "s#{CONFLUENT}#$CONFLUENT#g" kafka-statefulset.yaml > kafka-statefulset-deploy-tmp0.yaml
+sed "s#{BITNAMI}#$BITNAMI#g" kafka-statefulset.yaml > kafka-statefulset-deploy-tmp0.yaml
 sed "s#{ZOOKEEPER}#$ZOOKEEPER#g" kafka-statefulset-deploy-tmp0.yaml >kafka-statefulset-deploy-tmp1.yaml
 sed "s#{KAFKA}#$KAFKA#g" kafka-statefulset-deploy-tmp1.yaml > kafka-statefulset-deploy-tmp2.yaml
 sed "s#{KAFKA_BROKER_IMAGE}#$KAFKA_BROKER_IMAGE#g" kafka-statefulset-deploy-tmp2.yaml > kafka-statefulset-deploy-tmp3.yaml

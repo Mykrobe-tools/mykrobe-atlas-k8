@@ -1,17 +1,18 @@
 #!/bin/bash
 
-export NAMESPACE="insight-dev"
+export NAMESPACE="insight"
 export PREFIX="mykrobe"
-export CONFLUENT="$PREFIX-confluent"
+export BITNAMI="$PREFIX-bitnami"
+export KAFDROP="$PREFIX-kafdrop"
 export ZOOKEEPER="zookeeper"
 export SCHEMA_REGISTRY="schema-registry"
 export KAFKA_CONNECT="kafka-connect"
 export KAFKA="kafka"
-export CONTROL_CENTER_IMAGE="confluentinc/cp-enterprise-control-center:5.4.1"
+export KAFDROP_IMAGE="obsidiandynamics/kafdrop:3.27.0"
 export KAFKA_CONNECT_IMAGE="makeandship/kafka-connect"
 export SCHEMA_REGISTRY_IMAGE="confluentinc/cp-schema-registry:5.4.1"
-export KAFKA_BROKER_IMAGE="confluentinc/cp-enterprise-kafka:5.4.1"
-export ZOOKEEPER_IMAGE="confluentinc/cp-zookeeper:5.4.1"
+export KAFKA_BROKER_IMAGE="docker.io/bitnami/kafka:2.8.0-debian-10-r0"
+export ZOOKEEPER_IMAGE="docker.io/bitnami/zookeeper:3.7.0-debian-10-r0"
 
 # Pod (Deployment) resource limits
 export REQUEST_ZOOKEEPER_CPU="500m"
@@ -40,6 +41,6 @@ export REQUEST_KAFKA_CONNECT_MEMORY="1Gi"
 export LIMIT_KAFKA_CONNECT_CPU="2000m"
 export LIMIT_KAFKA_CONNECT_MEMORY="2Gi"
 
-export STORAGE_CLASS="nfs-client"
+export STORAGE_CLASS="external-nfs-provisioner-storage-class-4"
 
-sh ./deploy-confluent.sh
+sh ./deploy-kafka.sh
