@@ -176,6 +176,26 @@ curl -X POST \
 curl -X POST \
     -H "Content-Type: application/json" \
     --data '{
+    "name": "core_predictor_result_lineage",
+    "config": {
+        "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
+        "errors.log.include.messages": "true",
+        "connection.password": "<password>",
+        "topics": "core_predictor_result_lineage",
+        "connection.user": "mykrobe",
+        "name": "core_predictor_result_lineage",
+        "auto.create": "false",
+        "connection.url": "jdbc:mysql://mykrobe-mysql.insight.svc:3306/mykrobe",
+        "errors.log.enable": "true",
+        "insert.mode": "upsert",
+        "pk.fields": "experimentId, index",
+        "pk.mode": "record_value"
+        }
+    }' http://$CONNECT_REST_ADVERTISED_HOST_NAME:8083/connectors
+
+curl -X POST \
+    -H "Content-Type: application/json" \
+    --data '{
     "name": "core_searches",
     "config": {
         "connector.class": "io.confluent.connect.jdbc.JdbcSinkConnector",
