@@ -19,6 +19,7 @@ data:
   BIGSI_BUILD_URL: http://$BIGSI_PREFIX-service-small
   BIGSI_BUILD_CONFIG: /etc/bigsi/conf/config.yaml
   CELERY_BROKER_URL: redis://$REDIS_PREFIX:6379
+  CLUSTER_DB_PATH: /data/cluster/cluster-cache-db
   DEFAULT_OUTDIR: /data/out/
   SKELETON_DIR: /config/
   FLASK_DEBUG: "1"
