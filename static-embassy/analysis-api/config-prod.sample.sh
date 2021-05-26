@@ -12,7 +12,7 @@ export ATLAS_AUTH_CLIENT_SECRET="<secret>"
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:fb0d8d7"
 export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:fb0d8d7"
 
-export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:2e01b85d"
+export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:a019ebd"
 export BIGSI_IMAGE="zhichengliu/bigsi:c329b10"
 export BACKGROUND_VARIANTS_DB_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-background-variants-db:4302c8c"
 
