@@ -46,7 +46,7 @@ spec:
       volumes:
         - name: $KMERSEARCH_API_PREFIX-data
           persistentVolumeClaim:
-            claimName: cobs-data
+            claimName: $KMERSEARCH_API_PREFIX-data
       imagePullSecrets:
       - name: gcr-json-key
 ---
@@ -64,4 +64,17 @@ spec:
     targetPort: 8000
   selector:
     app: $KMERSEARCH_API_PREFIX
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: $KMERSEARCH_API_PREFIX-data
+  namespace: $NAMESPACE
+spec:
+  storageClassName: external-nfs-provisioner-storage-class-1
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 256Gi
 EOF

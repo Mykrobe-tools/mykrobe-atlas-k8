@@ -23,7 +23,7 @@ export REDIS_IMAGE="redis:4.0"
 export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:603c0aa"
 export TRACKING_DB_IMAGE="postgres:12"
 
-export KMERSEARCH_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kmersearch-api:19caae2"
+export KMERSEARCH_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kmersearch-api:3a3164c"
 
 export REDIS_PREFIX="redis"
 export ANALYSIS_PREFIX="analysis-api"
