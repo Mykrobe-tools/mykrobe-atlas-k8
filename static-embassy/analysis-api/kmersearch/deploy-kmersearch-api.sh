@@ -30,9 +30,6 @@ spec:
         image: $KMERSEARCH_API_IMAGE
         ports:
         - containerPort: 8000
-        env:
-        - name: COBS_INDEX_PATH
-          value: /data/50000.cobs_compact
         resources:
           limits:
             memory: $LIMIT_MEMORY_KMERSEARCH_API
