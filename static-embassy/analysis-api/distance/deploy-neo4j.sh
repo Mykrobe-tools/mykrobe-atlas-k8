@@ -51,7 +51,7 @@ spec:
         ports:
         - containerPort: 7687
         volumeMounts:
-        - mountPath: "/data/databases"
+        - mountPath: "/data"
           name: $NEO4J_PREFIX-data
         env:
         - name: NEO4J_dbms_recovery_fail__on__missing__files
