@@ -9,22 +9,22 @@ export ATLAS_AUTH_SERVER="https://accounts-dev.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
 export ATLAS_AUTH_CLIENT_SECRET="<secret>"
 
-export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:fb0d8d7"
-export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:fb0d8d7"
+export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:036d9a7"
+export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:036d9a7"
 
 export BIGSI_AGGREGATOR_IMAGE="zhichengliu/bigsi-ebi-api:a019ebd"
 export BIGSI_IMAGE="zhichengliu/bigsi:c329b10"
 export BACKGROUND_VARIANTS_DB_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-background-variants-db:4302c8c"
 
-export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:512d921"
-export NEO4J_IMAGE="neo4j:4.1"
+export DISTANCE_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-distance-api:c3c9c9f"
+export NEO4J_IMAGE="neo4j:4.1.8"
 
 export REDIS_IMAGE="redis:6.2.1"
 
 export TRACKING_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-tracking-api:603c0aa"
 export TRACKING_DB_IMAGE="postgres:12"
 
-export KMERSEARCH_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kmersearch-api:966e672"
+export KMERSEARCH_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-kmersearch-api:955cd0f"
 
 export REDIS_PREFIX="redis"
 export ANALYSIS_PREFIX="analysis-api"
