@@ -11,6 +11,7 @@ metadata:
 apiVersion: v1
 data:
   COBS_CLASSIC_INDEXES_DIR: /cobs/classic
+  TB_REF: /config/NC_000962.3.fasta
 kind: ConfigMap
 metadata:
   name: $KMERSEARCH_API_PREFIX-env
@@ -51,12 +52,17 @@ spec:
         volumeMounts:
           - mountPath: "/cobs"
             name: $KMERSEARCH_API_PREFIX-data
+          - mountPath: /config/
+            name: $ANALYSIS_PREFIX-config-data
           - mountPath: /data/
             name: uploads-data
       volumes:
         - name: $KMERSEARCH_API_PREFIX-data
           persistentVolumeClaim:
             claimName: $KMERSEARCH_API_PREFIX-data
+        - name: $ANALYSIS_PREFIX-config-data
+          persistentVolumeClaim:
+            claimName: $ANALYSIS_PREFIX-config-data
         - name: uploads-data
           persistentVolumeClaim:
             claimName: $ATLAS_API_PREFIX-uploads-data
