@@ -8,6 +8,15 @@ metadata:
   name: $KMERSEARCH_API_PREFIX-sa
   namespace: $NAMESPACE
 ---
+apiVersion: v1
+data:
+  COBS_CLASSIC_INDEXES_DIR: /cobs/classic
+  TB_REF: /config/NC_000962.3.fasta
+kind: ConfigMap
+metadata:
+  name: $KMERSEARCH_API_PREFIX-env
+  namespace: $NAMESPACE
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
@@ -30,6 +39,9 @@ spec:
         image: $KMERSEARCH_API_IMAGE
         ports:
         - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: $KMERSEARCH_API_PREFIX-env
         resources:
           limits:
             memory: $LIMIT_MEMORY_KMERSEARCH_API
@@ -38,12 +50,22 @@ spec:
             memory: $REQUEST_MEMORY_KMERSEARCH_API
             cpu: $REQUEST_CPU_KMERSEARCH_API
         volumeMounts:
-          - mountPath: "/data"
+          - mountPath: "/cobs"
             name: $KMERSEARCH_API_PREFIX-data
+          - mountPath: /config/
+            name: $ANALYSIS_PREFIX-config-data
+          - mountPath: /data/
+            name: uploads-data
       volumes:
         - name: $KMERSEARCH_API_PREFIX-data
           persistentVolumeClaim:
             claimName: $KMERSEARCH_API_PREFIX-data
+        - name: $ANALYSIS_PREFIX-config-data
+          persistentVolumeClaim:
+            claimName: $ANALYSIS_PREFIX-config-data
+        - name: uploads-data
+          persistentVolumeClaim:
+            claimName: $ATLAS_API_PREFIX-uploads-data
       imagePullSecrets:
       - name: gcr-json-key
 ---
