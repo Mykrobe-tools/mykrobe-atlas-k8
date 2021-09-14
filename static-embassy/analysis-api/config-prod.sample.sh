@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export NAMESPACE="mykrobe-analysis-prod"
+export NAMESPACE="mykrobe"
 export TARGET_ENV="prod"
 export ATLAS_API="https://api.mykro.be"
 
