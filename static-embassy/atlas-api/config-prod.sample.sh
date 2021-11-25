@@ -6,9 +6,11 @@ export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:dcc4b1f"
 
 export DB_SERVICE_HOST="mykrobe-mongodb-replicaset-client.mykrobe.svc.cluster.local"
 export DB_RS_NAME="rs0"
+export MONGO_USER="atlas"
+export MONGO_PASSWORD=`echo -n <PROD_MONGO_APP_PASSWORD> | base64` #secret
 
-export AWS_ACCESS_KEY="<AWS_ACCESS_KEY>"
-export AWS_SECRET_KEY="<AWS_SECRET_KEY>"
+export AWS_ACCESS_KEY=`echo -n <AWS_ACCESS_KEY> | base64` #secret
+export AWS_SECRET_KEY=`echo -n <AWS_SECRET_KEY> | base64` #secret
 export AWS_REGION="eu-west-1"
 export ATLAS_APP="https://www.mykro.be"
 
@@ -16,12 +18,12 @@ export ES_SCHEME="http"
 export ES_HOST="mykrobe-elasticsearch-headless.search.svc"
 export ES_PORT="9200"
 export ES_USERNAME="elastic"
-export ES_PASSWORD=`echo -n "<ES_PASSWORD>" | base64`
+export ES_PASSWORD=`echo -n <PROD_ES_PASSWORD> | base64` #secret
 export ES_INDEX_NAME="mykrobe"
 
 export KEYCLOAK_REDIRECT_URI="https://www.mykro.be/"
 export KEYCLOAK_URL="https://accounts.mykro.be/auth"
-export KEYCLOAK_ADMIN_PASSWORD="<KEYCLOAK_ADMIN_PASSWORD>"
+export KEYCLOAK_ADMIN_PASSWORD=`echo -n <PROD_KEYCLOAK_ADMIN_PASSWORD> | base64` #secret
 export API_HOST="api.mykro.be"
 export DEBUG=1
 export LOG_LEVEL=debug
@@ -31,7 +33,7 @@ export CORS_ORIGIN="www.mykro.be"
 export ANALYSIS_API="http://analysis-api-service.mykrobe.svc.cluster.local"
 export BIGSI_API="http://bigsi-api-aggregator-service.mykrobe.svc.cluster.local"
 export TRACKING_API="http://tracking-api-service.mykrobe.svc.cluster.local/api/v1"
-export GOOGLE_MAPS_API_KEY=`echo -n "" | base64`
+export GOOGLE_MAPS_API_KEY=`echo -n <GOOGLE_MAPS_API_KEY> | base64` #secret
 export SWAGGER_API_FILES="/home/node/app/dist/server/routes/*.route.js"
 
 export FOREVER_DIR="/home/node/data/forever"

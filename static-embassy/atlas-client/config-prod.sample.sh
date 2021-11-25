@@ -34,14 +34,14 @@ export REACT_APP_KEYCLOAK_CLIENT_ID="react-web-client"
 export REACT_APP_KEYCLOAK_IDP=
 
 # Provider upload keys
-export REACT_APP_GOOGLE_MAPS_API_KEY=`echo -n "" | base64`
-export REACT_APP_BOX_CLIENT_ID=`echo -n "" | base64`
-export REACT_APP_DROPBOX_APP_KEY=`echo -n "" | base64`
-export REACT_APP_GOOGLE_DRIVE_CLIENT_ID=`echo -n "" | base64`
-export REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY=`echo -n "" | base64`
-export REACT_APP_ONEDRIVE_CLIENT_ID=`echo -n "" | base64`
+export REACT_APP_GOOGLE_MAPS_API_KEY=`echo -n <REACT_APP_GOOGLE_MAPS_API_KEY> | base64` #secret
+export REACT_APP_BOX_CLIENT_ID=`echo -n <REACT_APP_BOX_CLIENT_ID>  | base64` #secret
+export REACT_APP_DROPBOX_APP_KEY=`echo -n <REACT_APP_DROPBOX_APP_KEY>  | base64` #secret
+export REACT_APP_GOOGLE_DRIVE_CLIENT_ID=`echo -n <REACT_APP_GOOGLE_DRIVE_CLIENT_ID> | base64` #secret
+export REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY=`echo -n <REACT_APP_GOOGLE_DRIVE_DEVELOPER_KEY> | base64` #secret
+export REACT_APP_ONEDRIVE_CLIENT_ID=`echo -n <REACT_APP_ONEDRIVE_CLIENT_ID>  | base64` #secret
 
 # Crash telemetry
-export REACT_APP_SENTRY_PUBLIC_DSN=`echo -n "" | base64`
+export REACT_APP_SENTRY_PUBLIC_DSN=`echo -n <REACT_APP_SENTRY_PUBLIC_DSN> | base64` #secret 
 
 sh ./deploy-client.sh

@@ -6,10 +6,10 @@ export RELEASE_NAME="mykrobe"
 export REPLICAS="3"
 export APP_DB="atlas"
 export MONGO_USER=`echo -n "admin" | base64`
-export MONGO_PASSWORD=`echo -n "<password>" | base64`
+export MONGO_PASSWORD=`echo -n <PROD_MONGO_ADMIN_PASSWORD> | base64` #secret
 export APP_USER=`echo -n "atlas" | base64`
-export APP_PASSWORD=`echo -n "<password>" | base64`
-export MONGO_KEY="<MONGO_KEY>"
+export APP_PASSWORD=`echo -n <PROD_MONGO_APP_PASSWORD> | base64` #secret
+export MONGO_KEY=`echo -n <PROD_MONGO_KEY> | base64` #secret
 
 export REQUEST_CPU="1000m"
 export REQUEST_MEMORY="1Gi"

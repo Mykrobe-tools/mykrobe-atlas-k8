@@ -7,7 +7,7 @@ export ATLAS_API="https://api-dev.mykro.be"
 export ATLAS_AUTH_REALM="atlas"
 export ATLAS_AUTH_SERVER="https://accounts-dev.mykro.be/auth"
 export ATLAS_AUTH_CLIENT_ID="analysis-api"
-export ATLAS_AUTH_CLIENT_SECRET="<secret>"
+export ATLAS_AUTH_CLIENT_SECRET=`echo -n <DEV_ATLAS_AUTH_CLIENT_SECRET> | base64` #secret
 
 export ANALYSIS_API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api:036d9a7"
 export ANALYSIS_API_WORKER_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-analysis-api-worker:036d9a7"
@@ -40,16 +40,16 @@ export KMERSEARCH_API_PREFIX="kmersearch-api"
 export NEO4J_URI="bolt://neo4j-service:7687"
 export NEO4J_USER="neo4j"
 export NEO4J_PASSWORD="<password>"
-export NEO4J_AUTH=`echo -n $NEO4J_USER/$NEO4J_PASSWORD | base64`
-export DISTANCE_API_NEO4J_AUTH=`echo -n $NEO4J_USER:$NEO4J_PASSWORD | base64`
+export NEO4J_AUTH=`echo -n <DEV_NEO4J_AUTH> | base64` #secret
+export DISTANCE_API_NEO4J_AUTH=`echo -n <DEV_DISTANCE_API_NEO4J_AUTH> | base64` #secret
 
 export TRACKING_DB_USER="postgres"
 export TRACKING_DB_PASSWORD_RAW="password"
-export TRACKING_DB_PASSWORD=`echo -n "$TRACKING_DB_PASSWORD_RAW" | base64`
+export TRACKING_DB_PASSWORD=`echo -n <DEV_TRACKING_DB_PASSWORD> | base64` #secret
 export TRACKING_DB_SVC="$TRACKING_DB_PREFIX-service"
 export TRACKING_DB_PORT="5432"
 export TRACKING_DB_URI_RAW="postgresql://$TRACKING_DB_USER:$TRACKING_DB_PASSWORD_RAW@$TRACKING_DB_SVC:$TRACKING_DB_PORT"
-export TRACKING_DB_URI=`echo -n "$TRACKING_DB_URI_RAW" | base64`
+export TRACKING_DB_URI=`echo -n <DEV_TRACKING_DB_URI> | base64` #secret
 
 export POD_CPU_REDIS="1000m"
 export POD_MEMORY_REDIS="2Gi"
