@@ -5,8 +5,8 @@ export PREFIX="mykrobe-elasticsearch"
 export REPLICAS=2
 export IMAGE="docker.elastic.co/elasticsearch/elasticsearch:7.9.1"
 export CLUSTER_NAME="mykrobe"
-export USERNAME=`echo -n <USERNAME> | base64`
-export PASSWORD=`echo -n <PASSWORD> | base64`
+export USERNAME=`echo -n "elastic" | base64`
+export PASSWORD=`echo -n <PROD_ES_PASSWORD> | base64` #secret
 
 # Resource limits
 export REQUEST_CPU="500m"

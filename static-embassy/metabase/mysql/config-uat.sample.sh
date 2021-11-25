@@ -5,8 +5,8 @@ export PREFIX="mykrobe"
 export MYSQL_IMAGE="mysql:5.7.28"
 export DATABASE="mykrobe"
 export DB_USER="mykrobe"
-export DB_PASSWORD=`echo -n <DB_PASSWORD> | base64`
-export ROOT_PASSWORD=`echo -n <ROOT_PASSWORD> | base64`
+export DB_PASSWORD=`echo -n <UAT_MYSQL_PASSWORD> | base64` #secret
+export ROOT_PASSWORD=`echo -n <UAT_MYSQL_ROOT_PASSWORD> | base64` #secret
 
 # Pod (Deployment) resource limits
 export REQUEST_CPU="500m"
