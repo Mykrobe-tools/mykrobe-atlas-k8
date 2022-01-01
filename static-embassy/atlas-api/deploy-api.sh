@@ -98,7 +98,7 @@ metadata:
   name: $PREFIX-uploads-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: $STORAGE_CLASS
+  storageClassName: $RWX_STORAGE_CLASS
   accessModes:
   - ReadWriteMany
   resources:
@@ -111,7 +111,7 @@ metadata:
   name: $PREFIX-groups-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: $STORAGE_CLASS
+  storageClassName: $DEFAULT_STORAGE_CLASS
   accessModes:
   - ReadWriteMany
   resources:
@@ -129,7 +129,7 @@ spec:
   resources:
     requests:
       storage: $STORAGE_APP_DATA
-  storageClassName: $STORAGE_CLASS
+  storageClassName: $DEFAULT_STORAGE_CLASS
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -142,7 +142,7 @@ spec:
   resources:
     requests:
       storage: $STORAGE_APP_TMP
-  storageClassName: $STORAGE_CLASS
+  storageClassName: $DEFAULT_STORAGE_CLASS
 ---
 apiVersion: v1
 kind: Secret
@@ -150,14 +150,12 @@ metadata:
   name: $PREFIX-env-secret
   namespace: $NAMESPACE
 data:
-  AWS_ACCESS_KEY: $AWS_ACCESS_KEY
-  AWS_SECRET_KEY: $AWS_SECRET_KEY
   ES_PASSWORD: $ES_PASSWORD
   KEYCLOAK_ADMIN_PASSWORD: $KEYCLOAK_ADMIN_PASSWORD
   GOOGLE_MAPS_API_KEY: $GOOGLE_MAPS_API_KEY
   MONGO_PASSWORD: $MONGO_PASSWORD
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -240,18 +238,6 @@ spec:
             secretKeyRef:
               name: $PREFIX-env-secret
               key: MONGO_PASSWORD
-        - name: AWS_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: $PREFIX-env-secret
-              key: AWS_ACCESS_KEY
-        - name: AWS_SECRET_KEY
-          valueFrom:
-            secretKeyRef:
-              name: $PREFIX-env-secret
-              key: AWS_SECRET_KEY
-        - name: AWS_REGION
-          value: $AWS_REGION
         - name: ATLAS_APP
           value: $ATLAS_APP
         - name: ES_SCHEME

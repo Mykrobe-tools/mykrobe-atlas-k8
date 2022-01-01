@@ -2,7 +2,7 @@
 
 export NAMESPACE="mykrobe"
 export PREFIX="atlas"
-export CLIENT_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas:a81d112"
+export CLIENT_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas:6ade416"
 export HOST="www.mykro.be"
 export ADDITIONAL_DNS="mykro.be"
 export NODE_OPTIONS_MEMORY="4096"
@@ -17,7 +17,7 @@ export LIMIT_STORAGE="4Gi"
 
 # Storage class
 export STORAGE_DATA="2Gi"
-export STORAGE_CLASS="external-nfs-provisioner-storage-class-2"
+export STORAGE_CLASS="default-cinder"
 
 # Env vars
 

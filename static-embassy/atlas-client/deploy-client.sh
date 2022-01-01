@@ -72,7 +72,7 @@ data:
   REACT_APP_ONEDRIVE_CLIENT_ID: $REACT_APP_ONEDRIVE_CLIENT_ID
   REACT_APP_SENTRY_PUBLIC_DSN: $REACT_APP_SENTRY_PUBLIC_DSN
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:

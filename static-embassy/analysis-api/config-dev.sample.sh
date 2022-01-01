@@ -191,7 +191,6 @@ echo ""
 sh ./redis/deploy-redis.sh
 sh ./analysis/deploy-analysis.sh
 sh ./analysis/copy-files.sh
-sh ./bigsi/deploy-bigsi.sh
 sh ./bigsi/deploy-background-variants-db.sh
 sh ./distance/deploy-neo4j.sh
 sh ./distance/deploy-distance.sh

@@ -2,17 +2,13 @@
 
 export NAMESPACE="mykrobe-dev"
 export PREFIX="atlas-api"
-export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:adeebc6"
+export API_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-api:v1.2.4"
 
 export DB_SERVICE_HOST="mykrobe-mongodb-replicaset-client.mykrobe-dev.svc.cluster.local"
 export DB_RS_NAME="rs0"
 export MONGO_USER="atlas"
 export MONGO_PASSWORD=`echo -n "ZnHhPUCEAFCAYhhFC3gmwF54" | base64`
 
-
-export AWS_ACCESS_KEY="<AWS_ACCESS_KEY>"
-export AWS_SECRET_KEY="<AWS_SECRET_KEY>"
-export AWS_REGION="eu-west-1"
 export ATLAS_APP="https://dev.mykro.be"
 
 export ES_SCHEME="http"
@@ -60,7 +56,8 @@ export STORAGE_APP_DATA="10Gi"
 export STORAGE_APP_TMP="5Gi"
 
 # Storage class
-export STORAGE_CLASS="external-nfs-provisioner-storage-class-2"
+export DEFAULT_STORAGE_CLASS="default-cinder"
+export RWX_STORAGE_CLASS="rwx-storage"
 
 # Pod (Deployment) resource limits
 export REQUEST_CPU="1000m"

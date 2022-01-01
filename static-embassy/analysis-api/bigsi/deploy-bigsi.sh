@@ -14,7 +14,7 @@ metadata:
   name: $BIGSI_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-1
+  storageClassName: default-cinder
   accessModes:
   - ReadWriteMany
   resources:
@@ -73,7 +73,7 @@ metadata:
   name: $BIGSI_PREFIX-config-small
   namespace: $NAMESPACE
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -140,7 +140,7 @@ spec:
   sessionAffinity: None
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -189,7 +189,7 @@ spec:
       dnsPolicy: ClusterFirst
       restartPolicy: Always
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -263,7 +263,7 @@ spec:
           name: $BIGSI_PREFIX-config-big
         name: configmap-volume-big
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:

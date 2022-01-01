@@ -18,7 +18,7 @@ export LIMIT_CPU="2000m"
 export LIMIT_MEMORY="2Gi"
 export LIMIT_STORAGE="4Gi"
 
-export STORAGE_CLASS="external-nfs-provisioner-storage-class-3"
+export STORAGE_CLASS="default-cinder"
 export STORAGE_DATA="10Gi"
 
 sh ./deploy-mongo.sh

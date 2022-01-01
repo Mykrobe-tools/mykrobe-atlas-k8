@@ -19,7 +19,7 @@ metadata:
   namespace: $NAMESPACE
 type: Opaque
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $TRACKING_DB_PREFIX-deployment
@@ -40,6 +40,18 @@ spec:
       - name: $TRACKING_DB_PREFIX-data
         persistentVolumeClaim:
           claimName: $TRACKING_DB_PREFIX-data
+      initContainers:
+      - args:
+        - -c
+        - chmod a+w /var/lib/postgresql/data
+        command:
+        - sh
+        image: busybox:1.29.3
+        imagePullPolicy: IfNotPresent
+        name: change-permission
+        volumeMounts:
+        - mountPath: "/var/lib/postgresql/data"
+          name: $TRACKING_DB_PREFIX-data
       containers:
       - name: $TRACKING_DB_PREFIX
         image: $TRACKING_DB_IMAGE
@@ -53,6 +65,8 @@ spec:
         - mountPath: "/var/lib/postgresql/data"
           name: $TRACKING_DB_PREFIX-data
         env:
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
         - name: POSTGRES_USER
           value: $TRACKING_DB_USER
         - name: POSTGRES_PASSWORD
@@ -75,7 +89,7 @@ metadata:
   name: $TRACKING_DB_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-1
+  storageClassName: default-cinder
   accessModes:
   - ReadWriteMany
   resources:

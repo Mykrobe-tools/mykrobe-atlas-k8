@@ -17,7 +17,7 @@ metadata:
   name: $KMERSEARCH_API_PREFIX-env
   namespace: $NAMESPACE
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $KMERSEARCH_API_PREFIX-deployment
@@ -90,7 +90,7 @@ metadata:
   name: $KMERSEARCH_API_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-1
+  storageClassName: default-cinder
   accessModes:
   - ReadWriteMany
   resources:

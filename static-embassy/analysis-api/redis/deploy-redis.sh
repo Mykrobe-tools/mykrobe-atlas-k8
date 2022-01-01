@@ -14,7 +14,7 @@ metadata:
   name: $REDIS_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-1
+  storageClassName: default-cinder
   accessModes:
   - ReadWriteOnce
   resources:
@@ -41,7 +41,7 @@ data:
     rename-command SPOP ""
     rename-command RENAME ""
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: $REDIS_PREFIX

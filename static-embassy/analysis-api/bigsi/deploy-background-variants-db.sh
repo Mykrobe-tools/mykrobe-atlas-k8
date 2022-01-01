@@ -8,7 +8,7 @@ metadata:
   name: $BACKGROUND_VARIANTS_DB_PREFIX-sa
   namespace: $NAMESPACE
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $BACKGROUND_VARIANTS_DB_PREFIX-deployment
@@ -24,24 +24,35 @@ spec:
       labels:
         app: $BACKGROUND_VARIANTS_DB_PREFIX
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        runAsNonRoot: true
       serviceAccountName: $BACKGROUND_VARIANTS_DB_PREFIX-sa
       volumes:
       - name: $BACKGROUND_VARIANTS_DB_PREFIX-data
         persistentVolumeClaim:
           claimName: $BACKGROUND_VARIANTS_DB_PREFIX-data
+      initContainers:
+      - args:
+        - -c
+        - chmod a+w /database/mongo-db
+        command:
+        - sh
+        image: busybox:1.29.3
+        imagePullPolicy: IfNotPresent
+        name: change-permission
+        volumeMounts:
+        - mountPath: "/database/mongo-db"
+          name: $BACKGROUND_VARIANTS_DB_PREFIX-data
       containers:
       - name: $BACKGROUND_VARIANTS_DB_PREFIX
         image: $BACKGROUND_VARIANTS_DB_IMAGE
         ports:
         - containerPort: 27017
         volumeMounts:
-        - mountPath: "/database"
+        - mountPath: "/database/mongo-db"
           name: $BACKGROUND_VARIANTS_DB_PREFIX-data
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
         resources:
           limits:
             memory: $LIMIT_MEMORY_BACKGROUND_VARIANTS_DB
@@ -59,7 +70,7 @@ metadata:
   name: $BACKGROUND_VARIANTS_DB_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-4
+  storageClassName: default-cinder
   accessModes:
   - ReadWriteMany
   resources:

@@ -4,7 +4,7 @@ export NAMESPACE="mykrobe"
 export PREFIX="keycloak"
 export POSTGRES_PREFIX="postgres"
 export POSTGRES_IMAGE="postgres:10"
-export KEYCLOAK_IMAGE="makeandship/keycloak:1"
+export KEYCLOAK_IMAGE="eu.gcr.io/atlas-275810/mykrobe-atlas-keycloak:v1.0.0"
 export HOST="accounts-dev.mykro.be"
 export POSTGRES_DB="keycloak"
 export POSTGRES_USER=`echo -n "keycloak" | base64`
@@ -17,7 +17,7 @@ export KEYCLOAK_PASSWORD=`echo -n "<KEYCLOAK_PASSWORD>" | base64`
 # Storage sizes
 export STORAGE_POSTGRES="10Gi"
 export STORAGE_THEMES="2Gi"
-export STORAGE_CLASS="nfs-client"
+export STORAGE_CLASS="default-cinder"
 
 # Pod (Deployment) resource limits
 export REQUEST_DB_CPU="1000m"

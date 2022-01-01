@@ -19,7 +19,7 @@ metadata:
   namespace: $NAMESPACE
 type: Opaque
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $NEO4J_PREFIX-deployment
@@ -35,16 +35,23 @@ spec:
       labels:
         app: $NEO4J_PREFIX
     spec:
-      securityContext:
-        runAsUser: 1000
-        runAsGroup: 1000
-        fsGroup: 1000
-        runAsNonRoot: true
       serviceAccountName: $NEO4J_PREFIX-sa
       volumes:
       - name: $NEO4J_PREFIX-data
         persistentVolumeClaim:
           claimName: $NEO4J_PREFIX-data
+      initContainers:
+      - args:
+        - -c
+        - chmod a+w /data
+        command:
+        - sh
+        image: busybox:1.29.3
+        imagePullPolicy: IfNotPresent
+        name: change-permission
+        volumeMounts:
+        - mountPath: "/data"
+          name: $NEO4J_PREFIX-data
       containers:
       - name: $NEO4J_PREFIX
         image: $NEO4J_IMAGE
@@ -53,6 +60,10 @@ spec:
         volumeMounts:
         - mountPath: "/data"
           name: $NEO4J_PREFIX-data
+        securityContext:
+          runAsUser: 1000
+          runAsGroup: 1000
+          runAsNonRoot: true
         env:
         - name: NEO4J_dbms_recovery_fail__on__missing__files
           value: "false"
@@ -78,7 +89,7 @@ metadata:
   name: $NEO4J_PREFIX-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-4
+  storageClassName: default-cinder
   accessModes:
   - ReadWriteMany
   resources:

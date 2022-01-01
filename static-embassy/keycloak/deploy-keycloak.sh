@@ -91,7 +91,7 @@ metadata:
   namespace: $NAMESPACE
 type: Opaque
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -100,6 +100,9 @@ metadata:
   namespace: $NAMESPACE
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: $POSTGRES_PREFIX
   template:
     metadata:
       labels:
@@ -139,6 +142,8 @@ spec:
         - mountPath: "/var/lib/postgresql/data"
           name: $POSTGRES_PREFIX-data
         env:
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
         - name: POSTGRES_DB
           value: $POSTGRES_DB
         - name: POSTGRES_USER
@@ -181,7 +186,7 @@ spec:
   selector:
     app: $POSTGRES_PREFIX
 ---
-apiVersion: apps/v1beta2
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:

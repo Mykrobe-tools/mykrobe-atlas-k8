@@ -19,9 +19,9 @@ EOF
 
 helm install $NAME \
   --namespace $NAMESPACE \
-  --version v0.15.1 \
+  --version $VERSION \
   --set installCRDs=true \
-  jetstack/cert-manager 
+  jetstack/cert-manager
 
 cat <<EOF | kubectl apply -f -
 apiVersion: v1
@@ -42,6 +42,7 @@ apiVersion: cert-manager.io/v1alpha2
 kind: ClusterIssuer
 metadata:
   name: letsencrypt-prod
+  namespace: $NAMESPACE
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory

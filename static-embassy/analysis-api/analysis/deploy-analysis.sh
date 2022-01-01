@@ -40,7 +40,7 @@ metadata:
   name: $ANALYSIS_PREFIX-config-data
   namespace: $NAMESPACE
 spec:
-  storageClassName: external-nfs-provisioner-storage-class-1
+  storageClassName: rwx-storage
   accessModes:
   - ReadWriteMany
   resources:
@@ -63,7 +63,7 @@ spec:
     app: $ANALYSIS_PREFIX
   type: NodePort
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
@@ -128,7 +128,7 @@ spec:
       imagePullSecrets:
       - name: gcr-json-key
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:

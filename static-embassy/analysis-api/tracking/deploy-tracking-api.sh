@@ -19,7 +19,7 @@ metadata:
   namespace: $NAMESPACE
 type: Opaque
 ---
-apiVersion: apps/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: $TRACKING_API_PREFIX-deployment
